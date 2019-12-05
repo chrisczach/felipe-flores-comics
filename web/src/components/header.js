@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
+import {navigate} from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import {SpeedDial, SpeedDialIcon, SpeedDialAction} from '@material-ui/lab';
-import {FileCopyOutlined, SaveOutlined, PrintOutlined, ShareOutlined, FavoriteOutlined, MenuOutlined, CloseOutlined} from '@material-ui/icons';
+import {HomeOutlined, InfoOutlined, PhotoAlbumOutlined, ContactMailOutlined, MenuOutlined, CloseOutlined} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,16 +18,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const actions = [
-  { icon: <FileCopyOutlined />, name: 'Copy' },
-  { icon: <SaveOutlined />, name: 'Save' },
-  { icon: <PrintOutlined />, name: 'Print' },
-  { icon: <ShareOutlined />, name: 'Share' },
-  { icon: <FavoriteOutlined />, name: 'Like' },
+  { icon: <HomeOutlined />, name: 'Home', slug: '/' },
+  { icon: <InfoOutlined />, name: 'About', slug:'about/' },
+  { icon: <PhotoAlbumOutlined />, name: 'Portfolio', slug: 'portfolio/' },
+  { icon: <ContactMailOutlined />, name: 'Contact',slug: 'contact/' },
 ];
+
+const toNav = handleClose => ( { name, icon, slug } ) => {
+  const clickHandler = () => {
+    handleClose()
+    navigate(slug)
+  }
+  return(
+          <SpeedDialAction
+            key={name}
+            icon={ icon }
+            tooltipOpen
+            tooltipTitle={name}
+            onClick={clickHandler}
+          />
+        )}
 
 const Header = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -37,6 +51,10 @@ const Header = () => {
     setOpen(false);
   };
 
+  const handleToggle = () => {
+  setOpen(open => !open)
+}
+
   return (
     <SpeedDial
       direction='down'
@@ -44,18 +62,10 @@ const Header = () => {
         className={classes.speedDial}
       icon={<SpeedDialIcon openIcon={<CloseOutlined />} icon={ <MenuOutlined /> } />}
         onClose={handleClose}
-        onOpen={handleOpen}
+        onClick={handleToggle}
         open={open}
       >
-        {actions.map(action => (
-          <SpeedDialAction
-            key={action.name}
-            icon={ action.icon }
-            tooltipOpen
-            tooltipTitle={action.name}
-            onClick={handleClose}
-          />
-        ))}
+        {actions.map(toNav(handleClose))}
       </SpeedDial>
   );
 }
