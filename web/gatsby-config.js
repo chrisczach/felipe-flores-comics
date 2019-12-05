@@ -14,7 +14,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Didact Gothic', 'Roboto']
+          families: ['Didact Gothic', 'Montserrat']
         }
       }
     },

@@ -14,13 +14,16 @@ import {
   Button,
 } from '@material-ui/core';
 
+import Header from './header'
+import Footer from './footer'
+
 const Layout = ( { children, onHideNav, onShowNav, showNav, siteTitle } ) => (
     <>
-    <Button variant='contained' color='primary'>Header</Button>
+    <Header/>
     <Container maxWidth='lg'>
       { children }
       </Container>
-        <Button variant='contained' color='secondary'>Footer</Button>
+        <Footer/>
         </>
 )
 

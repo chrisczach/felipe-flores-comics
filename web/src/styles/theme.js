@@ -2,16 +2,18 @@ import { createMuiTheme, responsiveFontSizes  } from '@material-ui/core/styles';
 
 const palette = {
   primary: { main: '#C72027', contrastText: '#f7dcc6' },
-  secondary: { main: '#FFCA06', contrastText: '#331a07' }
+  secondary: { main: '#FFCA06', contrastText: '#331a07' },
 };
 
 const typography = {
-  fontFamily: [ 'Roboto', 'sans-serif' ],
+  fontFamily: ['Montserrat', 'sans-serif' ],
   body1: {
-    fontFamily: ['Didact Gothic', 'sans-serif' ]
+    fontFamily: ['Didact Gothic', 'sans-serif' ],
+    marginBottom: '1em',
   },
   body2: {
-    fontFamily: [ 'Didact Gothic', 'sans-serif' ]
+    fontFamily: [ 'Didact Gothic', 'sans-serif' ],
+    marginBottom: '1em',
   }
 }
 

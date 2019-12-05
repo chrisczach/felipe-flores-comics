@@ -92,10 +92,15 @@ const IndexPage = props => {
     <>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <h1 hidden>Welcome to {site.title}</h1>
-      <Typography variant='h1'>Home Page Starting Heading 1</Typography>
-      <Typography variant='h2'>Home Page Starting Heading 2</Typography>
-      <Typography variant='h3'>Home Page Starting Heading 3</Typography>
-      <Typography variant='body1'>Paragraph test here.</Typography>
+      <Typography variant='h1'>Heading 1</Typography>
+      <Typography variant='h2'>Heading 2</Typography>
+      <Typography variant='h3'>Heading 3</Typography>
+      <Typography variant='body1'>Doggo ipsum long woofer very hand that feed shibe floofs h*ck doge blop shoob such treat borking doggo what a nice floof, stop it fren h*ck doing me a frighten puggorino clouds dat tungg tho borkf. Heckin angery woofer pupperino smol borking doggo with a long snoot for pats borking doggo, clouds big ol. Smol snoot vvv fluffer, porgo long doggo doggorino, length boy very hand that feed shibe. Mlem maximum borkdrive blep fluffer, wrinkler.
+</Typography><Typography variant='body1'>
+Borking doggo aqua doggo sub woofer shibe you are doing me a frighten, you are doing me the shock you are doin me a concern. Shoob yapper pupperino length boy waggy wags bork porgo, very taste wow shoob blep smol I am bekom fat, many pats corgo heckin good boys shoober pupper. You are doin me a concern yapper clouds very jealous pupper, vvv the neighborhood pupper. Many pats sub woofer heck long water shoob pats many pats aqua doggo very good spot he made many woofs, aqua doggo maximum borkdrive shooberino boofers blep bork. Thicc bork very hand that feed shibe I am bekom fat wow such tempt borking doggo, extremely cuuuuuute smol borking doggo with a long snoot for pats fat boi. Aqua doggo very hand that feed shibe you are doing me the shock wow such tempt extremely cuuuuuute you are doing me a frighten, borkf very taste wow very good spot. Ruff corgo much ruin diet doge, you are doing me a frighten borking doggo.
+</Typography><Typography variant='body1'>
+Shoober you are doing me the shock fat boi borkf corgo long doggo, heckin heck shoober. Puggorino borkdrive pupperino big ol, you are doing me the shock mlem. H*ck doggo much ruin diet, noodle horse. Heckin angery woofer pats wow very biscit shoob many pats heckin good boys long doggo, long woofer what a nice floof floofs tungg. Heck mlem blep length boy the neighborhood pupper, shibe borking doggo corgo very taste wow, fat boi heckin angery woofer blop.
+</Typography>
       <Link to='about'>About</Link>
       <Link to='portfolio'>Portfolio</Link>
     </>
