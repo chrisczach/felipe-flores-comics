@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     position: 'fixed',
     top: theme.spacing(2),
     right: theme.spacing(2),
-  },
+  }
 }));
 
 const actions = [
@@ -50,7 +50,8 @@ const Header = () => {
         {actions.map(action => (
           <SpeedDialAction
             key={action.name}
-            icon={action.icon}
+            icon={ action.icon }
+            tooltipOpen
             tooltipTitle={action.name}
             onClick={handleClose}
           />
