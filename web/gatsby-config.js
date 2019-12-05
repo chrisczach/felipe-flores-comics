@@ -10,6 +10,14 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   plugins: [
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Didact Gothic', 'Roboto']
+        }
+      }
+    },
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
     {

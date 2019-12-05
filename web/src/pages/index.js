@@ -1,5 +1,20 @@
 import React from 'react'
 import {graphql, Link} from 'gatsby'
+import {
+  Container,
+  Paper,
+  Collapse,
+  Typography,
+  TextField,
+  Zoom,
+  Fade,
+  Grow,
+  Slide,
+  Breadcrumbs,
+  Box,
+  Button,
+} from '@material-ui/core';
+
 
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
@@ -77,7 +92,10 @@ const IndexPage = props => {
     <>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <h1 hidden>Welcome to {site.title}</h1>
-    <div>Home Page Starting</div>
+      <Typography variant='h1'>Home Page Starting Heading 1</Typography>
+      <Typography variant='h2'>Home Page Starting Heading 2</Typography>
+      <Typography variant='h3'>Home Page Starting Heading 3</Typography>
+      <Typography variant='body1'>Paragraph test here.</Typography>
       <Link to='about'>About</Link>
       <Link to='portfolio'>Portfolio</Link>
     </>

@@ -13,11 +13,14 @@ import {
   Box,
   Button,
 } from '@material-ui/core';
+
 const Layout = ( { children, onHideNav, onShowNav, showNav, siteTitle } ) => (
     <>
-    <div>Header</div>
-    <div>{ children }</div>
-        <Paper>Footer</Paper>
+    <Button variant='contained' color='primary'>Header</Button>
+    <Container maxWidth='lg'>
+      { children }
+      </Container>
+        <Button variant='contained' color='secondary'>Footer</Button>
         </>
 )
 
