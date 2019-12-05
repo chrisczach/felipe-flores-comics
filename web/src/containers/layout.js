@@ -1,6 +1,10 @@
 import {graphql, StaticQuery} from 'gatsby'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
+
 import Layout from '../components/layout'
+import theme from '../styles/theme';
 
 const query = graphql`
   query SiteTitleQuery {
@@ -28,13 +32,18 @@ function LayoutContainer (props) {
           )
         }
         return (
+          <>
+            <CssBaseline/>
+          <ThemeProvider theme={theme}>
           <Layout
             {...props}
             showNav={showNav}
             siteTitle={data.site.title}
             onHideNav={handleHideNav}
             onShowNav={handleShowNav}
-          />
+            />
+            </ThemeProvider>
+            </>
         )
       }}
     />

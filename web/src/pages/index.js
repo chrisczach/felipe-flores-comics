@@ -3,7 +3,6 @@ import {graphql, Link} from 'gatsby'
 
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
-import Layout from '../containers/layout'
 
 export const query = graphql`
   query IndexPageQuery {
@@ -58,9 +57,9 @@ const IndexPage = props => {
 
   if (errors) {
     return (
-      <Layout>
+      <>
         <GraphQLErrorList errors={errors} />
-      </Layout>
+      </>
     )
   }
 
@@ -75,13 +74,13 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout>
+    <>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <h1 hidden>Welcome to {site.title}</h1>
     <div>Home Page Starting</div>
       <Link to='about'>About</Link>
       <Link to='portfolio'>Portfolio</Link>
-    </Layout>
+    </>
   )
 }
 

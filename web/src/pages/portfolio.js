@@ -2,7 +2,6 @@ import React from 'react'
 import {graphql, Link} from 'gatsby'
 
 import SEO from '../components/seo'
-import Layout from '../containers/layout'
 
 export const query = graphql`
   query PortfolioPageQuery {
@@ -35,20 +34,20 @@ const PortfolioPage = props => {
   const {data, errors} = props
   if (errors) {
     return (
-      <Layout>
+      <>
         <GraphQLErrorList errors={errors} />
-      </Layout>
+      </>
     )
   }
   const projectNodes =
     data && data.projects && []
   return (
-    <Layout>
+    <>
       <SEO title='Portfolio' />
 
       <div>Portfolio Page Starting</div>
 <Link to='/'>Home</Link>
-    </Layout>
+    </>
   )
 }
 

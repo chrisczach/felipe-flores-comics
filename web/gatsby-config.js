@@ -13,6 +13,23 @@ module.exports = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
     {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/containers/layout.js`),
+      },
+    },
+    `gatsby-plugin-force-trailing-slashes`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+        {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
+    {
       resolve: 'gatsby-source-sanity',
       options: {
         ...clientConfig.sanity,
@@ -20,6 +37,19 @@ module.exports = {
         watchMode: !isProd,
         overlayDrafts: !isProd && token
       }
-    }
+    },
+        {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Chris Czach - Front End Developer`,
+        short_name: `ChrisCzachDeveloper`,
+        icon: `src/images/icon.png`,
+        start_url: `/`,
+        background_color: `#2E253A`,
+        theme_color: `#585246`,
+        display: `standalone`,
+      },
+    },
+    `gatsby-plugin-offline`,
   ]
 }
