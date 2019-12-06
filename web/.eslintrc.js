@@ -1,13 +1,28 @@
 module.exports = {
-  extends: ['standard', 'standard-react', 'plugin:import/errors', 'plugin:import/warnings'],
-  rules: {
-    'react/prop-types': 0,
-    'object-curly-spacing': ['error', 'never']
+  extends: ['airbnb', 'plugin:prettier/recommended', 'prettier/react'],
+  env: {
+    browser: true,
+    commonjs: true,
+    es6: true,
+    jest: true,
+    node: true,
   },
-  settings: {
-    react: {
-      pragma: 'React',
-      version: '16.8.4'
-    }
-  }
-}
+  rules: {
+    'jsx-a11y/href-no-hash': ['off'],
+    'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
+    'max-len': [
+      'warn',
+      {
+        code: 80,
+        tabWidth: 2,
+        comments: 80,
+        ignoreComments: false,
+        ignoreTrailingComments: true,
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreRegExpLiterals: true,
+      },
+    ],
+  },
+};

@@ -3,10 +3,10 @@ export default {
     {
       name: 'sanity-tutorials',
       options: {
-        templateRepoId: 'sanity-io/sanity-template-gatsby-portfolio'
-      }
+        templateRepoId: 'sanity-io/sanity-template-gatsby-portfolio',
+      },
     },
-    {name: 'structure-menu'},
+    { name: 'structure-menu' },
     {
       name: 'project-info',
       options: {
@@ -21,37 +21,41 @@ export default {
                   buildHookId: '5de92316818d9eb5fa871469',
                   title: 'Sanity Studio',
                   name: 'felipe-flores-comics-studio',
-                  apiId: '4969127d-05e8-4a1c-a69b-c7950809662e'
+                  apiId: '4969127d-05e8-4a1c-a69b-c7950809662e',
                 },
                 {
                   buildHookId: '5de92316653fa3e0c9f3d4f3',
                   title: 'Portfolio Website',
                   name: 'felipe-flores-comics',
-                  apiId: 'd2db1903-d6e3-40f0-b0ae-9f05b95f002f'
-                }
-              ]
-            }
-          }
+                  apiId: 'd2db1903-d6e3-40f0-b0ae-9f05b95f002f',
+                },
+              ],
+            },
+          },
         ],
         data: [
           {
             title: 'GitHub repo',
             value: 'https://github.com/chrisczach/felipe-flores-comics',
-            category: 'Code'
+            category: 'Code',
           },
           {
             title: 'Frontend',
             value: 'https://felipe-flores-comics.netlify.com',
-            category: 'apps'
-          }
-        ]
-      }
+            category: 'apps',
+          },
+        ],
+      },
     },
-    {name: 'project-users', layout: {height: 'auto'}},
+    { name: 'project-users', layout: { height: 'auto' } },
     {
       name: 'document-list',
-      options: {title: 'Recent projects', order: '_createdAt desc', types: ['sampleProject']},
-      layout: {width: 'medium'}
-    }
-  ]
-}
+      options: {
+        title: 'Recent projects',
+        order: '_createdAt desc',
+        types: ['sampleProject'],
+      },
+      layout: { width: 'medium' },
+    },
+  ],
+};

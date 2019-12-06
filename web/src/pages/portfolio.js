@@ -1,14 +1,14 @@
-import React from 'react'
-import {graphql, Link} from 'gatsby'
+import React from 'react';
+import { graphql, Link } from 'gatsby';
 
-import SEO from '../components/seo'
+import SEO from '../components/seo';
 
 export const query = graphql`
   query PortfolioPageQuery {
     projects: allSanitySampleProject(
       limit: 12
-      sort: {fields: [publishedAt], order: DESC}
-      filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
+      sort: { fields: [publishedAt], order: DESC }
+      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
     ) {
       edges {
         node {
@@ -28,27 +28,26 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
 const PortfolioPage = props => {
-  const {data, errors} = props
+  const { data, errors } = props;
   if (errors) {
     return (
       <>
         <GraphQLErrorList errors={errors} />
       </>
-    )
+    );
   }
-  const projectNodes =
-    data && data.projects && []
+  const projectNodes = data && data.projects && [];
   return (
     <>
-      <SEO title='Portfolio' />
+      <SEO title="Portfolio" />
 
       <div>Portfolio Page Starting</div>
-<Link to='/'>Home</Link>
+      <Link to="/">Home</Link>
     </>
-  )
-}
+  );
+};
 
-export default PortfolioPage
+export default PortfolioPage;

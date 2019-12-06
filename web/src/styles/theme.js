@@ -1,4 +1,4 @@
-import { createMuiTheme, responsiveFontSizes  } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 const palette = {
   primary: { main: '#C72027', contrastText: '#f7dcc6' },
@@ -6,18 +6,20 @@ const palette = {
 };
 
 const typography = {
-  fontFamily: ['Montserrat', 'sans-serif' ],
+  fontFamily: ['Montserrat', 'sans-serif'],
   body1: {
-    fontFamily: ['Didact Gothic', 'sans-serif' ],
+    fontFamily: ['Didact Gothic', 'sans-serif'],
     marginBottom: '1em',
   },
   body2: {
-    fontFamily: [ 'Didact Gothic', 'sans-serif' ],
+    fontFamily: ['Didact Gothic', 'sans-serif'],
     marginBottom: '1em',
-  }
-}
-
+  },
+};
 
 const themeName = 'Cardinal Supernova Bat';
 
-export default responsiveFontSizes(createMuiTheme({ palette, typography, themeName }), {factor: 4});
+export default responsiveFontSizes(
+  createMuiTheme({ palette, typography, themeName }),
+  { factor: 4 },
+);

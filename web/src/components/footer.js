@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   AppBar,
   Container,
@@ -17,8 +17,10 @@ import {
 
 const Footer = () => {
   return (
-<AppBar position='startic' color='secondary' component='footer'>Footer</AppBar>
-  )
-}
+    <AppBar position="startic" color="secondary" component="footer">
+      Footer
+    </AppBar>
+  );
+};
 
-export default Footer
+export default Footer;

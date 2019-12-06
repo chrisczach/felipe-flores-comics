@@ -1,20 +1,20 @@
-import React from 'react'
-import {graphql, Link} from 'gatsby'
+import React from 'react';
+import { graphql, Link } from 'gatsby';
 
-import GraphQLErrorList from '../components/graphql-error-list'
-import SEO from '../components/seo'
+import GraphQLErrorList from '../components/graphql-error-list';
+import SEO from '../components/seo';
 
 export const query = graphql`
   query AboutPageQuery {
-    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
+    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       description
       keywords
     }
     projects: allSanitySampleProject(
       limit: 6
-      sort: {fields: [publishedAt], order: DESC}
-      filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
+      sort: { fields: [publishedAt], order: DESC }
+      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
     ) {
       edges {
         node {
@@ -50,37 +50,40 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
 const AboutPage = props => {
-  const {data, errors} = props
+  const { data, errors } = props;
 
   if (errors) {
     return (
       <>
         <GraphQLErrorList errors={errors} />
       </>
-    )
+    );
   }
 
-  const site = (data || {}).site
-  const projectNodes = (data || {}).projects
-    ? ['to','an','array'] : []
+  const site = (data || {}).site;
+  const projectNodes = (data || {}).projects ? ['to', 'an', 'array'] : [];
 
   if (!site) {
     throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    )
+      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
+    );
   }
 
   return (
     <>
-      <SEO title={site.title} description={site.description} keywords={site.keywords} />
-        <h1 hidden>About {site.title}</h1>
-    <div>About Page Starting</div>
-    <Link to='/'>Home</Link>
+      <SEO
+        title={site.title}
+        description={site.description}
+        keywords={site.keywords}
+      />
+      <h1 hidden>About {site.title}</h1>
+      <div>About Page Starting</div>
+      <Link to="/">Home</Link>
     </>
-  )
-}
+  );
+};
 
-export default AboutPage
+export default AboutPage;

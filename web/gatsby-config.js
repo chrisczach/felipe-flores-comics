@@ -1,12 +1,12 @@
 // Load variables from `.env` as soon as possible
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV || 'development'}`
-})
+  path: `.env.${process.env.NODE_ENV || 'development'}`,
+});
 
-const clientConfig = require('./client-config')
-const token = process.env.SANITY_READ_TOKEN
+const clientConfig = require('./client-config');
+const token = process.env.SANITY_READ_TOKEN;
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   plugins: [
@@ -14,9 +14,9 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Didact Gothic', 'Montserrat']
-        }
-      }
+          families: ['Didact Gothic', 'Montserrat'],
+        },
+      },
     },
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
@@ -29,7 +29,7 @@ module.exports = {
     `gatsby-plugin-force-trailing-slashes`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-        {
+    {
       resolve: `gatsby-plugin-material-ui`,
       options: {
         stylesProvider: {
@@ -43,10 +43,10 @@ module.exports = {
         ...clientConfig.sanity,
         token,
         watchMode: !isProd,
-        overlayDrafts: !isProd && token
-      }
+        overlayDrafts: !isProd && token,
+      },
     },
-        {
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Chris Czach - Front End Developer`,
@@ -59,5 +59,5 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
-  ]
-}
+  ],
+};
