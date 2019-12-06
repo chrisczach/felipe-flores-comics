@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { navigate } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
-import { SpeedDial, SpeedDialIcon, SpeedDialAction } from '@material-ui/lab';
+import {
+  SwipeableDrawer,
+  Button,
+  List,
+  ListItemIcon,
+  ListItemText,
+  ListItem,
+} from '@material-ui/core';
 import {
   HomeOutlined,
   InfoOutlined,
@@ -11,18 +18,26 @@ import {
   CloseOutlined,
 } from '@material-ui/icons';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: 380,
-    transform: 'translateZ(0px)',
-    flexGrow: 1,
-  },
-  speedDial: {
+const useStyles = makeStyles({
+  menuButton: {
     position: 'fixed',
-    top: theme.spacing(2),
-    right: theme.spacing(2),
+    top: 0,
+    right: 0,
   },
-}));
+  menuPaper: {
+    height: 'auto',
+    display: 'inline-flex',
+    top: '10vh',
+    position: 'absolute',
+    right: 0,
+  },
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+});
 
 const actions = [
   { icon: <HomeOutlined />, name: 'Home', slug: '/' },
@@ -32,51 +47,56 @@ const actions = [
 ];
 
 const toNav = handleClose => ({ name, icon, slug }) => {
-  const clickHandler = () => {
+  const handleClick = () => {
     handleClose();
     navigate(slug);
   };
   return (
-    <SpeedDialAction
-      key={name}
-      icon={icon}
-      tooltipOpen
-      tooltipTitle={name}
-      onClick={clickHandler}
-    />
+    // <Link to={slug}>
+    <ListItem button key={name} onClick={handleClick}>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={name} />
+    </ListItem>
+    // </Link>
   );
 };
 
-const Header = () => {
-  const classes = useStyles();
+const Header = props => {
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const classes = useStyles(props);
   const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleToggle = () => {
-    setOpen(open => !open);
-  };
-
+  const handleToggle = () => setOpen(open => !open);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
-    <SpeedDial
-      direction="down"
-      ariaLabel="Navigation Menu"
-      className={classes.speedDial}
-      icon={
-        <SpeedDialIcon openIcon={<CloseOutlined />} icon={<MenuOutlined />} />
-      }
-      onClose={handleClose}
-      onClick={handleToggle}
-      open={open}
-    >
-      {actions.map(toNav(handleClose))}
-    </SpeedDial>
+    <>
+      <Button onClick={handleToggle} className={classes.menuButton}>
+        {open ? (
+          <CloseOutlined titleAccess="Close Nav Menu" fontSize="large" />
+        ) : (
+          <MenuOutlined titleAccess="Open Nav Menu" fontSize="large" />
+        )}
+      </Button>
+      <SwipeableDrawer
+        PaperProps={{ className: classes.menuPaper }}
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+        open={open}
+        onOpen={handleOpen}
+        onClose={handleClose}
+        anchor="right"
+      >
+        <List>
+          <ListItem key={'Felipe Flores'} >
+            <ListItemText
+              primary={'Felipe Flores'}
+              secondary={'Artist and graphic illustrator'}
+            />
+          </ListItem>
+          {actions.map(toNav(handleClose))}
+        </List>
+      </SwipeableDrawer>
+    </>
   );
 };
 
