@@ -19,26 +19,29 @@ import {
 } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => {
-  const backgroundColor = fade(theme.palette.secondary.light, 0.5);
+  const backgroundColor = fade(theme.palette.secondary.light, 0.25);
   return {
     menuButton: {
       position: 'fixed',
       top: theme.spacing(1),
       right: theme.spacing(1),
+      zIndex: 1000,
     },
     menuHeading: {
       background: backgroundColor,
       '&:after': {
         content: `""`,
         position: 'absolute',
+        background: backgroundColor,
         zIndex: 2,
         top: 0,
         right: 0,
-        bottom: theme.spacing(1),
+        bottom: 0,
         left: 0,
-        borderBottom: `${theme.spacing(1)}px solid ${
-          theme.palette.primary.main
-        }`,
+        // transform: 'skewY(2deg)',
+        // borderBottom: `${theme.spacing(1)}px solid ${
+        //   theme.palette.primary.main
+        // }`,
       },
     },
     menuPaper: {
@@ -99,7 +102,15 @@ const Nav = props => {
         )}
       </Button>
       <SwipeableDrawer
-        PaperProps={{ className: classes.menuPaper }}
+        ModalProps={{
+          BackdropProps: {
+            style: {
+              backdropFilter: 'blur(4px)',
+              background: 'rgba(120,120,120,.1)',
+            },
+          },
+        }}
+        PaperProps={{ className: classes.menuPaper, elevation: 0 }}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
         open={open}
@@ -113,7 +124,12 @@ const Nav = props => {
               primary={'Felipe Flores'}
               primaryTypographyProps={{ color: 'primary', variant: 'h6' }}
               secondary={'Artist and graphic illustrator'}
-              secondaryTypographyProps={{ color: 'textPrimary' }}
+              secondaryTypographyProps={{
+                color: 'textPrimary',
+                style: {
+                  marginBottom: 0,
+                },
+              }}
               style={{ opacity: 0.75 }}
             />
           </ListItem>

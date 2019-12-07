@@ -5,6 +5,7 @@ import {
   Paper,
   makeStyles,
   Box,
+  Hidden,
   fade,
 } from '@material-ui/core';
 
@@ -23,9 +24,17 @@ const useStyles = makeStyles(theme => {
       position: 'relative',
       background: 'transparent',
       padding: theme.spacing(1),
-
+      zIndex: 50,
       '&::before': {
         backdropFilter: `blur(10px)`,
+        borderRight: `${fade(
+          theme.palette.primary.dark,
+          0.5,
+        )} solid ${theme.spacing(2)}px`,
+        borderBottom: `${fade(
+          theme.palette.primary.light,
+          0.5,
+        )} solid ${theme.spacing(0.25)}px`,
         content: '""',
         zIndex: -1,
         position: 'absolute',
@@ -42,9 +51,33 @@ const useStyles = makeStyles(theme => {
       marginBottom: 0,
     },
     pageTitle: {
+      position: 'relative',
       marginLeft: theme.spacing(8),
+      color: fade(
+        theme.palette.getContrastText(theme.palette.background.default),
+        0.75,
+      ),
       display: 'flex',
       alignItems: 'center',
+      background: 'transparent',
+      '&::before': {
+        backdropFilter: `blur(10px)`,
+        content: '""',
+        zIndex: -1,
+        position: 'absolute',
+        top: 0,
+        right: theme.spacing(-4),
+        bottom: 0,
+        left: theme.spacing(-6),
+        transform: 'skewX(-45deg)',
+        // background: theme.palette.background.default,
+      },
+    },
+    container: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(6),
+      // remove min height later
+      // minHeight: '100vh',
     },
   };
 });
@@ -53,6 +86,7 @@ const PageContainer = ({
   children,
   heading = 'Felipe Flores Comics',
   subHeading = 'Artist and graphic illustrator',
+  pageTitle = '',
   ...props
 }) => {
   const classes = useStyles(props);
@@ -71,11 +105,21 @@ const PageContainer = ({
             {subHeading}
           </Typography>
         </Box>
+
         <Box className={classes.pageTitle}>
-          <Typography variant="h4">Page Title</Typography>
+          <Hidden xsDown implementation="css">
+            <Typography variant="h4">{pageTitle}</Typography>
+          </Hidden>
         </Box>
       </Paper>
-      <Container maxWidth="lg">{children}</Container>
+      <Container maxWidth="lg" className={classes.container}>
+        {pageTitle && (
+          <Hidden smUp implementation="css">
+            <Typography variant="h1">{pageTitle}</Typography>
+          </Hidden>
+        )}
+        {children}
+      </Container>
     </>
   );
 };

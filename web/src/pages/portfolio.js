@@ -36,14 +36,14 @@ const PortfolioPage = props => {
   const { data, errors } = props;
   if (errors) {
     return (
-      <PageContainer>
+      <PageContainer pageTitle="Portfolio">
         <GraphQLErrorList errors={errors} />
       </PageContainer>
     );
   }
   const projectNodes = data && data.projects && [];
   return (
-    <PageContainer>
+    <PageContainer pageTitle="Portfolio">
       <SEO title="Portfolio" />
 
       <div>Portfolio Page Starting</div>

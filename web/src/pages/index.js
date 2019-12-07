@@ -88,8 +88,7 @@ const IndexPage = props => {
   }
 
   return (
-    <PageContainer
-    >
+    <PageContainer pageTitle="Home">
       <SEO
         title={site.title}
         description={site.description}

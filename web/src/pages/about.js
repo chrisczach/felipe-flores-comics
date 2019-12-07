@@ -58,9 +58,9 @@ const AboutPage = props => {
 
   if (errors) {
     return (
-      <>
+      <PageContainer pageTitle="About Felipe">
         <GraphQLErrorList errors={errors} />
-      </>
+      </PageContainer>
     );
   }
 
@@ -74,7 +74,7 @@ const AboutPage = props => {
   }
 
   return (
-    <PageContainer>
+    <PageContainer pageTitle="About Felipe">
       <SEO
         title={site.title}
         description={site.description}
