@@ -80,7 +80,8 @@ const useStyles = makeStyles(theme => ({
   rightBox: {
     width: '75%',
     position: 'relative',
-
+    display: 'flex',
+    flexDirection: 'column',
     padding: theme.spacing(1),
     '&::before': {
       content: '""',
@@ -131,9 +132,6 @@ const Footer = ({ ...props }) => {
           <br />
           mail: 123 main st, city, state 12345
         </Typography>
-        {/* <Typography variant="body1" align="right">
-          More Info
-        </Typography> */}
       </Box>
     </AppBar>
   );

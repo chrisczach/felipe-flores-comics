@@ -9,7 +9,7 @@ async function createProjectPages(graphql, actions, reporter) {
   const { createPage } = actions;
   const result = await graphql(`
     {
-      allSanitySampleProject(
+      allSanityProject(
         filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
       ) {
         edges {
@@ -27,7 +27,7 @@ async function createProjectPages(graphql, actions, reporter) {
 
   if (result.errors) throw result.errors;
 
-  const projectEdges = (result.data.allSanitySampleProject || {}).edges || [];
+  const projectEdges = (result.data.allSanityProject || {}).edges || [];
 
   projectEdges
     .filter(edge => !isFuture(edge.node.publishedAt))

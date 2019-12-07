@@ -53,7 +53,7 @@ export default {
       options: {
         title: 'Recent projects',
         order: '_createdAt desc',
-        types: ['sampleProject'],
+        types: ['project'],
       },
       layout: { width: 'medium' },
     },

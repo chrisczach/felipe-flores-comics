@@ -7,7 +7,7 @@ import GraphQLErrorList from '../components/graphql-error-list';
 
 export const query = graphql`
   query PortfolioPageQuery {
-    projects: allSanitySampleProject(
+    projects: allSanityProject(
       limit: 12
       sort: { fields: [publishedAt], order: DESC }
       filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
