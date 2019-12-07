@@ -52,6 +52,7 @@ const useStyles = makeStyles(theme => {
     },
     pageTitle: {
       position: 'relative',
+      height: '100%',
       marginLeft: theme.spacing(8),
       color: fade(
         theme.palette.getContrastText(theme.palette.background.default),
@@ -105,12 +106,13 @@ const PageContainer = ({
             {subHeading}
           </Typography>
         </Box>
-
-        <Box className={classes.pageTitle}>
+        {pageTitle && (
           <Hidden xsDown implementation="css">
-            <Typography variant="h4">{pageTitle}</Typography>
+            <Box className={classes.pageTitle}>
+              <Typography variant="h4">{pageTitle}</Typography>
+            </Box>
           </Hidden>
-        </Box>
+        )}
       </Paper>
       <Container maxWidth="lg" className={classes.container}>
         {pageTitle && (

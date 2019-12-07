@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => {
     },
     menuHeading: {
       background: backgroundColor,
-      '&:after': {
+      '&:before': {
         content: `""`,
         position: 'absolute',
         background: backgroundColor,
@@ -45,14 +45,24 @@ const useStyles = makeStyles(theme => {
       },
     },
     menuPaper: {
+      background: 'transparent',
+    },
+    menuBar: {
+      background: theme.palette.background.default,
       height: 'auto',
       display: 'inline-flex',
+      flexDirection: 'column',
       top: theme.spacing(8),
+      paddingBottom: theme.spacing(1),
       position: 'absolute',
       right: theme.spacing(4),
+      borderTop: `${theme.spacing(0.5)}px solid ${theme.palette.primary.dark}`,
+      borderLeft: `${theme.spacing(0.25)}px solid ${
+        theme.palette.primary.dark
+      }`,
     },
     listItemClass: {
-      background: fade(theme.palette.secondary.light, 0.05),
+      background: 'transparent',
     },
     list: {
       width: 250,
@@ -94,23 +104,24 @@ const Nav = props => {
   const handleClose = () => setOpen(false);
   return (
     <>
-      <Button onClick={handleToggle} className={classes.menuButton}>
-        {open ? (
-          <CloseOutlined titleAccess="Close Nav Menu" fontSize="large" />
-        ) : (
+      {!open && (
+        <Button onClick={handleToggle} className={classes.menuButton}>
           <MenuOutlined titleAccess="Open Nav Menu" fontSize="large" />
-        )}
-      </Button>
+        </Button>
+      )}
       <SwipeableDrawer
         ModalProps={{
           BackdropProps: {
             style: {
               backdropFilter: 'blur(4px)',
-              background: 'rgba(120,120,120,.1)',
+              background: 'rgba(50,50,50,.25)',
             },
           },
         }}
-        PaperProps={{ className: classes.menuPaper, elevation: 0 }}
+        PaperProps={{
+          className: classes.menuPaper,
+          elevation: 0,
+        }}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
         open={open}
@@ -118,7 +129,10 @@ const Nav = props => {
         onClose={handleClose}
         anchor="right"
       >
-        <List disablePadding>
+        <Button onClick={handleToggle} className={classes.menuButton}>
+          <CloseOutlined titleAccess="Close Nav Menu" fontSize="large" />
+        </Button>
+        <List disablePadding className={classes.menuBar} elevation={5}>
           <ListItem key={'Felipe Flores'} className={classes.menuHeading}>
             <ListItemText
               primary={'Felipe Flores'}
