@@ -136,8 +136,14 @@ const Nav = props => {
           <ListItem key={'Felipe Flores'} className={classes.menuHeading}>
             <ListItemText
               primary={'Felipe Flores'}
-              primaryTypographyProps={{ color: 'primary', variant: 'h6' }}
-              secondary={'Artist and graphic illustrator'}
+              primaryTypographyProps={{
+                style: {
+                  fontWeight: 'bold',
+                },
+                color: 'primary',
+                variant: 'h5',
+              }}
+              secondary={'Comic Book Illustrator'}
               secondaryTypographyProps={{
                 color: 'textPrimary',
                 style: {

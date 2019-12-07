@@ -121,7 +121,7 @@ const Footer = ({ ...props }) => {
       <Box className={classes.leftBox}></Box>
       <Box className={classes.rightBox}>
         <Typography variant="h6" align="right">
-          Felipe Flores Comics
+          Felipe Flores
         </Typography>
         <Typography variant="body1" align="right">
           Phone: ###-###-####

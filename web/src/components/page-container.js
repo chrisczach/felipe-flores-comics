@@ -24,7 +24,7 @@ const useStyles = hero =>
       titleWrap: {
         position: 'relative',
         background: 'transparent',
-        padding: theme.spacing(1),
+        padding: theme.spacing(1, 3, 1, 1),
         zIndex: 50,
         '&::before': {
           backdropFilter: `blur(10px)`,
@@ -46,6 +46,10 @@ const useStyles = hero =>
           transform: 'skewX(-45deg)',
           background: backgroundColor,
         },
+      },
+      heading: {
+        fontWeight: 'bold',
+        opacity: 0.65,
       },
       subHeading: {
         opacity: 0.75,
@@ -86,8 +90,8 @@ const useStyles = hero =>
 
 const PageContainer = ({
   children,
-  heading = 'Felipe Flores Comics',
-  subHeading = 'Artist and graphic illustrator',
+  heading = 'Felipe Flores',
+  subHeading = 'Comic Book Illustrator',
   pageTitle = '',
   hero,
   ...props
@@ -98,7 +102,7 @@ const PageContainer = ({
       {hero && hero}
       <Paper square elevation={0} className={classes.root}>
         <Box className={classes.titleWrap}>
-          <Typography variant="h5" color="primary">
+          <Typography variant="h5" color="primary" className={classes.heading}>
             {heading}
           </Typography>
           <Typography
