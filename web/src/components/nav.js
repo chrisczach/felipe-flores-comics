@@ -132,7 +132,7 @@ const Nav = props => {
         <Button onClick={handleToggle} className={classes.menuButton}>
           <CloseOutlined titleAccess="Close Nav Menu" fontSize="large" />
         </Button>
-        <List disablePadding className={classes.menuBar} elevation={5}>
+        <List disablePadding className={classes.menuBar}>
           <ListItem key={'Felipe Flores'} className={classes.menuHeading}>
             <ListItemText
               primary={'Felipe Flores'}

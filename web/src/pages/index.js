@@ -7,12 +7,14 @@ import {
   Typography,
   TextField,
   Zoom,
+  fade,
   Fade,
   Grow,
   Slide,
   Breadcrumbs,
   Box,
   Button,
+  makeStyles,
 } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
@@ -67,9 +69,23 @@ export const query = graphql`
   }
 `;
 
+const useStyles = makeStyles(theme => ({
+  hero: {
+    background: `linear-gradient(155deg, ${fade(
+      theme.palette.secondary.dark,
+      0.2,
+    )} 50%, ${fade(theme.palette.secondary.light, 0.1)} 50%)`,
+    height: '75vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
+
 const IndexPage = props => {
   const { data, errors } = props;
-
+  const classes = useStyles(props);
   if (errors) {
     return (
       <>
@@ -88,7 +104,20 @@ const IndexPage = props => {
   }
 
   return (
-    <PageContainer pageTitle="Home">
+    <PageContainer
+      pageTitle="Home"
+      hero={
+        <Paper color="primary" square className={classes.hero}>
+          <Typography variant="h1" color="primary">
+            ¡HERO IMAGE!
+          </Typography>
+          <Typography variant="h6" color="primary">
+            Use something that has a focal point in the center but has content
+            that can be cropped out safely on the top and bottom.
+          </Typography>
+        </Paper>
+      }
+    >
       <SEO
         title={site.title}
         description={site.description}
