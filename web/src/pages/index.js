@@ -74,7 +74,8 @@ const useStyles = makeStyles(theme => ({
     background: `linear-gradient(155deg, ${fade(
       theme.palette.secondary.dark,
       0.2,
-    )} 50%, ${fade(theme.palette.secondary.light, 0.1)} 50%)`,
+    ) } 50%, ${ fade( theme.palette.secondary.light, 0.1 ) } 50%)`,
+    backgroundAttachment: 'fixed',
     height: '75vh',
     display: 'flex',
     flexDirection: 'column',
