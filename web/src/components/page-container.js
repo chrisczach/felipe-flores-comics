@@ -48,6 +48,7 @@ const useStyles = hero =>
         },
       },
       heading: {
+        fontVariant: 'small-caps',
         fontWeight: 'bold',
         opacity: 0.65,
       },

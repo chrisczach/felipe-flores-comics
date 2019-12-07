@@ -120,7 +120,11 @@ const Footer = ({ ...props }) => {
     >
       <Box className={classes.leftBox}></Box>
       <Box className={classes.rightBox}>
-        <Typography variant="h6" align="right">
+        <Typography
+          variant="h6"
+          align="right"
+          style={{ fontVariant: 'small-caps' }}
+        >
           Felipe Flores
         </Typography>
         <Typography variant="body1" align="right">

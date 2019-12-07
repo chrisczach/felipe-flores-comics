@@ -139,6 +139,7 @@ const Nav = props => {
               primaryTypographyProps={{
                 style: {
                   fontWeight: 'bold',
+                  fontVariant: 'small-caps',
                 },
                 color: 'primary',
                 variant: 'h5',
