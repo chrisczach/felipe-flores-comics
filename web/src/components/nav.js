@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { navigate } from 'gatsby';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import {
   SwipeableDrawer,
   Button,
@@ -18,25 +18,46 @@ import {
   CloseOutlined,
 } from '@material-ui/icons';
 
-const useStyles = makeStyles({
-  menuButton: {
-    position: 'fixed',
-    top: 0,
-    right: 0,
-  },
-  menuPaper: {
-    height: 'auto',
-    display: 'inline-flex',
-    top: '10vh',
-    position: 'absolute',
-    right: 0,
-  },
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
+const useStyles = makeStyles(theme => {
+  const backgroundColor = fade(theme.palette.secondary.light, 0.5);
+  return {
+    menuButton: {
+      position: 'fixed',
+      top: theme.spacing(1),
+      right: theme.spacing(1),
+    },
+    menuHeading: {
+      background: backgroundColor,
+      '&:after': {
+        content: `""`,
+        position: 'absolute',
+        zIndex: 2,
+        top: 0,
+        right: 0,
+        bottom: theme.spacing(1),
+        left: 0,
+        borderBottom: `${theme.spacing(1)}px solid ${
+          theme.palette.primary.main
+        }`,
+      },
+    },
+    menuPaper: {
+      height: 'auto',
+      display: 'inline-flex',
+      top: theme.spacing(8),
+      position: 'absolute',
+      right: theme.spacing(4),
+    },
+    listItemClass: {
+      background: fade(theme.palette.secondary.light, 0.05),
+    },
+    list: {
+      width: 250,
+    },
+    fullList: {
+      width: 'auto',
+    },
+  };
 });
 
 const actions = [
@@ -46,14 +67,14 @@ const actions = [
   { icon: <ContactMailOutlined />, name: 'Contact', slug: 'contact/' },
 ];
 
-const toNav = handleClose => ({ name, icon, slug }) => {
+const toNav = (handleClose, listItemClass) => ({ name, icon, slug }) => {
   const handleClick = () => {
     handleClose();
     navigate(slug);
   };
   return (
     // <Link to={slug}>
-    <ListItem button key={name} onClick={handleClick}>
+    <ListItem button key={name} onClick={handleClick} className={listItemClass}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={name} />
     </ListItem>
@@ -61,7 +82,7 @@ const toNav = handleClose => ({ name, icon, slug }) => {
   );
 };
 
-const Header = props => {
+const Nav = props => {
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const classes = useStyles(props);
   const [open, setOpen] = useState(false);
@@ -86,18 +107,21 @@ const Header = props => {
         onClose={handleClose}
         anchor="right"
       >
-        <List>
-          <ListItem key={'Felipe Flores'} >
+        <List disablePadding>
+          <ListItem key={'Felipe Flores'} className={classes.menuHeading}>
             <ListItemText
               primary={'Felipe Flores'}
+              primaryTypographyProps={{ color: 'primary', variant: 'h6' }}
               secondary={'Artist and graphic illustrator'}
+              secondaryTypographyProps={{ color: 'textPrimary' }}
+              style={{ opacity: 0.75 }}
             />
           </ListItem>
-          {actions.map(toNav(handleClose))}
+          {actions.map(toNav(handleClose, classes.listItemClass))}
         </List>
       </SwipeableDrawer>
     </>
   );
 };
 
-export default Header;
+export default Nav;

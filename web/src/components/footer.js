@@ -17,7 +17,7 @@ import {
 
 const Footer = () => {
   return (
-    <AppBar position="startic" color="secondary" component="footer">
+    <AppBar square position="static" color="secondary" component="footer">
       Footer
     </AppBar>
   );

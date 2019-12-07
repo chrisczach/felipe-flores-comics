@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
+import PageContainer from '../components/page-container';
 
 export const query = graphql`
   query ContactPageQuery {
@@ -57,9 +58,9 @@ const ContactPage = props => {
 
   if (errors) {
     return (
-      <>
+      <PageContainer>
         <GraphQLErrorList errors={errors} />
-      </>
+      </PageContainer>
     );
   }
 
@@ -73,7 +74,7 @@ const ContactPage = props => {
   }
 
   return (
-    <>
+    <PageContainer>
       <SEO
         title={site.title}
         description={site.description}
@@ -82,7 +83,7 @@ const ContactPage = props => {
       <h1 hidden>About {site.title}</h1>
       <div>About Page Starting</div>
       <Link to="/">Home</Link>
-    </>
+    </PageContainer>
   );
 };
 

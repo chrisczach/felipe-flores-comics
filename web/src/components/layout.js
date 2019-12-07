@@ -14,13 +14,13 @@ import {
   Button,
 } from '@material-ui/core';
 
-import Header from './header';
+import Nav from './nav';
 import Footer from './footer';
 
 const Layout = ({ children, onHideNav, onShowNav, showNav, siteTitle }) => (
   <>
-    <Header />
-    <Container maxWidth="lg">{children}</Container>
+    <Nav />
+    {children}
     <Footer />
   </>
 );

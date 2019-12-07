@@ -17,6 +17,7 @@ import {
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
+import PageContainer from '../components/page-container';
 
 export const query = graphql`
   query IndexPageQuery {
@@ -87,7 +88,8 @@ const IndexPage = props => {
   }
 
   return (
-    <>
+    <PageContainer
+    >
       <SEO
         title={site.title}
         description={site.description}
@@ -133,7 +135,7 @@ const IndexPage = props => {
       </Typography>
       <Link to="about">About</Link>
       <Link to="portfolio">Portfolio</Link>
-    </>
+    </PageContainer>
   );
 };
 

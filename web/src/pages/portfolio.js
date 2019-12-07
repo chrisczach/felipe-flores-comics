@@ -2,6 +2,8 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 
 import SEO from '../components/seo';
+import PageContainer from '../components/page-container';
+import GraphQLErrorList from '../components/graphql-error-list';
 
 export const query = graphql`
   query PortfolioPageQuery {
@@ -34,19 +36,19 @@ const PortfolioPage = props => {
   const { data, errors } = props;
   if (errors) {
     return (
-      <>
+      <PageContainer>
         <GraphQLErrorList errors={errors} />
-      </>
+      </PageContainer>
     );
   }
   const projectNodes = data && data.projects && [];
   return (
-    <>
+    <PageContainer>
       <SEO title="Portfolio" />
 
       <div>Portfolio Page Starting</div>
       <Link to="/">Home</Link>
-    </>
+    </PageContainer>
   );
 };
 

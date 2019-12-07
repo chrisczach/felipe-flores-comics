@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
+import PageContainer from '../components/page-container';
 
 export const query = graphql`
   query AboutPageQuery {
@@ -73,7 +74,7 @@ const AboutPage = props => {
   }
 
   return (
-    <>
+    <PageContainer>
       <SEO
         title={site.title}
         description={site.description}
@@ -82,7 +83,7 @@ const AboutPage = props => {
       <h1 hidden>About {site.title}</h1>
       <div>About Page Starting</div>
       <Link to="/">Home</Link>
-    </>
+    </PageContainer>
   );
 };
 
