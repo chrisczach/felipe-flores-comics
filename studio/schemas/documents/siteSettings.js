@@ -15,11 +15,21 @@ export default {
       title: 'Title',
     },
     {
+      name: 'subtitle',
+      type: 'string',
+      title: 'Subitle',
+    },
+    {
       name: 'description',
       type: 'text',
       title: 'Description',
       description:
         'Describe your portfolio for search engines and social media.',
+    },
+    {
+      name: 'footerText',
+      title: 'Footer Text',
+      type: 'projectPortableText',
     },
     {
       name: 'keywords',
@@ -30,13 +40,6 @@ export default {
       options: {
         layout: 'tags',
       },
-    },
-    {
-      name: 'author',
-      type: 'reference',
-      description: 'Publish an author and set a reference to them here.',
-      title: 'Author',
-      to: [{ type: 'person' }],
     },
   ],
 };

@@ -108,7 +108,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Footer = ({ ...props }) => {
+const Footer = ({ siteTitle, siteSubtitle, siteFooter, ...props }) => {
   const classes = useStyles(props);
   return (
     <AppBar
@@ -125,14 +125,10 @@ const Footer = ({ ...props }) => {
           align="right"
           style={{ fontVariant: 'small-caps' }}
         >
-          Felipe Flores
+          {siteTitle}
         </Typography>
         <Typography variant="body1" align="right">
-          Phone: ###-###-####
-          <br />
-          Email: name@address.com
-          <br />
-          mail: 123 main st, city, state 12345
+          {JSON.stringify(siteFooter)}
         </Typography>
       </Box>
     </AppBar>

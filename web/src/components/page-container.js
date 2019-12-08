@@ -8,6 +8,7 @@ import {
   Hidden,
   fade,
 } from '@material-ui/core';
+import { graphql, StaticQuery } from 'gatsby';
 
 const useStyles = hero =>
   makeStyles(theme => {
@@ -89,49 +90,61 @@ const useStyles = hero =>
     };
   });
 
-const PageContainer = ({
-  children,
-  heading = 'Felipe Flores',
-  subHeading = 'Comic Book Illustrator',
-  pageTitle = '',
-  hero,
-  ...props
-}) => {
+const PageContainer = ({ children, pageTitle = '', hero = null, ...props }) => {
   const classes = useStyles(hero)(props);
   return (
-    <>
-      {hero && hero}
-      <Paper square elevation={0} className={classes.root}>
-        <Box className={classes.titleWrap}>
-          <Typography variant="h5" color="primary" className={classes.heading}>
-            {heading}
-          </Typography>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-            className={classes.subHeading}
-          >
-            {subHeading}
-          </Typography>
-        </Box>
-        {pageTitle && (
-          <Hidden xsDown implementation="css">
-            <Box className={classes.pageTitle}>
-              <Typography variant="h4">{pageTitle}</Typography>
+    <StaticQuery
+      query={query}
+      render={data => (
+        <>
+          {hero && hero}
+          <Paper square elevation={0} className={classes.root}>
+            <Box className={classes.titleWrap}>
+              <Typography
+                variant="h5"
+                color="primary"
+                className={classes.heading}
+              >
+                {data.site.title}
+              </Typography>
+              <Typography
+                variant="body1"
+                color="textPrimary"
+                className={classes.subHeading}
+              >
+                {data.site.subtitle}
+              </Typography>
             </Box>
-          </Hidden>
-        )}
-      </Paper>
-      <Container maxWidth="lg" className={classes.container}>
-        {pageTitle && (
-          <Hidden smUp implementation="css">
-            <Typography variant="h1">{pageTitle}</Typography>
-          </Hidden>
-        )}
-        {children}
-      </Container>
-    </>
+            {pageTitle && (
+              <Hidden xsDown implementation="css">
+                <Box className={classes.pageTitle}>
+                  <Typography variant="h4">{pageTitle}</Typography>
+                </Box>
+              </Hidden>
+            )}
+          </Paper>
+          <Container maxWidth="lg" className={classes.container}>
+            {pageTitle && (
+              <Hidden smUp implementation="css">
+                <Typography variant="h1">{pageTitle}</Typography>
+              </Hidden>
+            )}
+            {children}
+          </Container>
+        </>
+      )}
+    />
   );
 };
+
+const query = graphql`
+  query PageContainerQuery {
+    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
+      title
+      subtitle
+      footer: _rawFooterText
+    }
+  }
+`;
 
 export default PageContainer;

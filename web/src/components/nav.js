@@ -95,7 +95,7 @@ const toNav = (handleClose, listItemClass) => ({ name, icon, slug }) => {
   );
 };
 
-const Nav = props => {
+const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const classes = useStyles(props);
   const [open, setOpen] = useState(false);
@@ -133,9 +133,9 @@ const Nav = props => {
           <CloseOutlined titleAccess="Close Nav Menu" fontSize="large" />
         </Button>
         <List disablePadding className={classes.menuBar}>
-          <ListItem key={'Felipe Flores'} className={classes.menuHeading}>
+          <ListItem key={siteTitle} className={classes.menuHeading}>
             <ListItemText
-              primary={'Felipe Flores'}
+              primary={siteTitle}
               primaryTypographyProps={{
                 style: {
                   fontWeight: 'bold',
@@ -144,7 +144,7 @@ const Nav = props => {
                 color: 'primary',
                 variant: 'h5',
               }}
-              secondary={'Comic Book Illustrator'}
+              secondary={siteSubtitle}
               secondaryTypographyProps={{
                 color: 'textPrimary',
                 style: {

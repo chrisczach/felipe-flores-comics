@@ -17,11 +17,19 @@ import {
 import Nav from './nav';
 import Footer from './footer';
 
-const Layout = ({ children, onHideNav, onShowNav, showNav, siteTitle }) => (
+const Layout = ({
+  children,
+  onHideNav,
+  onShowNav,
+  showNav,
+  siteTitle,
+  siteSubtitle,
+  siteFooter,
+}) => (
   <>
-    <Nav />
+    <Nav {...{ siteTitle, siteSubtitle }} />
     {children}
-    <Footer />
+    <Footer {...{ siteTitle, siteFooter }} />
   </>
 );
 
