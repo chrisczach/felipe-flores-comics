@@ -22,7 +22,7 @@ const useStyles = hero =>
       root: {
         zIndex: 10,
         pointerEvents: 'none',
-        position: hero ? 'fixed' : 'sticky',
+        position: 'sticky',
         top: 0,
         background: 'transparent',
         display: 'flex',
@@ -100,6 +100,10 @@ const useStyles = hero =>
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        borderBottom: `${theme.spacing(0.5)}px solid ${lighten(
+          theme.palette.primary.dark,
+          0.35,
+        )}`,
       },
     };
   });
@@ -107,12 +111,14 @@ const useStyles = hero =>
 const PageContainer = ({
   children,
   pageTitle = '',
-  heroImage = null,
+  heroImage = {},
   ...props
 }) => {
   const classes = useStyles(heroImage)(props);
   const heroImageFluid =
-    heroImage && heroImage.asset.localFile.childImageSharp.fluid;
+    heroImage &&
+    heroImage.asset &&
+    heroImage.asset.localFile.childImageSharp.fluid;
 
   return (
     <StaticQuery

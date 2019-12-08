@@ -33,9 +33,6 @@ const ContactPage = props => {
   const site = (data || {}).site;
   const page = (data || {}).page;
 
-  const heroImageFluid =
-    page.heroImage && page.heroImage.asset.localFile.childImageSharp.fluid;
-
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
