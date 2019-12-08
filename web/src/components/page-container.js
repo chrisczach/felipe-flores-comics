@@ -7,12 +7,16 @@ import {
   Box,
   Hidden,
   fade,
+  lighten,
 } from '@material-ui/core';
 import { graphql, StaticQuery } from 'gatsby';
 
 const useStyles = hero =>
   makeStyles(theme => {
-    const backgroundColor = fade(theme.palette.secondary.light, 0.5);
+    const backgroundColor = fade(
+      lighten(theme.palette.secondary.light, 0.5),
+      0.75,
+    );
     return {
       root: {
         zIndex: 10,
@@ -79,7 +83,7 @@ const useStyles = hero =>
           bottom: 0,
           left: theme.spacing(-6),
           transform: 'skewX(-45deg)',
-          // background: theme.palette.background.default,
+          background: fade(theme.palette.background.default, 0.5),
         },
       },
       container: {

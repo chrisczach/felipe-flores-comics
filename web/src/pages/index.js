@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    boxShadow: theme.shadows[4]
   },
 }));
 
