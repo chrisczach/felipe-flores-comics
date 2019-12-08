@@ -17,7 +17,8 @@ import {
   fade,
   Hidden,
 } from '@material-ui/core';
-import { display } from '@material-ui/system';
+
+import BlockContent from './block-content';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,6 +85,7 @@ const useStyles = makeStyles(theme => ({
     width: '75%',
     position: 'relative',
     display: 'flex',
+    textAlign: 'right',
     flexDirection: 'column',
     padding: theme.spacing(1),
     '&::before': {
@@ -120,15 +122,11 @@ const Footer = ({ siteTitle, siteSubtitle, siteFooter, ...props }) => {
     >
       <Box className={classes.leftBox}></Box>
       <Box className={classes.rightBox}>
-        <Typography
-          variant="h6"
-          align="right"
-          style={{ fontVariant: 'small-caps' }}
-        >
+        <Typography variant="h6" style={{ fontVariant: 'small-caps' }}>
           {siteTitle}
         </Typography>
-        <Typography variant="body1" align="right">
-          {JSON.stringify(siteFooter)}
+        <Typography variant="body1">
+          <BlockContent blocks={siteFooter} />
         </Typography>
       </Box>
     </AppBar>

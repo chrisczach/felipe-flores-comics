@@ -10,6 +10,7 @@ import {
   lighten,
 } from '@material-ui/core';
 import { graphql, StaticQuery } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
 
 const useStyles = hero =>
   makeStyles(theme => {
@@ -92,17 +93,44 @@ const useStyles = hero =>
         // remove min height later
         // minHeight: '100vh',
       },
+      hero: {
+        backgroundAttachment: 'fixed',
+        height: '75vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
     };
   });
 
-const PageContainer = ({ children, pageTitle = '', hero = null, ...props }) => {
-  const classes = useStyles(hero)(props);
+const PageContainer = ({
+  children,
+  pageTitle = '',
+  heroImage = null,
+  ...props
+}) => {
+  const classes = useStyles(heroImage)(props);
+  const heroImageFluid =
+    heroImage && heroImage.asset.localFile.childImageSharp.fluid;
+
   return (
     <StaticQuery
       query={query}
       render={data => (
         <>
-          {hero && hero}
+          {heroImage && (
+            <BackgroundImage
+              fluid={heroImageFluid}
+              fadeIn
+              durationFadeIn={1000}
+              className={classes.hero}
+            >
+              <Typography variant="h1" color="primary">
+                {heroImage.caption}
+              </Typography>
+            </BackgroundImage>
+          )}
           <Paper square elevation={0} className={classes.root}>
             <Box className={classes.titleWrap}>
               <Typography

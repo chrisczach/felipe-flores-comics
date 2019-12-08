@@ -1,71 +1,40 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
+
+import { makeStyles } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
+import BlockContent from '../components/block-content';
 
-export const query = graphql`
-  query ContactPageQuery {
-    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
-      title
-      description
-      keywords
-    }
-    projects: allSanityProject(
-      limit: 6
-      sort: { fields: [publishedAt], order: DESC }
-      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
-    ) {
-      edges {
-        node {
-          id
-          mainImage {
-            crop {
-              _key
-              _type
-              top
-              bottom
-              left
-              right
-            }
-            hotspot {
-              _key
-              _type
-              x
-              y
-              height
-              width
-            }
-            asset {
-              _id
-            }
-            alt
-          }
-          title
-          _rawExcerpt
-          slug {
-            current
-          }
-        }
-      }
-    }
-  }
-`;
+const useStyles = makeStyles(theme => ({
+  hero: {
+    backgroundAttachment: 'fixed',
+    height: '75vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
 
 const ContactPage = props => {
   const { data, errors } = props;
-
+  const classes = useStyles(props);
   if (errors) {
     return (
-      <PageContainer pageTitle="Contact Me">
+      <>
         <GraphQLErrorList errors={errors} />
-      </PageContainer>
+      </>
     );
   }
 
   const site = (data || {}).site;
-  const projectNodes = (data || {}).projects ? ['to', 'an', 'array'] : [];
+  const page = (data || {}).page;
+
+  const heroImageFluid =
+    page.heroImage && page.heroImage.asset.localFile.childImageSharp.fluid;
 
   if (!site) {
     throw new Error(
@@ -74,17 +43,50 @@ const ContactPage = props => {
   }
 
   return (
-    <PageContainer pageTitle="Contact Me">
+    <PageContainer pageTitle={page.title} heroImage={page.heroImage}>
       <SEO
         title={site.title}
         description={site.description}
         keywords={site.keywords}
       />
-      <h1 hidden>About {site.title}</h1>
-      <div>About Page Starting</div>
-      <Link to="/">Home</Link>
+      <h1 hidden>Welcome to {site.title}</h1>
+
+      <BlockContent blocks={page.body} />
+      {/* <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} /> */}
     </PageContainer>
   );
 };
+
+export const query = graphql`
+  query ContactPageQuery {
+    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
+      title
+      description
+      keywords
+    }
+    page: sanityPage(title: { eq: "Contact" }) {
+      title
+      excerpt: _rawExcerpt
+      body: _rawBody
+      heroImage: mainImage {
+        caption
+        alt
+        asset {
+          id
+          localFile(width: 2400) {
+            childImageSharp {
+              fluid(
+                maxWidth: 2400
+                traceSVG: { color: "#8b151b77", background: "#ffd83111" }
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default ContactPage;

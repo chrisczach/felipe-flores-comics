@@ -1,40 +1,14 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
-import BackgroundImage from 'gatsby-background-image';
+import { graphql } from 'gatsby';
 
-import {
-  Container,
-  Paper,
-  Collapse,
-  Typography,
-  TextField,
-  Zoom,
-  fade,
-  Fade,
-  Grow,
-  Slide,
-  Breadcrumbs,
-  Box,
-  Button,
-  makeStyles,
-} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
+import BlockContent from '../components/block-content';
 
-const useStyles = makeStyles(theme => ({
-  hero: {
-    backgroundAttachment: 'fixed',
-    height: '75vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    boxShadow: theme.shadows[4]
-  },
-}));
+const useStyles = makeStyles(theme => ({}));
 
 const IndexPage = props => {
   const { data, errors } = props;
@@ -50,8 +24,6 @@ const IndexPage = props => {
   const site = (data || {}).site;
   const page = (data || {}).page;
 
-  const heroImageFluid = page.heroImage.asset.localFile.childImageSharp.fluid;
-
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
@@ -59,21 +31,7 @@ const IndexPage = props => {
   }
 
   return (
-    <PageContainer
-      pageTitle={page.title}
-      hero={
-        <BackgroundImage
-          fluid={heroImageFluid}
-          fadeIn
-          durationFadeIn={1000}
-          className={classes.hero}
-        >
-          <Typography variant="h1" color="primary">
-            {page.heroImage.caption}
-          </Typography>
-        </BackgroundImage>
-      }
-    >
+    <PageContainer pageTitle={page.title} heroImage={page.heroImage}>
       <SEO
         title={site.title}
         description={site.description}
@@ -81,8 +39,8 @@ const IndexPage = props => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
 
-      {JSON.stringify(page.body)}
-      <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} />
+      <BlockContent blocks={page.body} />
+      {/* <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} /> */}
     </PageContainer>
   );
 };
