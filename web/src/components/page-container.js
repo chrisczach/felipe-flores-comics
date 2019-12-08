@@ -105,6 +105,10 @@ const useStyles = hero =>
           0.35,
         )}`,
       },
+      captionText: {
+        color: theme.palette.background.default,
+        // mixBlendMode: `difference`,
+      },
     };
   });
 
@@ -132,7 +136,11 @@ const PageContainer = ({
               durationFadeIn={1000}
               className={classes.hero}
             >
-              <Typography variant="h1" color="primary">
+              <Typography
+                variant="h1"
+                color="primary"
+                className={classes.captionText}
+              >
                 {heroImage.caption}
               </Typography>
             </BackgroundImage>
