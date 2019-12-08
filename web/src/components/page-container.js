@@ -15,6 +15,7 @@ const useStyles = hero =>
     const backgroundColor = fade(theme.palette.secondary.light, 0.5);
     return {
       root: {
+        zIndex: 10,
         pointerEvents: 'none',
         position: hero ? 'fixed' : 'sticky',
         top: 0,

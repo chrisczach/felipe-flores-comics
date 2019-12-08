@@ -1,6 +1,8 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
+import BackgroundImage from 'gatsby-background-image';
+
 import {
   Container,
   Paper,
@@ -24,10 +26,6 @@ import PageContainer from '../components/page-container';
 
 const useStyles = makeStyles(theme => ({
   hero: {
-    background: `linear-gradient(155deg, ${fade(
-      theme.palette.secondary.dark,
-      0.2,
-    )} 50%, ${fade(theme.palette.secondary.light, 0.1)} 50%)`,
     backgroundAttachment: 'fixed',
     height: '75vh',
     display: 'flex',
@@ -63,11 +61,16 @@ const IndexPage = props => {
     <PageContainer
       pageTitle={page.title}
       hero={
-        <Paper color="primary" square className={classes.hero}>
+        <BackgroundImage
+          fluid={heroImageFluid}
+          fadeIn
+          durationFadeIn={1000}
+          className={classes.hero}
+        >
           <Typography variant="h1" color="primary">
             {page.heroImage.caption}
           </Typography>
-        </Paper>
+        </BackgroundImage>
       }
     >
       <SEO
@@ -76,8 +79,9 @@ const IndexPage = props => {
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-      <Img fluid={heroImageFluid} />
+
       {JSON.stringify(page.body)}
+      <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} />
     </PageContainer>
   );
 };
@@ -100,7 +104,10 @@ export const query = graphql`
           id
           localFile(width: 2400) {
             childImageSharp {
-              fluid(maxWidth: 2400) {
+              fluid(
+                maxWidth: 2400
+                traceSVG: { color: "#8b151b77", background: "#ffd83111" }
+              ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
             }

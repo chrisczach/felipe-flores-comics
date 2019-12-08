@@ -20,6 +20,7 @@
     "@sanity/image-url": "^0.140.15",
     "date-fns": "^1.30.1",
     "gatsby": "^2.18.6",
+    "gatsby-background-image": "^0.9.11",
     "gatsby-image": "^2.2.34",
     "gatsby-plugin-force-trailing-slashes": "^1.0.4",
     "gatsby-plugin-layout": "^1.1.16",
@@ -35,6 +36,7 @@
     "gatsby-source-sanity": "^4.0.1",
     "gatsby-source-sanity-transform-images": "0.0.4",
     "gatsby-transformer-sharp": "^2.3.6",
+    "intersection-observer": "^0.7.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.0"
