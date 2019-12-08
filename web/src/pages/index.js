@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import Img from 'gatsby-image';
 import {
   Container,
   Paper,
@@ -66,7 +67,6 @@ const IndexPage = props => {
           <Typography variant="h1" color="primary">
             {page.heroImage.caption}
           </Typography>
-
         </Paper>
       }
     >
@@ -76,6 +76,7 @@ const IndexPage = props => {
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
+      <Img fluid={heroImageFluid} />
       {JSON.stringify(page.body)}
     </PageContainer>
   );
@@ -99,7 +100,7 @@ export const query = graphql`
           id
           localFile {
             childImageSharp {
-              fluid {
+              fluid(maxWidth: 2400) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
             }
