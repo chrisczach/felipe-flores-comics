@@ -47,6 +47,14 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `localImages`,
+        path: `${__dirname}/temp/`,
+      },
+    },
+    'gatsby-source-sanity-transform-images',
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Chris Czach - Front End Developer`,

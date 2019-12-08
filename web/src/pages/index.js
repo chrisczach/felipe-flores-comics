@@ -49,6 +49,9 @@ const IndexPage = props => {
 
   const site = (data || {}).site;
   const page = (data || {}).page;
+
+  const heroImageFluid = page.heroImage.asset.localFile.childImageSharp.fluid;
+
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
@@ -61,8 +64,9 @@ const IndexPage = props => {
       hero={
         <Paper color="primary" square className={classes.hero}>
           <Typography variant="h1" color="primary">
-            ¡HERO IMAGE!
+            {page.heroImage.caption}
           </Typography>
+
         </Paper>
       }
     >
@@ -92,8 +96,13 @@ export const query = graphql`
         caption
         alt
         asset {
-          fluid(maxWidth: 2400) {
-            ...GatsbySanityImageFluid
+          id
+          localFile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
           }
         }
       }
