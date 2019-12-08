@@ -7,6 +7,7 @@ import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
+import ProjectGrid from '../components/projects/project-grid';
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -23,6 +24,7 @@ const PortfolioPage = props => {
 
   const site = (data || {}).site;
   const page = (data || {}).page;
+  const projects = (data || {}).projects.nodes;
 
   if (!site) {
     throw new Error(
@@ -40,7 +42,7 @@ const PortfolioPage = props => {
       <h1 hidden>Welcome to {site.title}</h1>
 
       <BlockContent blocks={page.body} />
-      {/* <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} /> */}
+      <ProjectGrid {...{ projects }} />
     </PageContainer>
   );
 };
@@ -60,7 +62,6 @@ export const query = graphql`
         caption
         alt
         asset {
-          id
           localFile(width: 2400) {
             childImageSharp {
               fluid(
@@ -68,6 +69,34 @@ export const query = graphql`
                 traceSVG: { color: "#8b151b77", background: "#ffd83111" }
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
+        }
+      }
+    }
+    projects: allSanityProject {
+      nodes {
+        title
+        slug {
+          current
+        }
+        excerpt: _rawExcerpt
+        categories {
+          title
+        }
+        mainImage {
+          caption
+          alt
+          asset {
+            localFile(width: 2400) {
+              childImageSharp {
+                fluid(
+                  maxWidth: 2400
+                  traceSVG: { color: "#8b151b77", background: "#ffd83111" }
+                ) {
+                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                }
               }
             }
           }

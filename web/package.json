@@ -39,7 +39,8 @@
     "intersection-observer": "^0.7.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "react-masonry-css": "^1.0.14"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

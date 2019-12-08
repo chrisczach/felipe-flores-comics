@@ -125,9 +125,8 @@ const Footer = ({ siteTitle, siteSubtitle, siteFooter, ...props }) => {
         <Typography variant="h6" style={{ fontVariant: 'small-caps' }}>
           {siteTitle}
         </Typography>
-        <Typography variant="body1">
-          <BlockContent blocks={siteFooter} />
-        </Typography>
+
+        <BlockContent blocks={siteFooter} />
       </Box>
     </AppBar>
   );
