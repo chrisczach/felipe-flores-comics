@@ -165,7 +165,7 @@ const ProjectTile = ({
 }) => {
   const classes = useStyles(props);
   const handleNavigate = () => navigate(`/portfolio/${slug}/`,forwardedBreadcrumb ? {state: {forwardedBreadcrumb}}: {});
-  const handleClick = () => openHandler ? openHandler({title, excerpt, slug, fluid}) : handleNavigate()
+  const handleClick = () => openHandler ? openHandler({title, excerpt, slug, fluid, handleNavigate}) : handleNavigate()
   return (
     <Paper
       square
@@ -189,7 +189,7 @@ const ProjectTile = ({
           </Box>
           <Box className={classes.actionWrapper}>
             <Button disableFocusRipple disableRipple className={classes.action}>
-              Open
+              {openHandler ? 'View' : 'Open'}
             </Button>
           </Box>
         </Box>

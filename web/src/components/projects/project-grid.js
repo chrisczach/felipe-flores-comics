@@ -38,9 +38,11 @@ const ProjectGrid = ({ projects, forwardedBreadcrumb = null, enablePreview = fal
 
   const columns = sm ? 1 : md ? 2 : 3;
   const classes = useStyles( props );
-  const { openHandler, PreviewModal } = useProjectPreviewModal()
+  const { openHandler, previewModal } = useProjectPreviewModal()
   
   return (
+    <>
+      {enablePreview && previewModal}
     <Box>
       <Masonry
         breakpointCols={columns}
@@ -51,7 +53,8 @@ const ProjectGrid = ({ projects, forwardedBreadcrumb = null, enablePreview = fal
           <ProjectTile { ...props } forwardedBreadcrumb={ forwardedBreadcrumb } openHandler={enablePreview && openHandler} />
         )}
       </Masonry>
-    </Box>
+      </Box>
+      </>
   );
 };
 
