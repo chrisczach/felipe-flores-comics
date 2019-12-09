@@ -22,21 +22,60 @@ const useStyles = makeStyles(theme => {
   return {
     root: {
       cursor: 'pointer',
+      position: 'relative',
       marginBottom: gap,
-      background: theme.palette.background.default,
+      // background: theme.palette.background.default,
       '&:hover': {
-        backgroundImage: `radial-gradient(${fade(
-          theme.palette.primary.light,
-          0.075,
-        )} 10%, transparent 10%), radial-gradient(${fade(
-          theme.palette.primary.light,
-          0.1,
-        )} 10%, transparent 10%)`,
-        backgroundColor: fade(theme.palette.secondary.light, 0.075),
-        backgroundPosition: `0 0, 5px 5px`,
-        backgroundSize: `10px 10px`,
         boxShadow: theme.shadows[2],
       },
+    },
+    drawerWrapper: {
+      cursor: 'pointer',
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      overflow: 'hidden',
+      '&:hover div': {
+        transform: `translateY(0)`,
+      },
+      '&:hover h6': {
+        opacity: 0,
+        transition: 'none',
+      },
+    },
+    overlay: {
+      boxShadow: theme.shadows[2],
+      background: theme.palette.primary.light,
+      minWidth: '25%',
+      display: 'flex',
+      justifyContent: 'center',
+      color: theme.palette.background.default,
+      padding: theme.spacing(0.25, 2),
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+    },
+    infoWrapper: {
+      transition: theme.transitions.duration.enteringScreen,
+      transform: `translateY(100%)`,
+      position: 'absolute',
+      bottom: 0,
+      zIndex: 50,
+      left: 0,
+      right: 0,
+      borderTop: `${theme.spacing(0.15)}px solid ${red}`,
+      backgroundImage: `radial-gradient(${lighten(
+        theme.palette.primary.light,
+        0.7,
+      )} 10%, transparent 10%), radial-gradient(${lighten(
+        theme.palette.primary.light,
+        0.8,
+      )} 10%, transparent 10%)`,
+      backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      backgroundPosition: `0 0, 5px 5px`,
+      backgroundSize: `10px 10px`,
     },
     excerptWrapper: {
       padding: theme.spacing(0.5, 1, 0, 1),
@@ -129,20 +168,25 @@ const ProjectTile = ({
       onClick={handleNavigate}
     >
       <Img fluid={fluid} fadeIn durationFadeIn={1500} />
-      <Box className={classes.headingWrap}>
-        <Typography variant="h5" className={classes.heading}>
+      <Box className={classes.drawerWrapper}>
+        <Typography variant="h6" className={classes.overlay}>
           {title}
         </Typography>
-      </Box>
-
-      {/* <Typography variant="h6">{slug}</Typography> */}
-      <Box className={classes.excerptWrapper}>
-        <BlockContent blocks={excerpt} />
-      </Box>
-      <Box className={classes.actionWrapper}>
-        <Button disableFocusRipple disableRipple className={classes.action}>
-          Open
-        </Button>
+        <Box className={classes.infoWrapper}>
+          <Box className={classes.headingWrap}>
+            <Typography variant="h5" className={classes.heading}>
+              {title}
+            </Typography>
+          </Box>
+          <Box className={classes.excerptWrapper}>
+            <BlockContent blocks={excerpt} />
+          </Box>
+          <Box className={classes.actionWrapper}>
+            <Button disableFocusRipple disableRipple className={classes.action}>
+              Open
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </Paper>
   );
