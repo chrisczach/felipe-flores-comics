@@ -1,101 +1,89 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
+
+import { makeStyles, Typography, Box } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
-import Layout from '../containers/layout';
+import PageContainer from '../components/page-container';
+import BlockContent from '../components/block-content';
+const useStyles = makeStyles(theme => ({}));
+
+const ProjectTemplate = props => {
+  const { data, errors } = props;
+  const classes = useStyles(props);
+  if (errors) {
+    return (
+      <>
+        <GraphQLErrorList errors={errors} />
+      </>
+    );
+  }
+
+  const site = (data || {}).site;
+  const project = (data || {}).project;
+
+  if (!site) {
+    throw new Error(
+      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
+    );
+  }
+
+  return (
+    <PageContainer
+      pageTitle={project.title}
+      // heroImage={ project.heroImage }
+    >
+      <SEO
+        title={site.title}
+        description={site.description}
+        keywords={site.keywords}
+      />
+      <h1 hidden>Welcome to {site.title}</h1>
+      <Box style={{ width: '50%' }}>
+        <Img fluid={project.heroImage.asset.localFile.childImageSharp.fluid} />
+        <BlockContent blocks={project.body} />
+      </Box>
+    </PageContainer>
+  );
+};
 
 export const query = graphql`
   query ProjectTemplateQuery($id: String!) {
-    sampleProject: sanityProject(id: { eq: $id }) {
-      id
-      publishedAt
+    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
+      title
+      description
+      keywords
+    }
+    project: sanityProject(id: { eq: $id }) {
+      title
+      body: _rawBody
+      heroImage: mainImage {
+        caption
+        alt
+        asset {
+          id
+          localFile(width: 2400) {
+            childImageSharp {
+              fluid(
+                maxWidth: 2400
+                traceSVG: { color: "#8b151b77", background: "#ffd83111" }
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
+        }
+      }
       categories {
-        _id
-        title
+        id
       }
       relatedProjects {
         title
-        _id
-        slug {
-          current
-        }
-      }
-      mainImage {
-        crop {
-          _key
-          _type
-          top
-          bottom
-          left
-          right
-        }
-        hotspot {
-          _key
-          _type
-          x
-          y
-          height
-          width
-        }
-        asset {
-          _id
-        }
-        alt
-      }
-      title
-      slug {
-        current
-      }
-      _rawBody
-      members {
-        _key
-        person {
-          image {
-            crop {
-              _key
-              _type
-              top
-              bottom
-              left
-              right
-            }
-            hotspot {
-              _key
-              _type
-              x
-              y
-              height
-              width
-            }
-            asset {
-              _id
-            }
-          }
-          name
-        }
-        roles
       }
     }
   }
 `;
-
-const ProjectTemplate = props => {
-  const { data, errors } = props;
-  const project = data && data.project;
-  return (
-    <Layout>
-      {errors && <SEO title="GraphQL Error" />}
-      {project && <SEO title={project.title || 'Untitled'} />}
-
-      {errors && (
-        <Container>
-          <GraphQLErrorList errors={errors} />
-        </Container>
-      )}
-      {/* {project && <Project {...project} />} */}
-    </Layout>
-  );
-};
 
 export default ProjectTemplate;
