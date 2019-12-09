@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-const ProjectGrid = ({ projects, ...props }) => {
+const ProjectGrid = ({ projects, forwardedBreadcrumb = null, ...props }) => {
   // @ts-ignore
   const sm = useMediaQuery(theme => theme.breakpoints.down('sm'));
   // @ts-ignore
@@ -44,8 +44,8 @@ const ProjectGrid = ({ projects, ...props }) => {
         className={classes.grid}
         columnClassName={classes.column}
       >
-        {[...projects, ...projects, ...projects].map(
-          ProjectTile,
+        {[...projects, ...projects, ...projects].map((props)=>
+          <ProjectTile { ...props } forwardedBreadcrumb={forwardedBreadcrumb }/>
         )}
       </Masonry>
     </Box>

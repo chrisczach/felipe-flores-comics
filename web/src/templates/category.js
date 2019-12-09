@@ -25,7 +25,8 @@ const Category = props => {
   const site = (data || {}).site;
   const page = (data || {}).page;
   const projects = (data || {}).projects.nodes;
-
+  const currentBreadcrumb = { slug: `/portfolio/${ page.slug.current }/`, title: page.title }
+  
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
@@ -33,7 +34,7 @@ const Category = props => {
   }
 
   return (
-    <PageContainer pageTitle={'Projects'} heroImage={page.heroImage} breadcrumbs={[{slug: '/portfolio/', title: 'Portfolio'}, {slug: `'/projects/${page.slug.current}/'`, title:page.title}]}>
+    <PageContainer pageTitle={'Projects'} heroImage={page.heroImage} breadcrumbs={[{slug: '/portfolio/', title: 'Portfolio'}, currentBreadcrumb]}>
       <SEO
         title={site.title}
         description={site.description}
@@ -41,7 +42,7 @@ const Category = props => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       <BlockContent blocks={ page.body } />
-      <ProjectGrid {...{ projects }} />
+      <ProjectGrid { ...{ projects } } forwardedBreadcrumb={ currentBreadcrumb}/>
     </PageContainer>
   );
 };

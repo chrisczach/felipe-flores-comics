@@ -159,10 +159,11 @@ const ProjectTile = ({
       },
     },
   },
+  forwardedBreadcrumb = null,
   ...props
 }) => {
   const classes = useStyles(props);
-  const handleNavigate = () => navigate(`portfolio/${slug}/`);
+  const handleNavigate = () => navigate(`/portfolio/${slug}/`,forwardedBreadcrumb ? {state: {forwardedBreadcrumb}}: {});
   return (
     <Paper
       square
