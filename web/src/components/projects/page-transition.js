@@ -8,15 +8,19 @@ const timeout = 250
 const getTransitionStyles = {
   entering: {
     position: `absolute`,
+    transform: 'rotate(90deg) scale(0)',
     opacity: 0,
   },
   entered: {
-    transition: `opacity ${timeout}ms ease-in-out`,
+    transition: `all ${ timeout }ms ease-in-out`,
+    transformOrigin: 'center bottom',
+    transform: 'rotate(0deg) scale(1)',
     opacity: 1,
   },
   exiting: {
-    transition: `opacity ${timeout}ms ease-in-out`,
-    opacity: 0,
+    transition: `all ${timeout}ms ease-in-out`,
+    transform: 'rotate(-270deg) scale(0)',
+    opacity: 1,
   },
 }
 
