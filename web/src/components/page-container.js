@@ -96,6 +96,9 @@ const useStyles = hero =>
       hero: {
         backgroundAttachment: 'fixed',
         height: '75vh',
+        [theme.breakpoints.down('sm')]: {
+          height: '50vh',
+        },
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

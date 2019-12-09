@@ -1,5 +1,6 @@
 import React from 'react';
 import Img from 'gatsby-image';
+import { navigate } from 'gatsby';
 import {
   Container,
   Button,
@@ -10,6 +11,7 @@ import {
   Hidden,
   fade,
   lighten,
+  darken,
 } from '@material-ui/core';
 import BlockContent from '../block-content';
 
@@ -19,13 +21,25 @@ const useStyles = makeStyles(theme => {
   const darkYellow = theme.palette.secondary.main;
   return {
     root: {
-      // cursor: 'pointer',
+      cursor: 'pointer',
       marginBottom: gap,
       background: theme.palette.background.default,
       '&:hover': {
-        background: fade(theme.palette.secondary.light, 0.15),
+        backgroundImage: `radial-gradient(${fade(
+          theme.palette.primary.light,
+          0.075,
+        )} 10%, transparent 10%), radial-gradient(${fade(
+          theme.palette.primary.light,
+          0.1,
+        )} 10%, transparent 10%)`,
+        backgroundColor: fade(theme.palette.secondary.light, 0.075),
+        backgroundPosition: `0 0, 5px 5px`,
+        backgroundSize: `10px 10px`,
         boxShadow: theme.shadows[2],
       },
+    },
+    excerptWrapper: {
+      padding: theme.spacing(0.5, 1, 0, 1),
     },
     headingWrap: {
       overflow: 'hidden',
@@ -61,6 +75,17 @@ const useStyles = makeStyles(theme => {
       borderRadius: 0,
       '&:hover': {
         background: 'inherit',
+        '&::after': {
+          background: darken(red, 0.3),
+          borderTop: `${theme.spacing(0.35)}px solid ${darken(
+            darkYellow,
+            0.15,
+          )}`,
+          borderLeft: `${theme.spacing(0.25)}px solid ${darken(
+            darkYellow,
+            0.15,
+          )}`,
+        },
       },
       '&::after': {
         content: '""',
@@ -95,8 +120,14 @@ const ProjectTile = ({
   ...props
 }) => {
   const classes = useStyles(props);
+  const handleNavigate = () => navigate(`portfolio/${slug}/`);
   return (
-    <Paper square className={classes.root} elevation={0}>
+    <Paper
+      square
+      className={classes.root}
+      elevation={0}
+      onClick={handleNavigate}
+    >
       <Img fluid={fluid} fadeIn durationFadeIn={1500} />
       <Box className={classes.headingWrap}>
         <Typography variant="h5" className={classes.heading}>
@@ -104,11 +135,13 @@ const ProjectTile = ({
         </Typography>
       </Box>
 
-      <Typography variant="h6">{slug}</Typography>
-      <BlockContent blocks={excerpt} />
+      {/* <Typography variant="h6">{slug}</Typography> */}
+      <Box className={classes.excerptWrapper}>
+        <BlockContent blocks={excerpt} />
+      </Box>
       <Box className={classes.actionWrapper}>
-        <Button disableFocusRipple className={classes.action}>
-          Action Button
+        <Button disableFocusRipple disableRipple className={classes.action}>
+          Open
         </Button>
       </Box>
     </Paper>
