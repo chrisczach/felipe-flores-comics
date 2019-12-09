@@ -38,14 +38,16 @@ const useStyles = makeStyles(theme => {
       left: 0,
       overflow: 'hidden',
       '&:hover div': {
-        transform: `translateY(0)`,
+        transform: `rotate(0) translateY(0)`,
       },
       '&:hover h6': {
-        opacity: 0,
-        transition: 'none',
+        transform: `rotate(-90deg) translateY(150%)`,
       },
     },
     overlay: {
+      transformOrigin: 'top right',
+      transition: 'all 150ms cubic-bezier(0.895, 0.030, 0.685, 0.220)',
+      transform:  `rotate(0) translateY(0)`,
       boxShadow: theme.shadows[2],
       background: theme.palette.primary.light,
       minWidth: '25%',
@@ -58,8 +60,9 @@ const useStyles = makeStyles(theme => {
       right: 0,
     },
     infoWrapper: {
-      transition: theme.transitions.duration.enteringScreen,
-      transform: `translateY(100%)`,
+      transformOrigin: 'top left',
+      transition: 'all 150ms cubic-bezier(0.895, 0.030, 0.685, 0.220)',
+      transform: `rotate(90deg) translateY(150%)`,
       position: 'absolute',
       bottom: 0,
       zIndex: 50,
