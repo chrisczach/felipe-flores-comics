@@ -24,7 +24,7 @@ const useProjectPreviewModal = (props) => {
       onClose={ closeHandler }
     className={classes.root}
     >
-      <Paper className={classes.window}><Button onClick={modalData.handleNavigate}>{ JSON.stringify( modalData ) }</Button></Paper>
+      <Paper square className={classes.window}><Button onClick={modalData.handleNavigate}>{ JSON.stringify( modalData ) }</Button></Paper>
 
         </Modal>)
   return ({openHandler, previewModal})
