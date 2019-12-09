@@ -44,7 +44,7 @@ const ProjectGrid = ({ projects, ...props }) => {
         className={classes.grid}
         columnClassName={classes.column}
       >
-        {[...projects, ...projects, ...projects, ...projects, ...projects].map(
+        {[...projects, ...projects, ...projects].map(
           ProjectTile,
         )}
       </Masonry>

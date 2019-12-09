@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
@@ -33,28 +33,27 @@ const Category = props => {
   }
 
   return (
-    <PageContainer pageTitle={page.title} heroImage={page.heroImage}>
+    <PageContainer pageTitle={'Projects'} heroImage={page.heroImage}>
       <SEO
         title={site.title}
         description={site.description}
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-
-      <BlockContent blocks={page.body} />
+      <BlockContent blocks={ page.body } />
       <ProjectGrid {...{ projects }} />
     </PageContainer>
   );
 };
 
 export const query = graphql`
-  query CategoryTemplateQuery {
+  query CategoryTemplateQuery($id: String!) {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       description
       keywords
     }
-    page: sanityPage(title: { eq: "Portfolio" }) {
+    page: sanityCategory(id: { eq: $id }) {
       title
       excerpt: _rawExcerpt
       body: _rawBody
@@ -75,6 +74,7 @@ export const query = graphql`
         }
       }
     }
+#  (filter: {id: { eq: $id }})
     projects: allSanityProject {
       nodes {
         title

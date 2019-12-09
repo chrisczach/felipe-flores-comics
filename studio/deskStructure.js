@@ -26,7 +26,7 @@ export default () =>
       S.listItem()
         .title('Projects')
         .schemaType('project')
-        .child(S.documentTypeList('project').title('Pojects')),
+        .child(S.documentTypeList('project').title('Projects')),
       S.listItem()
         .title('People')
         .schemaType('person')
