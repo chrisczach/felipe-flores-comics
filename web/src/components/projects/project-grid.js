@@ -13,6 +13,7 @@ import {
 import Masonry from 'react-masonry-css';
 
 import ProjectTile from './project-tile';
+import useProjectPreviewModal from './use-project-preview-modal';
 
 const useStyles = makeStyles(theme => {
   const gap = theme.spacing(2);
@@ -29,14 +30,16 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-const ProjectGrid = ({ projects, forwardedBreadcrumb = null, ...props }) => {
+const ProjectGrid = ({ projects, forwardedBreadcrumb = null, enablePreview = false, ...props }) => {
   // @ts-ignore
   const sm = useMediaQuery(theme => theme.breakpoints.down('sm'));
   // @ts-ignore
   const md = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   const columns = sm ? 1 : md ? 2 : 3;
-  const classes = useStyles(props);
+  const classes = useStyles( props );
+  const { openHandler, PreviewModal } = useProjectPreviewModal()
+  
   return (
     <Box>
       <Masonry
@@ -45,7 +48,7 @@ const ProjectGrid = ({ projects, forwardedBreadcrumb = null, ...props }) => {
         columnClassName={classes.column}
       >
         {[...projects, ...projects, ...projects].map((props)=>
-          <ProjectTile { ...props } forwardedBreadcrumb={forwardedBreadcrumb }/>
+          <ProjectTile { ...props } forwardedBreadcrumb={ forwardedBreadcrumb } openHandler={enablePreview && openHandler} />
         )}
       </Masonry>
     </Box>

@@ -42,7 +42,7 @@ const Category = props => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       <BlockContent blocks={ page.body } />
-      <ProjectGrid { ...{ projects } } forwardedBreadcrumb={ currentBreadcrumb}/>
+      <ProjectGrid { ...{ projects } } forwardedBreadcrumb={ currentBreadcrumb} enablePreview/>
     </PageContainer>
   );
 };

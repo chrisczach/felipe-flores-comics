@@ -160,16 +160,18 @@ const ProjectTile = ({
     },
   },
   forwardedBreadcrumb = null,
+  openHandler = null,
   ...props
 }) => {
   const classes = useStyles(props);
   const handleNavigate = () => navigate(`/portfolio/${slug}/`,forwardedBreadcrumb ? {state: {forwardedBreadcrumb}}: {});
+  const handleClick = () => openHandler ? openHandler({title, excerpt, slug, fluid}) : handleNavigate()
   return (
     <Paper
       square
       className={classes.root}
       elevation={0}
-      onClick={handleNavigate}
+      onClick={handleClick}
     >
       <Img fluid={fluid} fadeIn durationFadeIn={1500} />
       <Box className={classes.drawerWrapper}>
