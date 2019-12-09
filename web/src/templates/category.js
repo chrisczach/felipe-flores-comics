@@ -11,7 +11,7 @@ import ProjectGrid from '../components/projects/project-grid';
 
 const useStyles = makeStyles(theme => ({}));
 
-const PortfolioPage = props => {
+const Category = props => {
   const { data, errors } = props;
   const classes = useStyles(props);
   if (errors) {
@@ -48,7 +48,7 @@ const PortfolioPage = props => {
 };
 
 export const query = graphql`
-  query PortfolioPageQuery {
+  query CategoryTemplateQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       description
@@ -75,13 +75,16 @@ export const query = graphql`
         }
       }
     }
-    projects: allSanityCategory(sort: {fields: [sort]}) {
+    projects: allSanityProject {
       nodes {
         title
         slug {
           current
         }
         excerpt: _rawExcerpt
+        categories {
+          title
+        }
         mainImage {
           caption
           alt
@@ -103,4 +106,4 @@ export const query = graphql`
   }
 `;
 
-export default PortfolioPage;
+export default Category;
