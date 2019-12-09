@@ -1,9 +1,12 @@
 import React from 'react';
+import { navigate, Link as GatsbyLink } from 'gatsby';
 import {
   Container,
+  Link,
   Typography,
   Paper,
   makeStyles,
+  Breadcrumbs,
   Box,
   Hidden,
   fade,
@@ -119,6 +122,8 @@ const PageContainer = ({
   children,
   pageTitle = '',
   heroImage = {},
+  //  need to setup
+  breadcrumbs = null,
   ...props
 }) => {
   const classes = useStyles(heroImage)(props);
@@ -173,10 +178,21 @@ const PageContainer = ({
               </Hidden>
             )}
           </Paper>
-          <Container maxWidth="lg" className={classes.container}>
+          <Container maxWidth="lg" className={ classes.container }>
+           {breadcrumbs && <Breadcrumbs aria-label="breadcrumb">
+              { [{
+                slug: '/',
+                title: 'Home'
+              }, ...breadcrumbs].map( ( { slug, title }, i, a ) => {
+                const isLast = a.length - 1 === i
+                const ComponentToUse = isLast ? Typography : Link
+                const propsToUse = isLast ? {color: 'primary', style: {marginBottom: 0, fontWeight: 'bold', opacity: .75}}: {to: slug, component: GatsbyLink}
+                return <ComponentToUse {...propsToUse}>{ title }</ComponentToUse>
+              } ) }
+            </Breadcrumbs>}
             {pageTitle && (
               <Hidden smUp implementation="css">
-                <Typography variant="h1">{pageTitle}</Typography>
+                <Typography variant="h1" >{pageTitle}</Typography>
               </Hidden>
             )}
             {children}

@@ -33,7 +33,7 @@ const PortfolioPage = props => {
   }
 
   return (
-    <PageContainer pageTitle={page.title} heroImage={page.heroImage}>
+    <PageContainer pageTitle={page.title} heroImage={page.heroImage}  breadcrumbs={[{slug: '/portfolio/', title: 'Portfolio'}]}>
       <SEO
         title={site.title}
         description={site.description}

@@ -40,7 +40,7 @@ const ContactPage = props => {
   }
 
   return (
-    <PageContainer pageTitle={page.title} heroImage={page.heroImage}>
+    <PageContainer pageTitle={page.title} heroImage={page.heroImage}  breadcrumbs={[{slug: '/contact/', title: 'Contact'}]}>
       <SEO
         title={site.title}
         description={site.description}

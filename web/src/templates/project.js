@@ -32,7 +32,8 @@ const ProjectTemplate = props => {
 
   return (
     <PageContainer
-      pageTitle={project.title}
+      pageTitle={ project.title }
+      breadcrumbs={[{slug: '/portfolio/', title: 'Portfolio'}, {slug: `'/projects/${project.slug.current}/'`, title: project.title}]}
       // heroImage={ project.heroImage }
     >
       <SEO
@@ -58,6 +59,9 @@ export const query = graphql`
     }
     project: sanityProject(id: { eq: $id }) {
       title
+      slug {
+        current
+      }
       body: _rawBody
       heroImage: mainImage {
         caption

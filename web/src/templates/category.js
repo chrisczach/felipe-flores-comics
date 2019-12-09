@@ -33,7 +33,7 @@ const Category = props => {
   }
 
   return (
-    <PageContainer pageTitle={'Projects'} heroImage={page.heroImage}>
+    <PageContainer pageTitle={'Projects'} heroImage={page.heroImage} breadcrumbs={[{slug: '/portfolio/', title: 'Portfolio'}, {slug: `'/projects/${page.slug.current}/'`, title:page.title}]}>
       <SEO
         title={site.title}
         description={site.description}
@@ -55,6 +55,9 @@ export const query = graphql`
     }
     page: sanityCategory(id: { eq: $id }) {
       title
+      	slug {
+	  current
+	}
       excerpt: _rawExcerpt
       body: _rawBody
       heroImage: mainImage {
