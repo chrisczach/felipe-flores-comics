@@ -93,6 +93,11 @@ export const query = graphql`
           caption
           alt
           asset {
+            metadata {
+              dimensions {
+                aspectRatio
+            }
+          }
             localFile(width: 2400) {
               childImageSharp {
                 fluid(

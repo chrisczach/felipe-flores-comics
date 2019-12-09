@@ -154,6 +154,7 @@ const ProjectTile = ({
     caption,
     alt,
     asset: {
+      metadata,
       localFile: {
         childImageSharp: { fluid },
       },
@@ -163,9 +164,10 @@ const ProjectTile = ({
   openHandler = null,
   ...props
 }) => {
-  const classes = useStyles(props);
+  const classes = useStyles( props );
+  const aspectRatio = metadata && metadata.dimensions && metadata.dimensions.aspectRatio
   const handleNavigate = () => navigate(`/portfolio/${slug}/`,forwardedBreadcrumb ? {state: {forwardedBreadcrumb}}: {});
-  const handleClick = () => openHandler ? openHandler({title, excerpt, slug, fluid, handleNavigate}) : handleNavigate()
+  const handleClick = () => openHandler ? openHandler({title, excerpt, slug, fluid, aspectRatio ,handleNavigate}) : handleNavigate()
   return (
     <Paper
       square
