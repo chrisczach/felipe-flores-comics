@@ -110,7 +110,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Footer = ({ siteTitle, siteSubtitle, siteFooter, ...props }) => {
+const Footer = ({ siteTitle, siteFooter, ...props }) => {
   const classes = useStyles(props);
   return (
     <AppBar
