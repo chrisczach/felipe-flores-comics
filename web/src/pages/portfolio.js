@@ -33,7 +33,11 @@ const PortfolioPage = props => {
   }
 
   return (
-    <PageContainer pageTitle={page.title} heroImage={page.heroImage}  breadcrumbs={[{slug: '/portfolio/', title: 'Portfolio'}]}>
+    <PageContainer
+      pageTitle={page.title}
+      heroImage={page.heroImage}
+      breadcrumbs={[{ slug: '/portfolio/', title: 'Portfolio' }]}
+    >
       <SEO
         title={site.title}
         description={site.description}
@@ -75,7 +79,7 @@ export const query = graphql`
         }
       }
     }
-    projects: allSanityCategory(sort: {fields: [sort]}) {
+    projects: allSanityCategory(sort: { fields: [sort] }) {
       nodes {
         title
         slug {

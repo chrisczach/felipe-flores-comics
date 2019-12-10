@@ -178,21 +178,37 @@ const PageContainer = ({
               </Hidden>
             )}
           </Paper>
-          <Container maxWidth="lg" className={ classes.container }>
-           {breadcrumbs && <Breadcrumbs aria-label="breadcrumb">
-              { [{
-                slug: '/',
-                title: 'Home'
-              }, ...breadcrumbs].map( ( { slug, title }, i, a ) => {
-                const isLast = a.length - 1 === i
-                const ComponentToUse = isLast ? Typography : Link
-                const propsToUse = isLast ? {color: 'primary', style: {marginBottom: 0, fontWeight: 'bold', opacity: .75}}: {to: slug, component: GatsbyLink}
-                return <ComponentToUse {...propsToUse}>{ title }</ComponentToUse>
-              } ) }
-            </Breadcrumbs>}
+          <Container maxWidth="lg" className={classes.container}>
+            {breadcrumbs && (
+              <Breadcrumbs aria-label="breadcrumb">
+                {[
+                  {
+                    slug: '/',
+                    title: 'Home',
+                  },
+                  ...breadcrumbs,
+                ].map(({ slug, title }, i, a) => {
+                  const isLast = a.length - 1 === i;
+                  const ComponentToUse = isLast ? Typography : Link;
+                  const propsToUse = isLast
+                    ? {
+                        color: 'primary',
+                        style: {
+                          marginBottom: 0,
+                          fontWeight: 'bold',
+                          opacity: 0.75,
+                        },
+                      }
+                    : { to: slug, component: GatsbyLink };
+                  return (
+                    <ComponentToUse {...propsToUse}>{title}</ComponentToUse>
+                  );
+                })}
+              </Breadcrumbs>
+            )}
             {pageTitle && (
               <Hidden smUp implementation="css">
-                <Typography variant="h1" >{pageTitle}</Typography>
+                <Typography variant="h1">{pageTitle}</Typography>
               </Hidden>
             )}
             {children}

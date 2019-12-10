@@ -25,8 +25,11 @@ const Category = props => {
   const site = (data || {}).site;
   const page = (data || {}).page;
   const projects = (data || {}).projects.nodes;
-  const currentBreadcrumb = { slug: `/portfolio/${ page.slug.current }/`, title: page.title }
-  
+  const currentBreadcrumb = {
+    slug: `/portfolio/${page.slug.current}/`,
+    title: page.title,
+  };
+
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.',
@@ -34,15 +37,26 @@ const Category = props => {
   }
 
   return (
-    <PageContainer pageTitle={'Projects'} heroImage={page.heroImage} breadcrumbs={[{slug: '/portfolio/', title: 'Portfolio'}, currentBreadcrumb]}>
+    <PageContainer
+      pageTitle={'Projects'}
+      heroImage={page.heroImage}
+      breadcrumbs={[
+        { slug: '/portfolio/', title: 'Portfolio' },
+        currentBreadcrumb,
+      ]}
+    >
       <SEO
         title={site.title}
         description={site.description}
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-      <BlockContent blocks={ page.body } />
-      <ProjectGrid { ...{ projects } } forwardedBreadcrumb={ currentBreadcrumb} enablePreview/>
+      <BlockContent blocks={page.body} />
+      <ProjectGrid
+        {...{ projects }}
+        forwardedBreadcrumb={currentBreadcrumb}
+        enablePreview
+      />
     </PageContainer>
   );
 };
@@ -56,9 +70,9 @@ export const query = graphql`
     }
     page: sanityCategory(id: { eq: $id }) {
       title
-      	slug {
-	  current
-	}
+      slug {
+        current
+      }
       excerpt: _rawExcerpt
       body: _rawBody
       heroImage: mainImage {
@@ -78,7 +92,7 @@ export const query = graphql`
         }
       }
     }
-#  (filter: {id: { eq: $id }})
+    #  (filter: {id: { eq: $id }})
     projects: allSanityProject {
       nodes {
         title
@@ -96,8 +110,8 @@ export const query = graphql`
             metadata {
               dimensions {
                 aspectRatio
+              }
             }
-          }
             localFile(width: 2400) {
               childImageSharp {
                 fluid(

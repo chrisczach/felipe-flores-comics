@@ -78,6 +78,6 @@ async function createCategoryPages(graphql, actions, reporter) {
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  await createProjectPages( graphql, actions, reporter );
+  await createProjectPages(graphql, actions, reporter);
   await createCategoryPages(graphql, actions, reporter);
 };

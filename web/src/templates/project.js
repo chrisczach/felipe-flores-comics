@@ -10,7 +10,7 @@ import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
 const useStyles = makeStyles(theme => ({}));
 
-const ProjectTemplate = ({location = null, ...props}) => {
+const ProjectTemplate = ({ location = null, ...props }) => {
   const { data, errors } = props;
   const classes = useStyles(props);
   if (errors) {
@@ -30,12 +30,19 @@ const ProjectTemplate = ({location = null, ...props}) => {
     );
   }
 
-  const forwardedBreadcrumbs =  location && location.state && location.state.forwardedBreadcrumb ? [location.state.forwardedBreadcrumb ] : []
+  const forwardedBreadcrumbs =
+    location && location.state && location.state.forwardedBreadcrumb
+      ? [location.state.forwardedBreadcrumb]
+      : [];
 
   return (
     <PageContainer
-      pageTitle={ project.title }
-      breadcrumbs={[{slug: '/portfolio/', title: 'Portfolio'}, ...forwardedBreadcrumbs,{slug: `'/projects/${project.slug.current}/'`, title: project.title}]}
+      pageTitle={project.title}
+      breadcrumbs={[
+        { slug: '/portfolio/', title: 'Portfolio' },
+        ...forwardedBreadcrumbs,
+        { slug: `'/projects/${project.slug.current}/'`, title: project.title },
+      ]}
       // heroImage={ project.heroImage }
     >
       <SEO

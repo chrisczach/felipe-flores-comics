@@ -40,7 +40,11 @@ const AboutPage = props => {
   }
 
   return (
-    <PageContainer pageTitle={page.title} heroImage={page.heroImage} breadcrumbs={[{slug: '/about/', title: 'About'}]}>
+    <PageContainer
+      pageTitle={page.title}
+      heroImage={page.heroImage}
+      breadcrumbs={[{ slug: '/about/', title: 'About' }]}
+    >
       <SEO
         title={site.title}
         description={site.description}

@@ -18,7 +18,7 @@ import Nav from './nav';
 import Footer from './footer';
 import PageTransition from './projects/page-transition';
 
-const Layout = ( {
+const Layout = ({
   location,
   children,
   onHideNav,
@@ -29,10 +29,8 @@ const Layout = ( {
   siteFooter,
 }) => (
   <>
-      <Nav { ...{ siteTitle, siteSubtitle } } />
-      <PageTransition location={location}>
-        { children }
-        </PageTransition>
+    <Nav {...{ siteTitle, siteSubtitle }} />
+    <PageTransition location={location}>{children}</PageTransition>
     <Footer {...{ siteTitle, siteFooter }} />
   </>
 );

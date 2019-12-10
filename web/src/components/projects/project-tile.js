@@ -25,8 +25,10 @@ const useStyles = makeStyles(theme => {
       position: 'relative',
       marginBottom: gap,
       // background: theme.palette.background.default,
-      '&:hover': {
-        boxShadow: theme.shadows[2],
+      '@media (hover:hover)': {
+        '&:hover': {
+          boxShadow: theme.shadows[2],
+        },
       },
     },
     drawerWrapper: {
@@ -37,17 +39,19 @@ const useStyles = makeStyles(theme => {
       bottom: 0,
       left: 0,
       overflow: 'hidden',
-      '&:hover div': {
-        transform: `rotate(0) translateY(0)`,
-      },
-      '&:hover h6': {
-        transform: `rotate(-90deg) translateY(150%)`,
-      },
+      '@media (hover:hover)': {
+        '&:hover div': {
+          transform: `rotate(0) translateY(0)`,
+        },
+        '&:hover h6': {
+          transform: `rotate(-90deg) translateY(150%)`,
+        },
+      }
     },
     overlay: {
       transformOrigin: 'top right',
       transition: 'all 150ms cubic-bezier(0.895, 0.030, 0.685, 0.220)',
-      transform:  `rotate(0) translateY(0)`,
+      transform: `rotate(0) translateY(0)`,
       boxShadow: theme.shadows[2],
       background: theme.palette.primary.light,
       minWidth: '25%',
@@ -115,18 +119,20 @@ const useStyles = makeStyles(theme => {
     action: {
       color: theme.palette.background.default,
       borderRadius: 0,
-      '&:hover': {
-        background: 'inherit',
-        '&::after': {
-          background: darken(red, 0.3),
-          borderTop: `${theme.spacing(0.35)}px solid ${darken(
-            darkYellow,
-            0.15,
-          )}`,
-          borderLeft: `${theme.spacing(0.25)}px solid ${darken(
-            darkYellow,
-            0.15,
-          )}`,
+      '@media (hover:hover)': {
+        '&:hover': {
+          background: 'inherit',
+          '&::after': {
+            background: darken( red, 0.3 ),
+            borderTop: `${ theme.spacing( 0.35 ) }px solid ${ darken(
+              darkYellow,
+              0.15,
+            ) }`,
+            borderLeft: `${ theme.spacing( 0.25 ) }px solid ${ darken(
+              darkYellow,
+              0.15,
+            ) }`,
+          },
         },
       },
       '&::after': {
@@ -164,17 +170,27 @@ const ProjectTile = ({
   openHandler = null,
   ...props
 }) => {
-  const classes = useStyles( props );
-  const aspectRatio = metadata && metadata.dimensions && metadata.dimensions.aspectRatio
-  const handleNavigate = () => navigate(`/portfolio/${slug}/`,forwardedBreadcrumb ? {state: {forwardedBreadcrumb}}: {});
-  const handleClick = () => openHandler ? openHandler({title, excerpt, slug, fluid, aspectRatio ,handleNavigate}) : handleNavigate()
+  const classes = useStyles(props);
+  const aspectRatio =
+    metadata && metadata.dimensions && metadata.dimensions.aspectRatio;
+  const handleNavigate = () =>
+    navigate(
+      `/portfolio/${slug}/`,
+      forwardedBreadcrumb ? { state: { forwardedBreadcrumb } } : {},
+    );
+  const handleClick = () =>
+    openHandler
+      ? openHandler({
+          title,
+          excerpt,
+          slug,
+          fluid,
+          aspectRatio,
+          handleNavigate,
+        })
+      : handleNavigate();
   return (
-    <Paper
-      square
-      className={classes.root}
-      elevation={0}
-      onClick={handleClick}
-    >
+    <Paper square className={classes.root} elevation={0} onClick={handleClick}>
       <Img fluid={fluid} fadeIn durationFadeIn={1500} />
       <Box className={classes.drawerWrapper}>
         <Typography variant="h6" className={classes.overlay}>
