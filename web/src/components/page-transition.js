@@ -4,23 +4,25 @@ import {
   Transition as ReactTransition,
 } from 'react-transition-group';
 
-const timeout = 200;
+const timeout = 100;
 const getTransitionStyles = {
   entering: {
     position: `absolute`,
-    transform: 'rotate(90deg) scale(0)',
-    opacity: 0,
+    // transform: 'translateY(-60px)',
+    filter: `blur(12px) saturate(0)`,
+    opacity: .0,
   },
   entered: {
     transition: `all ${timeout}ms ease-in-out`,
-    transformOrigin: 'center bottom',
-    transform: 'rotate(0deg) scale(1)',
+    // transform: 'rotate(0deg)',
+     filter: `blur(0) saturate(1)`,
     opacity: 1,
   },
   exiting: {
     transition: `all ${timeout}ms ease-in-out`,
-    transform: 'rotate(-270deg) scale(0)',
-    opacity: 1,
+    // transform: 'translateY(-60px)',
+    filter: `blur(12px) saturate(0)`,
+    opacity: 0,
   },
 };
 
