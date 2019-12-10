@@ -1,4 +1,4 @@
-import Figure from './figure';
+import Figure from './figure/figure';
 import BlocksToMUI from './blocks-to-MUI';
 
 const serializers = {
