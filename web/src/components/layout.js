@@ -16,7 +16,7 @@ import {
 
 import Nav from './nav';
 import Footer from './footer';
-import PageTransition from './projects/page-transition';
+import PageTransition from './page-transition';
 
 const Layout = ({
   location,
