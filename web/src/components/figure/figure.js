@@ -12,9 +12,6 @@ export default ({ node }) => {
     return null;
   }
 
-  const [open, setOpen] = useState(false);
-
-  //  node.asset._ref is format image-b153e57ac80ef6f7272d730c3521bff4b1e7f3b8-1500x1001-png
   const {
     asset: { _ref },
   } = node;
@@ -22,17 +19,10 @@ export default ({ node }) => {
   const {
     assets: { edges },
   } = useStaticQuery(query);
-
   const fluid = getImageFluid({ _ref, edges });
-
-  const openHandler = () => setOpen(true);
-
-  const closeHandler = () => console.log('close clicked') || setOpen(false);
-
   return (
     <>
-      <figure onClick={openHandler}>
-        <FigureModal {...{ open, fluid, aspectRatio: 1, closeHandler }} />
+      <figure>
         <Img fluid={fluid} alt={node.alt} />
         {node.caption && <figcaption>{node.caption}</figcaption>}
       </figure>
