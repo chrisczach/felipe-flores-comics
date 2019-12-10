@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Img from 'gatsby-image';
 import {
+  useTheme,
   makeStyles,
   Modal,
   Backdrop,
+  Typography,
   Paper,
   Fade,
   Button,
+  Zoom,
 } from '@material-ui/core';
+import { CloseOutlined } from '@material-ui/icons';
 
 const useStyles = portrait =>
   makeStyles(theme => ({
@@ -15,6 +19,30 @@ const useStyles = portrait =>
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      backdropFilter: `blur(4px) brightness(1.25) saturate(0.75)`,
+    },
+    title: {
+      zIndex: 1000,
+      background: theme.palette.primary.dark,
+      color: theme.palette.background.default,
+      borderRadius: 0,
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      padding: theme.spacing(1, 4, 1, 2),
+    },
+    viewButton: {
+      borderRadius: 0,
+      position: 'fixed',
+      bottom: 0,
+      right: 0,
+    },
+    closeButton: {
+      opacity: 0.9,
+      position: 'fixed',
+      top: theme.spacing(1),
+      right: theme.spacing(1),
+      zIndex: 1000,
     },
   }));
 
@@ -31,13 +59,17 @@ const useProjectPreviewModal = props => {
   }) =>
     setModalData({ title, excerpt, slug, fluid, aspectRatio, handleNavigate });
   const closeHandler = () => setModalData({});
-
+  const theme = useTheme();
   const {
+    // @ts-ignore
     title,
+    // @ts-ignore
     excerpt,
-    slug,
+    // @ts-ignore
     fluid,
+    // @ts-ignore
     aspectRatio,
+    // @ts-ignore
     handleNavigate,
   } = modalData;
 
@@ -72,26 +104,50 @@ const useProjectPreviewModal = props => {
   }, [updateScreen]);
 
   const classes = useStyles(portrait)(props);
-
+  const spacing = theme.spacing(2);
+  const open = Object.entries(modalData).length !== 0;
   const previewModal = (
     <Modal
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
-      open={Object.entries(modalData).length !== 0}
+      open={open}
       onClose={closeHandler}
       className={classes.root}
     >
-      <Paper
-        square
-        onClick={handleNavigate}
-        style={{
-          height: portrait ? (windowWidth - 5) / aspectRatio : windowHeight - 5,
-          width: portrait ? windowWidth - 5 : (windowHeight - 5) * aspectRatio,
-          overflow: 'hidden',
-        }}
-      >
-        <Img fluid={fluid} />
-      </Paper>
+      <>
+        <Typography variant="h3" className={classes.title}>
+          {title}
+        </Typography>
+        <Button className={classes.closeButton}>
+          <CloseOutlined titleAccess="Close Modal" fontSize="large" />
+        </Button>
+        <Zoom in={open}>
+          <Paper
+            square
+            onClick={handleNavigate}
+            style={{
+              height: portrait
+                ? (windowWidth - spacing) / aspectRatio
+                : windowHeight - spacing,
+              width: portrait
+                ? windowWidth - spacing
+                : (windowHeight - spacing) * aspectRatio,
+              overflow: 'hidden',
+            }}
+          >
+            <Img fluid={fluid} />
+          </Paper>
+        </Zoom>
+        <Button
+          onClick={handleNavigate}
+          variant="contained"
+          size="large"
+          color="primary"
+          className={classes.viewButton}
+        >
+          Open Project
+        </Button>
+      </>
     </Modal>
   );
   return { openHandler, previewModal };
