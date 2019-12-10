@@ -3,6 +3,9 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import {
   makeStyles,
+  lighten,
+  Typography,
+  Box,
 } from '@material-ui/core';
 
 import FigureModal from './figure-modal';
@@ -13,17 +16,54 @@ const getImageInfo = ({ _ref, edges }) =>{
 return {fluid, aspectRatio}
 }
 
-const useStyles = (float = false) => makeStyles( theme => ( {
+const useStyles = ( float = false ) => makeStyles( theme => {
+    const red = lighten(theme.palette.primary.dark, 0.25);
+  const darkYellow = theme.palette.secondary.main;
+  return ( {
   root: {
-    display: 'block',
-    margin: theme.spacing( 2, 0 ),
+    cursor: 'pointer',
+      display: 'block',
+
+      margin: theme.spacing( 2, 0 ),
+
     [ theme.breakpoints.up( 'md' ) ]: {
       margin: `${theme.spacing(2)}px auto`,
       width: float ? '60%' : '75%',
-      float: float || 'none '
+      float: float || 'none ',
+      '&:hover': {
+        boxShadow: theme.shadows[ 2 ],
+                border: `1px solid ${red}`,
+      backgroundImage: `radial-gradient(${lighten(
+        theme.palette.primary.light,
+        0.7,
+      )} 10%, transparent 10%), radial-gradient(${lighten(
+        theme.palette.primary.light,
+        0.8,
+      )} 10%, transparent 10%)`,
+      backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      backgroundPosition: `0 0, 5px 5px`,
+      backgroundSize: `10px 10px`,
+
+      }
+      },
+      '&:hover div': {
+        overflow: 'hidden',
+        '& img': {
+          // wip need to tweak
+          transition: `transform 400ms ease-in-out !important`,
+          transform: 'scale(1.05)'
+        }
+    },
+        '&:hover figcaption': {
+      borderTop: `${theme.spacing(.2)}px solid ${red}`
+      },
+    },
+
+    caption: {
+                    padding: theme.spacing( 1, 2,2,1 ),
+
     }
-  }
-}))
+})})
 
 export default ({ node,...props }) => {
   if (!node.asset) {
@@ -44,10 +84,14 @@ export default ({ node,...props }) => {
   const openHandler = () => modalUpdater( { children: <FigureModal {...{fluid, aspectRatio, closeHandler: ()=> modalUpdater({open: false, children: null})} }/>})
   return (
     <>
-      <figure onClick={openHandler} className={classes.root}>
+      <Box component='figure' onClick={openHandler} className={classes.root}>
         <Img fluid={fluid} alt={node.alt} />
-        {node.caption && <figcaption>{node.caption}</figcaption>}
-      </figure>
+        { node.caption && <Box component='figcaption' className={ classes.caption }>
+          <Typography variant='h5'>
+            { node.caption }
+            </Typography>
+        </Box> }
+      </Box>
     </>
   );
 };
