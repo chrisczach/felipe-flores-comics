@@ -120,7 +120,7 @@ const Footer = ({ siteTitle, siteSubtitle, siteFooter, ...props }) => {
       elevation={0}
       className={classes.root}
     >
-      <Box className={classes.leftBox}></Box>
+      <Box className={classes.leftBox} />
       <Box className={classes.rightBox}>
         <Typography variant="h6" style={{ fontVariant: 'small-caps' }}>
           {siteTitle}

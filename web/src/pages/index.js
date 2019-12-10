@@ -21,8 +21,8 @@ const IndexPage = props => {
     );
   }
 
-  const site = (data || {}).site;
-  const page = (data || {}).page;
+  const { site } = data || {};
+  const { page } = data || {};
 
   if (!site) {
     throw new Error(

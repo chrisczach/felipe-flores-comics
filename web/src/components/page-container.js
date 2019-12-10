@@ -1,5 +1,5 @@
 import React from 'react';
-import { navigate, Link as GatsbyLink } from 'gatsby';
+import { navigate, Link as GatsbyLink, graphql, StaticQuery } from 'gatsby';
 import {
   Container,
   Link,
@@ -12,7 +12,7 @@ import {
   fade,
   lighten,
 } from '@material-ui/core';
-import { graphql, StaticQuery } from 'gatsby';
+
 import BackgroundImage from 'gatsby-background-image';
 
 const useStyles = hero =>

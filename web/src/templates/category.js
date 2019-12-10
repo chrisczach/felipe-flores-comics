@@ -22,8 +22,8 @@ const Category = props => {
     );
   }
 
-  const site = (data || {}).site;
-  const page = (data || {}).page;
+  const { site } = data || {};
+  const { page } = data || {};
   const projects = (data || {}).projects.nodes;
   const currentBreadcrumb = {
     slug: `/portfolio/${page.slug.current}/`,
@@ -38,7 +38,7 @@ const Category = props => {
 
   return (
     <PageContainer
-      pageTitle={ 'Projects' }
+      pageTitle="Projects"
       hideTitleOnPortrait
       heroImage={page.heroImage}
       breadcrumbs={[

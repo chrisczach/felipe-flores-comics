@@ -8,6 +8,7 @@ import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
+
 const useStyles = makeStyles(theme => ({}));
 
 const ProjectTemplate = ({ location = null, ...props }) => {
@@ -21,8 +22,8 @@ const ProjectTemplate = ({ location = null, ...props }) => {
     );
   }
 
-  const site = (data || {}).site;
-  const project = (data || {}).project;
+  const { site } = data || {};
+  const { project } = data || {};
 
   if (!site) {
     throw new Error(

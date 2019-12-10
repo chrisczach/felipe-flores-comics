@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => {
         '&:hover h6': {
           transform: `rotate(-90deg) translateY(150%)`,
         },
-      }
+      },
     },
     overlay: {
       transformOrigin: 'top right',
@@ -123,15 +123,15 @@ const useStyles = makeStyles(theme => {
         '&:hover': {
           background: 'inherit',
           '&::after': {
-            background: darken( red, 0.3 ),
-            borderTop: `${ theme.spacing( 0.35 ) }px solid ${ darken(
+            background: darken(red, 0.3),
+            borderTop: `${theme.spacing(0.35)}px solid ${darken(
               darkYellow,
               0.15,
-            ) }`,
-            borderLeft: `${ theme.spacing( 0.25 ) }px solid ${ darken(
+            )}`,
+            borderLeft: `${theme.spacing(0.25)}px solid ${darken(
               darkYellow,
               0.15,
-            ) }`,
+            )}`,
           },
         },
       },

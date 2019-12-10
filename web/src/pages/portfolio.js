@@ -22,8 +22,8 @@ const PortfolioPage = props => {
     );
   }
 
-  const site = (data || {}).site;
-  const page = (data || {}).page;
+  const { site } = data || {};
+  const { page } = data || {};
   const projects = (data || {}).projects.nodes;
 
   if (!site) {

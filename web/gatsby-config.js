@@ -4,6 +4,7 @@ require('dotenv').config({
 });
 
 const clientConfig = require('./client-config');
+
 const token = process.env.SANITY_READ_TOKEN;
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -66,7 +67,7 @@ module.exports = {
         display: `standalone`,
       },
     },
-    `gatsby-plugin-remove-serviceworker`, //remove for development
+    `gatsby-plugin-remove-serviceworker`, // remove for development
     // `gatsby-plugin-offline`, add back in when deployed
   ],
 };

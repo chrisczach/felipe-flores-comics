@@ -27,7 +27,7 @@ async function createProjectPages(graphql, actions, reporter) {
   const projectEdges = (result.data.allSanityProject || {}).edges || [];
 
   projectEdges.forEach(edge => {
-    const id = edge.node.id;
+    const { id } = edge.node;
     const slug = edge.node.slug.current;
     const path = `/portfolio/${slug}/`;
 
@@ -63,7 +63,7 @@ async function createCategoryPages(graphql, actions, reporter) {
   const categoryEdges = (result.data.allSanityCategory || {}).edges || [];
 
   categoryEdges.forEach(edge => {
-    const id = edge.node.id;
+    const { id } = edge.node;
     const slug = edge.node.slug.current;
     const path = `/portfolio/${slug}/`;
 
