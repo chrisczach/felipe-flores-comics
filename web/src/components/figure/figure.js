@@ -46,11 +46,13 @@ const useStyles = ( float = false ) => makeStyles( theme => {
 
       }
       },
+      '& div img': {
+                // wip need to tweak
+          transition: `transform 400ms ease-in-out !important`,
+    },
       '&:hover div': {
         overflow: 'hidden',
         '& img': {
-          // wip need to tweak
-          transition: `transform 400ms ease-in-out !important`,
           transform: 'scale(1.05)'
         }
     },
