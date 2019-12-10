@@ -38,7 +38,8 @@ const Category = props => {
 
   return (
     <PageContainer
-      pageTitle={'Projects'}
+      pageTitle={ 'Projects' }
+      hideTitleOnPortrait
       heroImage={page.heroImage}
       breadcrumbs={[
         { slug: '/portfolio/', title: 'Portfolio' },

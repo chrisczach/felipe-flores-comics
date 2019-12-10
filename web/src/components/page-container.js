@@ -121,6 +121,7 @@ const useStyles = hero =>
 const PageContainer = ({
   children,
   pageTitle = '',
+  hideTitleOnPortrait = false,
   heroImage = {},
   //  need to setup
   breadcrumbs = null,
@@ -206,7 +207,7 @@ const PageContainer = ({
                 })}
               </Breadcrumbs>
             )}
-            {pageTitle && (
+            {pageTitle && !hideTitleOnPortrait && (
               <Hidden smUp implementation="css">
                 <Typography variant="h1">{pageTitle}</Typography>
               </Hidden>

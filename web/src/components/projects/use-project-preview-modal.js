@@ -42,11 +42,12 @@ const useProjectPreviewModal = props => {
   } = modalData;
 
   const [
-    { screenAspect, windowWidth, windowHeight },
+    { screenAspect, windowWidth, windowHeight, updated },
     setScreenAspect,
   ] = useState({
-    windowWidth: window.innerWidth || 1080,
-    windowHeight: window.innerHeight || 1920,
+    updated: false,
+    windowWidth: 1080,
+    windowHeight: 1920,
     screenAspect: 1980 / 1080,
   });
 
@@ -54,12 +55,16 @@ const useProjectPreviewModal = props => {
 
   const updateScreen = () =>
     setScreenAspect({
+      updated: true,
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
       screenAspect: window.innerWidth / window.innerHeight,
     });
 
   useEffect(() => {
+    if (!updated) {
+      updateScreen();
+    }
     window.addEventListener('resize', updateScreen);
     return () => {
       window.removeEventListener('resize', updateScreen);
