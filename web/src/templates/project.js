@@ -52,7 +52,7 @@ const ProjectTemplate = ({ location = null, ...props }) => {
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-      <Box style={{ width: '50%' }}>
+      <Box>
         <Img fluid={project.heroImage.asset.localFile.childImageSharp.fluid} />
         <BlockContent blocks={project.body} />
       </Box>

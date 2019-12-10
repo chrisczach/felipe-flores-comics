@@ -2,9 +2,6 @@ export default {
   name: 'figure',
   title: 'Image',
   type: 'image',
-  options: {
-    hotspot: true,
-  },
   fields: [
     {
       title: 'Caption',
@@ -12,6 +9,19 @@ export default {
       type: 'string',
       options: {
         isHighlighted: true,
+      },
+    }, {
+      title: 'Float',
+      name: 'float',
+      description: 'This is used for images placed inline. If not set then the image takes up its own line. If set to "left" then it floats to the left of text, if set to "right" it floats to the right.',
+      type: 'string',
+      options: {
+        isHighlighted: true,
+        list: [
+          { title: 'Float Left', value: 'left' },
+          { title: 'Float Right', value: 'right' },
+          { title: `Default - Don't Float`, value: '' },
+        ]
       },
     },
     {
