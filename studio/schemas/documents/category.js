@@ -46,6 +46,15 @@ export default {
       type: 'projectPortableText',
     },
   ],
+  orderings: [
+    {
+      title: 'Site Order',
+      name: 'siteOrder',
+      by: [
+        {field: 'sort', direction: 'asc'}
+      ]
+    }
+  ],
   preview: {
     select: {
       title: 'title',

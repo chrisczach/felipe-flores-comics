@@ -23,6 +23,12 @@ export default {
         maxLength: 96,
       },
     },
+        {
+      name: 'sort',
+      title: 'Sort',
+      description: 'Sort order for categories',
+      type: 'number',
+    },
     // {
     //   name: 'publishedAt',
     //   title: 'Published at',
@@ -76,6 +82,15 @@ export default {
       type: 'array',
       of: [{ type: 'reference', to: { type: 'project' } }],
     },
+  ],
+    orderings: [
+    {
+      title: 'Site Order',
+      name: 'siteOrder',
+      by: [
+        {field: 'sort', direction: 'asc'}
+      ]
+    }
   ],
   preview: {
     select: {

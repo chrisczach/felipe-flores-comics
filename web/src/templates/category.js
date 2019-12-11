@@ -99,8 +99,8 @@ export const query = graphql`
         }
       }
     }
-    #  (filter: {id: { eq: $id }})
-    projects: allSanityProject {
+    #  (filter: {id: { eq: $id }}) (sort: { fields: [sort] }) 
+    projects: allSanityProject{
       nodes {
         title
         slug {
