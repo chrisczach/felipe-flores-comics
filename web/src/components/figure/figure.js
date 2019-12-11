@@ -39,6 +39,7 @@ const useStyles = (float = false) =>
           background: 'transparent',
           content: '""',
         },
+        margin: theme.spacing(2, 0),
         '@media (hover:hover)': {
           '&:hover:after': {
             boxShadow: theme.shadows[2],
@@ -58,7 +59,6 @@ const useStyles = (float = false) =>
         [theme.breakpoints.up('xl')]: {
           width: `${float ? '40%' : '65%'} !important`,
         },
-        margin: theme.spacing(2, 0),
         [theme.breakpoints.up('md')]: {
           margin: `${theme.spacing(2)}px auto`,
           width: float ? '45%' : '50%',
@@ -91,9 +91,7 @@ const useStyles = (float = false) =>
 
             '&:hover figcaption': {
               // outline: `${theme.spacing(0.2)}px solid ${red}`,
-              transition: 'all 50ms ease',
-              padding: theme.spacing(1, 10, 2, 1),
-              display: 'inline-flex',
+
               // justifyContent: 'center',
               color: theme.palette.background.default,
 
@@ -117,11 +115,15 @@ const useStyles = (float = false) =>
       },
 
       caption: {
+                      transition: 'all 50ms ease',
+              display: 'inline-flex',
         zIndex: 5,
         position: 'relative',
-        display: 'inline-block',
         padding: theme.spacing(1, 8, 2, 1),
       },
+      captionText: {
+     
+      }
     };
   });
 
@@ -159,8 +161,9 @@ export default ({ node, ...props }) => {
       <Box component="figure" onClick={openHandler} className={classes.root}>
         <Img fluid={fluid} alt={node.alt} />
         {node.caption && (
-          <Box component="figcaption" className={classes.caption}>
-            <Typography variant="h5">{node.caption}</Typography>
+          <Box component="figcaption" className={ classes.caption }>
+      
+            <Typography variant="h5" className={classes.captionText}>{node.caption}</Typography>
           </Box>
         )}
       </Box>
