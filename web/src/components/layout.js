@@ -17,6 +17,8 @@ import PageTransition from './page-transition';
 
 export const ModalUpdater = createContext(() => null);
 
+export const SiteLinksContext = createContext([]);
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -48,20 +50,22 @@ const Layout = ({
   return (
     <>
       <ModalUpdater.Provider value={modalUpdater}>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={modalData.open}
-          onClose={handleClose}
-          className={classes.root}
-        >
-          {modalData.children}
-        </Modal>
-        <Nav {...{ siteTitle, siteSubtitle }} />
-        <PageTransition location={location}>
-          {children}
-          <Footer {...{ siteTitle, siteFooter, siteLinks }} />
-        </PageTransition>
+        <SiteLinksContext.Provider value={siteLinks}>
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={modalData.open}
+            onClose={handleClose}
+            className={classes.root}
+          >
+            {modalData.children}
+          </Modal>
+          <Nav {...{ siteTitle, siteSubtitle }} />
+          <PageTransition location={location}>
+            {children}
+            <Footer {...{ siteTitle, siteFooter, siteLinks }} />
+          </PageTransition>
+        </SiteLinksContext.Provider>
       </ModalUpdater.Provider>
     </>
   );
