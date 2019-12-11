@@ -13,7 +13,6 @@ import {
 } from '@material-ui/core';
 import { CloseOutlined } from '@material-ui/icons';
 
-
 const FigureModal = ({ fluid, aspectRatio, closeHandler, ...props }) => {
   const [
     { screenAspect, windowWidth, windowHeight, updated },
@@ -46,25 +45,25 @@ const FigureModal = ({ fluid, aspectRatio, closeHandler, ...props }) => {
   const spacing = theme.spacing(2);
   const portrait = screenAspect < aspectRatio;
   return (
-      <>
-        <Zoom in>
-          <Paper
-            onClick={closeHandler}
-            square
-            style={{
-              height: portrait
-                ? (windowWidth - spacing) / aspectRatio
-                : windowHeight - spacing,
-              width: portrait
-                ? windowWidth - spacing
-                : (windowHeight - spacing) * aspectRatio,
-              overflow: 'hidden',
-            }}
-          >
-            <Img fluid={fluid} />
-          </Paper>
-        </Zoom>
-      </>
+    <>
+      <Zoom in>
+        <Paper
+          onClick={closeHandler}
+          square
+          style={{
+            height: portrait
+              ? (windowWidth - spacing) / aspectRatio
+              : windowHeight - spacing,
+            width: portrait
+              ? windowWidth - spacing
+              : (windowHeight - spacing) * aspectRatio,
+            overflow: 'hidden',
+          }}
+        >
+          <Img fluid={fluid} />
+        </Paper>
+      </Zoom>
+    </>
   );
 };
 

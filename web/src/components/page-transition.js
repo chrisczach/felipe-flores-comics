@@ -10,12 +10,12 @@ const getTransitionStyles = {
     position: `absolute`,
     // transform: 'translateY(-60px)',
     filter: `blur(12px) saturate(0)`,
-    opacity: .0,
+    opacity: 0.0,
   },
   entered: {
     transition: `all ${timeout}ms ease-in-out`,
     // transform: 'rotate(0deg)',
-     filter: `blur(0) saturate(1)`,
+    filter: `blur(0) saturate(1)`,
     opacity: 1,
   },
   exiting: {
