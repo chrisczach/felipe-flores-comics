@@ -12,6 +12,17 @@ const query = graphql`
       title
       subtitle
       footer: _rawFooterText
+      linksList {
+        icon {
+          asset {
+            fluid(maxWidth: 3840) {
+              ...GatsbySanityImageFluid
+            }
+          }
+        }
+        linkTitle
+        linkUrl
+      }
     }
   }
 `;
@@ -33,6 +44,19 @@ function LayoutContainer(props) {
             'Missing "Site settings". Open the studio at http://localhost:3333 and add "Site settings" data',
           );
         }
+
+        const {
+          site: { linksList },
+        } = data;
+        const siteLinks = linksList.map(
+          ({
+            linkTitle,
+            linkUrl,
+            icon: {
+              asset: { fluid },
+            },
+          }) => ({ linkTitle, linkUrl, fluid }),
+        );
         return (
           <>
             <CssBaseline />
@@ -45,6 +69,7 @@ function LayoutContainer(props) {
                 siteFooter={data.site.footer}
                 onHideNav={handleHideNav}
                 onShowNav={handleShowNav}
+                siteLinks={siteLinks}
               />
             </ThemeProvider>
           </>

@@ -1,21 +1,15 @@
 import React from 'react';
+import Img from 'gatsby-image';
 import {
   AppBar,
-  Container,
-  Paper,
-  Collapse,
   Typography,
-  TextField,
-  Zoom,
-  Fade,
-  Grow,
-  Slide,
-  Breadcrumbs,
   Box,
-  Button,
   makeStyles,
   fade,
-  Hidden,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@material-ui/core';
 
 import BlockContent from './block-content';
@@ -108,10 +102,23 @@ const useStyles = makeStyles(theme => ({
       background: fade(theme.palette.primary.dark, 0.6),
     },
   },
+  socialIcon: {
+    width: theme.typography.fontSize * 1.5,
+    height: theme.typography.fontSize * 1.5,
+    marginRight: theme.typography.fontSize,
+  },
+  linkItem: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  linkText: {
+    flexGrow: 0,
+  },
 }));
 
-const Footer = ({ siteTitle, siteFooter, ...props }) => {
+const Footer = ({ siteTitle, siteFooter, siteLinks, ...props }) => {
   const classes = useStyles(props);
+
   return (
     <AppBar
       square
@@ -127,6 +134,28 @@ const Footer = ({ siteTitle, siteFooter, ...props }) => {
         </Typography>
 
         <BlockContent blocks={siteFooter} />
+        <List dense style={{ marginLeft: 'auto' }}>
+          {siteLinks.map(({ linkTitle, linkUrl, fluid }) => {
+            return (
+              <ListItem
+                component="a"
+                button
+                href={linkUrl}
+                target="_blank"
+                className={classes.linkItem}
+              >
+                {/* <ListItemIcon> */}
+                <Box className={classes.socialIcon}>
+                  <Img fluid={fluid} />
+                </Box>
+                {/* </ListItemIcon> */}
+                <ListItemText className={classes.linkText}>
+                  {linkTitle}
+                </ListItemText>
+              </ListItem>
+            );
+          })}
+        </List>
       </Box>
     </AppBar>
   );

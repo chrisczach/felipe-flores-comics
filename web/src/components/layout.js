@@ -33,6 +33,7 @@ const Layout = ({
   onShowNav,
   showNav,
   siteTitle,
+  siteLinks,
   siteSubtitle,
   siteFooter,
   ...props
@@ -59,7 +60,7 @@ const Layout = ({
         <Nav {...{ siteTitle, siteSubtitle }} />
         <PageTransition location={location}>
           {children}
-          <Footer {...{ siteTitle, siteFooter }} />
+          <Footer {...{ siteTitle, siteFooter, siteLinks }} />
         </PageTransition>
       </ModalUpdater.Provider>
     </>

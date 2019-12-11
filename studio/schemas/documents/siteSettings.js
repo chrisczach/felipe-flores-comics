@@ -32,6 +32,12 @@ export default {
       type: 'projectPortableText',
     },
     {
+      name: 'linksList',
+      title: 'Links List',
+      type: 'array',
+      of: [{ type: 'siteLink' }],
+    },
+    {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',
