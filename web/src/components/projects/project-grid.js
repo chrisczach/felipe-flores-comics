@@ -54,7 +54,7 @@ const ProjectGrid = ({
           className={classes.grid}
           columnClassName={classes.column}
         >
-          {[...projects, ...projects, ...projects].map(props => (
+          {projects.map(props => (
             <ProjectTile
               {...props}
               forwardedBreadcrumb={forwardedBreadcrumb}

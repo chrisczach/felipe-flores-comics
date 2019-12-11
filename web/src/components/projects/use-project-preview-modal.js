@@ -118,7 +118,7 @@ const useProjectPreviewModal = props => {
         <Typography variant="h3" className={classes.title}>
           {title}
         </Typography>
-        <Button className={classes.closeButton}>
+        <Button className={classes.closeButton} onClick={closeHandler}>
           <CloseOutlined titleAccess="Close Modal" fontSize="large" />
         </Button>
         <Zoom in={open}>

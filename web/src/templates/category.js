@@ -24,7 +24,12 @@ const Category = props => {
 
   const { site } = data || {};
   const { page } = data || {};
-  const projects = (data || {}).projects.nodes;
+  const allProjects = (data || {}).projects.nodes;
+
+  const projects = allProjects.filter(
+    ({ categories }) => !!categories.find(({ id }) => id === page.id),
+  );
+
   const currentBreadcrumb = {
     slug: `/portfolio/${page.slug.current}/`,
     title: page.title,
@@ -70,6 +75,7 @@ export const query = graphql`
       keywords
     }
     page: sanityCategory(id: { eq: $id }) {
+      id
       title
       slug {
         current
@@ -102,6 +108,7 @@ export const query = graphql`
         }
         excerpt: _rawExcerpt
         categories {
+          id
           title
         }
         mainImage {

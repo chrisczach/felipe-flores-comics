@@ -18,6 +18,7 @@ import PageTransition from './page-transition';
 export const ModalUpdater = createContext(() => null);
 
 export const SiteLinksContext = createContext([]);
+import './layout.module.css';
 
 const useStyles = makeStyles(theme => ({
   root: {

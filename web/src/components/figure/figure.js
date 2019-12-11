@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import { makeStyles, lighten, Typography, Box } from '@material-ui/core';
+import { makeStyles, lighten, Typography, Box, fade } from '@material-ui/core';
 
 import FigureModal from './figure-modal';
 import { ModalUpdater } from '../layout';
@@ -28,6 +28,33 @@ const useStyles = (float = false) =>
       root: {
         cursor: 'pointer',
         display: 'block',
+        background: 'transparent',
+        '&:after': {
+          zIndex: -15,
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          background: 'transparent',
+          content: '""',
+        },
+        '@media (hover:hover)': {
+          '&:hover:after': {
+            boxShadow: theme.shadows[2],
+            outline: `1px solid ${red}`,
+            backgroundImage: `radial-gradient(${lighten(
+              theme.palette.primary.light,
+              0.7,
+            )} 10%, transparent 10%), radial-gradient(${lighten(
+              theme.palette.primary.light,
+              0.8,
+            )} 10%, transparent 10%)`,
+            backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+            backgroundPosition: `0 0, 5px 5px`,
+            backgroundSize: `10px 10px`,
+          },
+        },
         [theme.breakpoints.up('xl')]: {
           width: `${float ? '40%' : '65%'} !important`,
         },
@@ -36,30 +63,49 @@ const useStyles = (float = false) =>
           margin: `${theme.spacing(2)}px auto`,
           width: float ? '45%' : '50%',
           float: float || 'none ',
-          '@media (hover:hover)': {
-            '&:hover': {
-              boxShadow: theme.shadows[2],
-              border: `1px solid ${red}`,
-              backgroundImage: `radial-gradient(${lighten(
-                theme.palette.primary.light,
-                0.7,
-              )} 10%, transparent 10%), radial-gradient(${lighten(
-                theme.palette.primary.light,
-                0.8,
-              )} 10%, transparent 10%)`,
-              backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-              backgroundPosition: `0 0, 5px 5px`,
-              backgroundSize: `10px 10px`,
+          background: 'transparent',
+          position: 'relative',
+          '& figcaption': {
+            minWidth: '35%',
+            overflow: 'hidden',
+            transition: 'all 250ms ease',
+            '&:after': {
+              transform: 'translateX(-100%)',
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              right: theme.spacing(4),
+              bottom: 0,
+              left: '-50%',
+              transition: 'all 250ms ease',
             },
+          },
+          '@media (hover:hover)': {
             '&:hover div': {
               overflow: 'hidden',
               '& img': {
-                transform: 'scale(1.05)',
+                transform: 'scale(1.025)',
                 transition: `all 400ms ease-in-out !important`,
               },
             },
+
             '&:hover figcaption': {
-              borderTop: `${theme.spacing(0.2)}px solid ${red}`,
+              // outline: `${theme.spacing(0.2)}px solid ${red}`,
+              transition: 'all 50ms ease',
+              padding: theme.spacing(1, 10, 2, 1),
+              display: 'inline-flex',
+              // justifyContent: 'center',
+              color: theme.palette.background.default,
+
+              '&:after': {
+                transition: 'all 250ms ease',
+                transform: 'translateX(0) skew(-45deg) ',
+                borderRight: `${theme.spacing(2)}px solid ${
+                  theme.palette.secondary.main
+                }`,
+                zIndex: -10,
+                background: fade(theme.palette.primary.main, 0.7),
+              },
             },
           },
         },
@@ -67,11 +113,14 @@ const useStyles = (float = false) =>
         //   '& div img': {
         //             // wip need to tweak
         //       transition: `transform 400ms ease-in-out !important`,
-        // },
+        // },import { display } from '@material-ui/system';
       },
 
       caption: {
-        padding: theme.spacing(1, 2, 2, 1),
+        zIndex: 5,
+        position: 'relative',
+        display: 'inline-block',
+        padding: theme.spacing(1, 8, 2, 1),
       },
     };
   });
