@@ -54,7 +54,7 @@ transition: 'all 500ms ease-out',
             bottom: 0,
             left: theme.spacing(-1),
             height: theme.spacing(1),
-            background: `linear-gradient(-90deg, ${darken(red,.5)} 35%, transparent 35% )`,
+            background: `linear-gradient(-90deg, ${darken(red,.25)} 35%, transparent 35% )`,
             transform: 'translateX(-50%) scaleX(0) skewX(0)',
             transformOrigin: 'center left',
           },
@@ -97,12 +97,15 @@ transition: 'all 500ms ease-out',
               transition: 'all 250ms ease',
             },
           },
+          '& div img': {
+                            transition: `all 400ms ease-in-out !important`,
+          },
           '@media (hover:hover)': {
             '&:hover div': {
               overflow: 'hidden',
               '& img': {
                 transform: 'scale(1.025)',
-                transition: `all 400ms ease-in-out !important`,
+                // transition: `all 400ms ease-in-out !important`,
               },
             },
 

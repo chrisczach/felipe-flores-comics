@@ -8,6 +8,7 @@ import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
+import ContainedDiv from '../components/contained-div'
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -53,7 +54,9 @@ const ProjectTemplate = ({ location = null, ...props }) => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       <Box>
-        <Img fluid={project.heroImage.asset.localFile.childImageSharp.fluid} />
+        <ContainedDiv aspectRatio={project.heroImage.asset.metadata.dimensions.aspectRatio}>
+          <Img fluid={ project.heroImage.asset.localFile.childImageSharp.fluid } />
+          </ContainedDiv>
         <BlockContent blocks={project.body} />
       </Box>
     </PageContainer>
@@ -78,6 +81,11 @@ export const query = graphql`
         alt
         asset {
           id
+                      metadata {
+              dimensions {
+                aspectRatio
+              }
+            }
           localFile(width: 2400) {
             childImageSharp {
               fluid(
