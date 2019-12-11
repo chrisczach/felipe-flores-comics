@@ -14,11 +14,11 @@ import {
 import Nav from './nav';
 import Footer from './footer';
 import PageTransition from './page-transition';
+import './layout.module.css';
 
 export const ModalUpdater = createContext(() => null);
 
 export const SiteLinksContext = createContext([]);
-import './layout.module.css';
 
 const useStyles = makeStyles(theme => ({
   root: {

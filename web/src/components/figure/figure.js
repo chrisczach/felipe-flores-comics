@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import { makeStyles, lighten, Typography, Box, fade } from '@material-ui/core';
+import { makeStyles, lighten, Typography, Box, fade,darken } from '@material-ui/core';
 
 import FigureModal from './figure-modal';
 import { ModalUpdater } from '../layout';
@@ -41,6 +41,23 @@ const useStyles = (float = false) =>
         },
         margin: theme.spacing(2, 0),
         '@media (hover:hover)': {
+          '&:hover div:after': {
+            transform: 'translateX(0) scaleX(1) skewX(-45deg)',
+transition: 'all 500ms ease-out',
+            background: `linear-gradient(-90deg, ${red} 35%, ${darkYellow} 35% )`,
+          },
+          '& div:after': {
+            transition: 'all 1000ms ease-out',
+            content: '""',
+            position: 'absolute',
+            right: theme.spacing(-1),
+            bottom: 0,
+            left: theme.spacing(-1),
+            height: theme.spacing(1),
+            background: `linear-gradient(-90deg, ${darken(red,.5)} 35%, transparent 35% )`,
+            transform: 'translateX(-50%) scaleX(0) skewX(0)',
+            transformOrigin: 'center left',
+          },
           '&:hover:after': {
             boxShadow: theme.shadows[2],
             outline: `1px solid ${red}`,
@@ -115,15 +132,13 @@ const useStyles = (float = false) =>
       },
 
       caption: {
-                      transition: 'all 50ms ease',
-              display: 'inline-flex',
+        transition: 'all 50ms ease',
+        display: 'inline-flex',
         zIndex: 5,
         position: 'relative',
-        padding: theme.spacing(1, 8, 2, 1),
+        padding: theme.spacing(1, 8, 1, 1),
       },
-      captionText: {
-     
-      }
+      captionText: {},
     };
   });
 
@@ -161,9 +176,10 @@ export default ({ node, ...props }) => {
       <Box component="figure" onClick={openHandler} className={classes.root}>
         <Img fluid={fluid} alt={node.alt} />
         {node.caption && (
-          <Box component="figcaption" className={ classes.caption }>
-      
-            <Typography variant="h5" className={classes.captionText}>{node.caption}</Typography>
+          <Box component="figcaption" className={classes.caption}>
+            <Typography variant="h5" className={classes.captionText}>
+              {node.caption}
+            </Typography>
           </Box>
         )}
       </Box>
