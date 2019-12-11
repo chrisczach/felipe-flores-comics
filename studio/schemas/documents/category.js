@@ -7,11 +7,13 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: Rule => Rule.required(),
     },
     {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      validation: Rule => Rule.required(),
       description:
         'Some frontend will require a slug to be set to be able to show the project',
       options: {
@@ -28,16 +30,19 @@ export default {
     {
       name: 'excerpt',
       title: 'Excerpt',
+      validation: Rule => Rule.required(),
       type: 'simplePortableText',
     },
     {
       name: 'mainImage',
+      validation: Rule => Rule.required(),
       title: 'Main image',
       type: 'figure',
     },
     {
       name: 'body',
       title: 'Body',
+      validation: Rule => Rule.required(),
       type: 'projectPortableText',
     },
   ],
