@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 
 import BackgroundImage from 'gatsby-background-image';
-import getImageInfo from '../lib/get-image-info'
+import {getImageInfo} from '../lib/get-image-info'
 
 const useStyles = hero =>
   makeStyles(theme => {
