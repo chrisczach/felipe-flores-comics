@@ -95,7 +95,7 @@ const useStyles = hero =>
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(6),
         // remove min height later
-        // minHeight: '100vh',
+        minHeight: '50vh',
       },
       hero: {
         backgroundAttachment: 'fixed',

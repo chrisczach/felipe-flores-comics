@@ -22,7 +22,11 @@ const useStyles = makeStyles(theme => ({
     // background: fade(theme.palette.secondary.dark, 0.35),
     background: 'transparent',
     [ theme.breakpoints.down( 'sm' ) ]: {
-        background: fade(theme.palette.secondary.dark,.25)
+      background: fade( theme.palette.secondary.dark, .25 ),
+            borderTop: `${fade(
+        theme.palette.secondary.dark,
+        0.15,
+      )} solid ${theme.spacing(0.25)}px`,
        },
     overflow: 'hidden',
     borderBottom: `${fade(

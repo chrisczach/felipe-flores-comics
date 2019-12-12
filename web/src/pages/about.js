@@ -51,7 +51,7 @@ const AboutPage = props => {
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-
+ 
       <BlockContent blocks={page.body} />
     </PageContainer>
   );
