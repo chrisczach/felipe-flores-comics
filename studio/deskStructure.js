@@ -22,7 +22,11 @@ export default () =>
       S.listItem()
         .title('Pages')
         .schemaType('page')
-        .child(S.documentTypeList('page').title('Pages')),
+        .child( S.documentTypeList( 'page' ).title( 'Pages' ) ),
+      S.listItem()
+        .title('Categories')
+        .schemaType('category')
+        .child(S.documentTypeList('category').title('Categories')),
       S.listItem()
         .title('Projects')
         .schemaType('project')
@@ -31,10 +35,6 @@ export default () =>
         .title('People')
         .schemaType('person')
         .child(S.documentTypeList('person').title('People')),
-      S.listItem()
-        .title('Categories')
-        .schemaType('category')
-        .child(S.documentTypeList('category').title('Categories')),
       // This returns an array of all the document types
       // defined in schema.js. We filter out those that we have
       // defined the structure above
