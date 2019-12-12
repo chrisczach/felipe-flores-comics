@@ -1,5 +1,5 @@
 import { graphql, StaticQuery } from 'gatsby';
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 
@@ -7,7 +7,7 @@ import Layout from '../components/layout';
 import theme from '../styles/theme';
 
 const query = graphql`
-  query SiteTitleQuery {
+  query SiteLayoutQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       subtitle
@@ -23,9 +23,33 @@ const query = graphql`
         linkTitle
         linkUrl
       }
+    },
+     assets: allSanityImageAsset {
+      edges {
+        node {
+          _id
+          metadata {
+            dimensions {
+              aspectRatio
+            }
+          }
+          localFile(width: 2400) {
+            childImageSharp {
+              fluid(
+                maxWidth: 2400
+                traceSVG: { color: "#8b151b77", background: "#ffd83111" }
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
+
+export const AssetsContext = createContext({})
 
 function LayoutContainer(props) {
   const [showNav, setShowNav] = useState(false);
@@ -38,7 +62,7 @@ function LayoutContainer(props) {
   return (
     <StaticQuery
       query={query}
-      render={data => {
+      render={({assets, ...data}) => {
         if (!data.site) {
           throw new Error(
             'Missing "Site settings". Open the studio at http://localhost:3333 and add "Site settings" data',
@@ -60,7 +84,8 @@ function LayoutContainer(props) {
         return (
           <>
             <CssBaseline />
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={ theme }>
+              <AssetsContext.Provider value={assets}>
               <Layout
                 {...props}
                 showNav={showNav}
@@ -70,7 +95,8 @@ function LayoutContainer(props) {
                 onHideNav={handleHideNav}
                 onShowNav={handleShowNav}
                 siteLinks={siteLinks}
-              />
+                />
+                </AssetsContext.Provider>
             </ThemeProvider>
           </>
         );

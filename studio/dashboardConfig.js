@@ -1,15 +1,15 @@
 export default {
   widgets: [
-    {
-      name: 'gatsby',
-      options: {
-        instances: [
-          {
-            instanceUrl: '<previewInstanceUrl>',
-          },
-        ],
-      },
-    },
+    // {
+    //   name: 'gatsby',
+    //   options: {
+    //     instances: [
+    //       {
+    //         instanceUrl: 'https://felipe-flores-comics-2846337642.gtsb.io/',
+    //       },
+    //     ],
+    //   },
+    // },
     { name: 'structure-menu' },
     {
       name: 'project-info',

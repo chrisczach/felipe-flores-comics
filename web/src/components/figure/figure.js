@@ -5,8 +5,11 @@ import { makeStyles, lighten, Typography, Box, fade,darken } from '@material-ui/
 
 import FigureModal from './figure-modal';
 import { ModalUpdater } from '../layout';
+import { AssetsContext } from '../../containers/layout'
 
-const getImageInfo = ({ _ref, edges }) => {
+const getImageInfo = ( { _ref } ) => {
+  const { edges } = useContext( AssetsContext );
+  
   const {
     node: {
       localFile: {
@@ -155,12 +158,11 @@ export default ({ node, ...props }) => {
     asset: { _ref },
   } = node;
 
-  const {
-    assets: { edges },
-  } = useStaticQuery(query);
-  const { fluid, aspectRatio } = getImageInfo({ _ref, edges });
 
-  const modalUpdater = useContext(ModalUpdater);
+  const { fluid, aspectRatio } = getImageInfo({ _ref });
+
+  const modalUpdater = useContext( ModalUpdater );
+
   const openHandler = () =>
     // @ts-ignore
     modalUpdater({
@@ -190,29 +192,29 @@ export default ({ node, ...props }) => {
   );
 };
 
-const query = graphql`
-  query BlockImageQuery {
-    assets: allSanityImageAsset {
-      edges {
-        node {
-          _id
-          metadata {
-            dimensions {
-              aspectRatio
-            }
-          }
-          localFile(width: 2400) {
-            childImageSharp {
-              fluid(
-                maxWidth: 2400
-                traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-              ) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// const query = graphql`
+//   query BlockImageQuery {
+//     assets: allSanityImageAsset {
+//       edges {
+//         node {
+//           _id
+//           metadata {
+//             dimensions {
+//               aspectRatio
+//             }
+//           }
+//           localFile(width: 2400) {
+//             childImageSharp {
+//               fluid(
+//                 maxWidth: 2400
+//                 traceSVG: { color: "#8b151b77", background: "#ffd83111" }
+//               ) {
+//                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
