@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { navigate } from 'gatsby';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import {
-  SwipeableDrawer,
+  Drawer,
   Button,
   List,
   ListItemIcon,
@@ -20,12 +20,19 @@ import {
 
 const useStyles = makeStyles(theme => {
   const backgroundColor = fade(theme.palette.secondary.light, 0.25);
+  const buttonColor = fade(theme.palette.background.default, 0.75);
   return {
     menuButton: {
+      borderRadius: 0,
       position: 'fixed',
-      top: theme.spacing(1),
-      right: theme.spacing(1),
+      top: 0,
+      right: 0,
       zIndex: 1000,
+      // backdropFilter: 'blur(4px)',
+      background: `linear-gradient(45deg, transparent 15%, ${buttonColor} 15%)`,
+      '&:hover': {
+        background: `linear-gradient(45deg, transparent 15%, ${theme.palette.background.default} 15%)`,
+      },
     },
     menuHeading: {
       background: backgroundColor,
@@ -109,7 +116,7 @@ const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
           <MenuOutlined titleAccess="Open Nav Menu" fontSize="large" />
         </Button>
       )}
-      <SwipeableDrawer
+      <Drawer
         ModalProps={{
           BackdropProps: {
             style: {
@@ -122,10 +129,10 @@ const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
           className: classes.menuPaper,
           elevation: 0,
         }}
-        disableBackdropTransition={!iOS}
-        disableDiscovery={iOS}
+        // disableBackdropTransition={!iOS}
+        // disableDiscovery={iOS}
         open={open}
-        onOpen={handleOpen}
+        // onOpen={handleOpen}
         onClose={handleClose}
         anchor="right"
       >
@@ -156,7 +163,7 @@ const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
           </ListItem>
           {actions.map(toNav(handleClose, classes.listItemClass))}
         </List>
-      </SwipeableDrawer>
+      </Drawer>
     </>
   );
 };

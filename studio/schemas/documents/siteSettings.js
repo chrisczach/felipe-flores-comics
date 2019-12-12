@@ -38,6 +38,12 @@ export default {
       of: [{ type: 'siteLink' }],
     },
     {
+      name: 'profileImage',
+      title: 'Profile Image',
+      validation: Rule => Rule.required(),
+      type: 'figure',
+    },
+    {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',

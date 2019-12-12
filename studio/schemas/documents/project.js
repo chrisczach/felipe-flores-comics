@@ -23,7 +23,7 @@ export default {
         maxLength: 96,
       },
     },
-        {
+    {
       name: 'sort',
       title: 'Sort',
       description: 'Sort order for categories',
@@ -83,14 +83,15 @@ export default {
       of: [{ type: 'reference', to: { type: 'project' } }],
     },
   ],
-    orderings: [
+  orderings: [
     {
       title: 'Site Order',
       name: 'siteOrder',
       by: [
-        {field: 'sort', direction: 'asc'}
-      ]
-    }
+        { field: 'sort', direction: 'asc' },
+        { field: 'slug', direction: 'asc' },
+      ],
+    },
   ],
   preview: {
     select: {
