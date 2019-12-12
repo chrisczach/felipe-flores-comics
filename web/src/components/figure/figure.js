@@ -5,23 +5,7 @@ import { makeStyles, lighten, Typography, Box, fade,darken } from '@material-ui/
 
 import FigureModal from './figure-modal';
 import { ModalUpdater } from '../layout';
-import { AssetsContext } from '../../containers/layout'
-
-const getImageInfo = ( { _ref } ) => {
-  const { edges } = useContext( AssetsContext );
-  
-  const {
-    node: {
-      localFile: {
-        childImageSharp: { fluid },
-      },
-      metadata: {
-        dimensions: { aspectRatio },
-      },
-    },
-  } = edges.find(({ node: { _id } }) => _id === _ref);
-  return { fluid, aspectRatio };
-};
+import { getImageInfo } from '../../lib/get-image-info';
 
 const useStyles = (float = false) =>
   makeStyles(theme => {
