@@ -26,7 +26,7 @@ const Category = props => {
   const { page } = data || {};
   const allProjects = (data || {}).projects.nodes;
 
-  const projects = allProjects.filter(
+  const projects = page.slug.current === 'all' ? allProjects : allProjects.filter(
     ({ categories }) => !!categories.find(({ id }) => id === page.id),
   );
 
