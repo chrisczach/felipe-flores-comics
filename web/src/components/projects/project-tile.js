@@ -160,19 +160,17 @@ const ProjectTile = ({
   mainImage: {
     caption,
     alt,
-    asset: {
-      _id
-    },
+    asset: { _id },
   },
   forwardedBreadcrumb = null,
   openHandler = null,
   ...props
 }) => {
-  const classes = useStyles( props );
-  
+  const classes = useStyles(props);
+
   // const aspectRatio =
   //   metadata && metadata.dimensions && metadata.dimensions.aspectRatio;
-  const {fluid, aspectRatio} = getImageInfo({_ref: _id})
+  const { fluid, aspectRatio } = getImageInfo({ _ref: _id });
   const handleNavigate = () =>
     navigate(
       `/portfolio/${slug}/`,

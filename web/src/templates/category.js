@@ -26,9 +26,12 @@ const Category = props => {
   const { page } = data || {};
   const allProjects = (data || {}).projects.nodes;
 
-  const projects = page.slug.current === 'all' ? allProjects : allProjects.filter(
-    ({ categories }) => !!categories.find(({ id }) => id === page.id),
-  );
+  const projects =
+    page.slug.current === 'all'
+      ? allProjects
+      : allProjects.filter(
+          ({ categories }) => !!categories.find(({ id }) => id === page.id),
+        );
 
   const currentBreadcrumb = {
     slug: `/portfolio/${page.slug.current}/`,
@@ -100,8 +103,8 @@ export const query = graphql`
       #   }
       # }
     }
-    #  (filter: {id: { eq: $id }}) (sort: { fields: [sort] }) 
-    projects: allSanityProject{
+    #  (filter: {id: { eq: $id }}) (sort: { fields: [sort] })
+    projects: allSanityProject {
       nodes {
         title
         slug {

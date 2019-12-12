@@ -5,16 +5,25 @@ import {
   makeStyles,
   Modal,
   Backdrop,
+  Box,
   Typography,
   Paper,
   Fade,
+  darken,
+  lighten,
   Button,
+  fade,
   Zoom,
 } from '@material-ui/core';
 import { CloseOutlined } from '@material-ui/icons';
 
 const useStyles = portrait =>
-  makeStyles(theme => ({
+  makeStyles( theme => {
+        const backgroundColor = lighten(theme.palette.secondary.light, 0.5)
+    const darkYellow = theme.palette.secondary.main;
+    const red = lighten( theme.palette.primary.dark, 0.25 );
+    
+    return ( {
     root: {
       display: 'flex',
       justifyContent: 'center',
@@ -23,13 +32,12 @@ const useStyles = portrait =>
     },
     title: {
       zIndex: 1000,
-      background: theme.palette.primary.dark,
       color: theme.palette.background.default,
       borderRadius: 0,
       position: 'fixed',
       top: 0,
       left: 0,
-      padding: theme.spacing(1, 4, 1, 2),
+      padding: theme.spacing(0.5, 1, 0.5, 1),
     },
     viewButton: {
       borderRadius: 0,
@@ -44,9 +52,94 @@ const useStyles = portrait =>
       right: theme.spacing(1),
       zIndex: 1000,
     },
-  }));
+    titleRoot: {
+        zIndex: 5000,
+        pointerEvents: 'none',
+        position: 'fixed',
+      top: 0,
+        left: 0,
+        background: 'transparent',
+        display: 'flex',
+        flexDirection: 'row',
+      },
+      titleWrap: {
+        position: 'relative',
+        background: 'transparent',
+        padding: theme.spacing(1, 3, 1, 1),
+        zIndex: 50,
+        '&::before': {
+          backdropFilter: `blur(10px)`,
+          borderRight: `${lighten(
+            theme.palette.primary.dark,
+            0.25,
+          )} solid ${theme.spacing(2)}px`,
+          borderBottom: `${lighten(
+            theme.palette.primary.light,
+            0.25,
+          )} solid ${theme.spacing(0.25)}px`,
+          content: '""',
+          zIndex: -1,
+          position: 'absolute',
+          top: 0,
+          right: theme.spacing(-4),
+          bottom: 0,
+          left: theme.spacing(-6),
+          transform: 'skewX(-45deg)',
+          background: backgroundColor,
+        },
+      },
+      titleHeading: {
+        fontVariant: 'small-caps',
+        fontWeight: 'bold',
+        opacity: 0.65,
+      },
+      titleSubHeading: {
+        opacity: 0.75,
+        marginBottom: 0,
+      },
+      actionWrapper: {
+      display: 'flex',
+        justifyContent: 'flex-end',
+        position: 'fixed',
+        bottom: 0,
+        right: 0,
+      zIndex: 5000,
+    },
+      action: {
+      color: theme.palette.background.default,
+      borderRadius: 0,
 
-const useProjectPreviewModal = props => {
+          background: 'inherit',
+          '&::after': {
+            background: darken(red, 0.3),
+            borderTop: `${theme.spacing(0.35)}px solid ${darken(
+              darkYellow,
+              0.15,
+            )}`,
+            borderLeft: `${theme.spacing(0.25)}px solid ${darken(
+              darkYellow,
+              0.15,
+            )}`,
+          },
+
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        zIndex: -1,
+        top: 0,
+        right: '-50%',
+        left: theme.spacing(-2),
+        bottom: 0,
+        transform: 'skew(-45deg)',
+        background: red,
+        borderTop: `${theme.spacing(0.35)}px solid ${darkYellow}`,
+        borderLeft: `${theme.spacing(0.25)}px solid ${darkYellow}`,
+      },
+    },
+  
+  })});
+
+const useProjectPreviewModal = ({forwardedBreadcrumb = null,...props}) => {
   const [modalData, setModalData] = useState({});
 
   const openHandler = ({
@@ -115,9 +208,32 @@ const useProjectPreviewModal = props => {
       className={classes.root}
     >
       <>
-        <Typography variant="h3" className={classes.title}>
+        {/* <Box className={classes.title}>
+        {forwardedBreadcrumb && <Typography variant="h5" >
+          {forwardedBreadcrumb.title}
+          </Typography>}
+                  <Typography variant="h6">
           {title}
-        </Typography>
+          </Typography>
+          </Box> */}
+        {title && <Paper square elevation={0} className={classes.titleRoot}>
+            <Box className={classes.titleWrap}>
+              <Typography
+                variant="h5"
+                color="primary"
+                className={classes.titleHeading}
+              >
+                {forwardedBreadcrumb.title}
+              </Typography>
+              <Typography
+                variant="body1"
+                color="textPrimary"
+                className={classes.titleSubHeading}
+              >
+                {title}
+              </Typography>
+            </Box>
+          </Paper>}
         <Button className={classes.closeButton} onClick={closeHandler}>
           <CloseOutlined titleAccess="Close Modal" fontSize="large" />
         </Button>
@@ -138,7 +254,7 @@ const useProjectPreviewModal = props => {
             <Img fluid={fluid} />
           </Paper>
         </Zoom>
-        <Button
+        {/* <Button
           onClick={handleNavigate}
           variant="contained"
           size="large"
@@ -146,7 +262,14 @@ const useProjectPreviewModal = props => {
           className={classes.viewButton}
         >
           Open Project
-        </Button>
+        </Button> */}
+         <Box className={classes.actionWrapper}>
+          <Button disableFocusRipple disableRipple className={ classes.action } onClick={ handleNavigate }>
+            <Typography variant='h5'>
+              Open Project
+              </Typography>
+            </Button>
+          </Box>
       </>
     </Modal>
   );

@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React, { useContext } from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
@@ -8,10 +8,10 @@ import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
-import ContainedDiv from '../components/contained-div'
+import ContainedDiv from '../components/contained-div';
 import { getImageInfo } from '../lib/get-image-info';
 
-import {ModalUpdater} from '../components/layout'
+import { ModalUpdater } from '../components/layout';
 import FigureModal from '../components/figure/figure-modal';
 
 const useStyles = makeStyles(theme => ({}));
@@ -40,10 +40,12 @@ const ProjectTemplate = ({ location = null, ...props }) => {
     location && location.state && location.state.forwardedBreadcrumb
       ? [location.state.forwardedBreadcrumb]
       : [project.categories[0].title];
-  
-  const { fluid, aspectRatio } = getImageInfo( { _ref: project.heroImage.asset._id } )
-    
-  const modalUpdater = useContext( ModalUpdater );
+
+  const { fluid, aspectRatio } = getImageInfo({
+    _ref: project.heroImage.asset._id,
+  });
+
+  const modalUpdater = useContext(ModalUpdater);
 
   const openHandler = () =>
     // @ts-ignore
@@ -57,9 +59,7 @@ const ProjectTemplate = ({ location = null, ...props }) => {
           }}
         />
       ),
-    } );
-  
-
+    });
 
   return (
     <PageContainer
@@ -78,8 +78,8 @@ const ProjectTemplate = ({ location = null, ...props }) => {
       <h1 hidden>Welcome to {site.title}</h1>
       <Box>
         <ContainedDiv aspectRatio={aspectRatio} onClick={openHandler}>
-          <Img fluid={ fluid } />
-          </ContainedDiv>
+          <Img fluid={fluid} />
+        </ContainedDiv>
         <BlockContent blocks={project.body} />
       </Box>
     </PageContainer>
@@ -104,11 +104,11 @@ export const query = graphql`
         alt
         asset {
           _id
-            #           metadata {
-            #   dimensions {
-            #     aspectRatio
-            #   }
-            # }
+          #           metadata {
+          #   dimensions {
+          #     aspectRatio
+          #   }
+          # }
           # localFile(width: 2400) {
           #   childImageSharp {
           #     fluid(

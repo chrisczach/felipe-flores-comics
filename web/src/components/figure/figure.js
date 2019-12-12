@@ -1,7 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import { makeStyles, lighten, Typography, Box, fade,darken } from '@material-ui/core';
+import {
+  makeStyles,
+  lighten,
+  Typography,
+  Box,
+  fade,
+  darken,
+} from '@material-ui/core';
 
 import FigureModal from './figure-modal';
 import { ModalUpdater } from '../layout';
@@ -11,7 +18,7 @@ import ContainedDiv from '../contained-div';
 const useStyles = (float = false) =>
   makeStyles(theme => {
     const red = lighten(theme.palette.primary.dark, 0.25);
-    const darkYellow = theme.palette.secondary.main;
+    const darkYellow = lighten(theme.palette.secondary.main, 0.25);
     return {
       root: {
         cursor: 'pointer',
@@ -31,7 +38,7 @@ const useStyles = (float = false) =>
         '@media (hover:hover)': {
           '&:hover div:after': {
             transform: 'translateX(0) scaleX(1) skewX(-45deg)',
-transition: 'all 500ms ease-out',
+            transition: 'all 500ms ease-out',
             background: `linear-gradient(-90deg, ${red} 35%, ${darkYellow} 35% )`,
           },
           '& div:after': {
@@ -42,7 +49,10 @@ transition: 'all 500ms ease-out',
             bottom: 0,
             left: theme.spacing(-1),
             height: theme.spacing(1),
-            background: `linear-gradient(-90deg, ${darken(red,.25)} 35%, transparent 35% )`,
+            background: `linear-gradient(-90deg, ${darken(
+              red,
+              0.25,
+            )} 35%, transparent 35% )`,
             transform: 'translateX(-50%) scaleX(0) skewX(0)',
             transformOrigin: 'center left',
           },
@@ -86,7 +96,7 @@ transition: 'all 500ms ease-out',
             },
           },
           '& div img': {
-                            transition: `all 400ms ease-in-out !important`,
+            transition: `all 400ms ease-in-out !important`,
           },
           '@media (hover:hover)': {
             '&:hover div': {
@@ -106,9 +116,7 @@ transition: 'all 500ms ease-out',
               '&:after': {
                 transition: 'all 250ms ease',
                 transform: 'translateX(0) skew(-45deg) ',
-                borderRight: `${theme.spacing(2)}px solid ${
-                  theme.palette.secondary.main
-                }`,
+                borderRight: `${theme.spacing(2)}px solid ${darkYellow}`,
                 zIndex: -10,
                 background: fade(theme.palette.primary.main, 0.7),
               },
@@ -143,10 +151,9 @@ export default ({ node, ...props }) => {
     asset: { _ref },
   } = node;
 
-
   const { fluid, aspectRatio } = getImageInfo({ _ref });
 
-  const modalUpdater = useContext( ModalUpdater );
+  const modalUpdater = useContext(ModalUpdater);
 
   const openHandler = () =>
     // @ts-ignore
@@ -160,10 +167,10 @@ export default ({ node, ...props }) => {
           }}
         />
       ),
-    } );
-  
+    });
+
   return (
-    <ContainedDiv aspectRatio={aspectRatio} height={.85}>
+    <ContainedDiv aspectRatio={aspectRatio} height={0.85}>
       <Box component="figure" onClick={openHandler} className={classes.root}>
         <Img fluid={fluid} alt={node.alt} />
         {node.caption && (

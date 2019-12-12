@@ -43,7 +43,9 @@ const ProjectGrid = ({
 
   const columns = sm ? 1 : md ? 2 : 3;
   const classes = useStyles(props);
-  const { openHandler, previewModal } = useProjectPreviewModal();
+  const { openHandler, previewModal } = useProjectPreviewModal({
+    forwardedBreadcrumb,
+  });
 
   return (
     <>
