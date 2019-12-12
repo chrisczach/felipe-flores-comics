@@ -34,7 +34,7 @@ const ContainedDiv = ( { aspectRatio = 1, height = .75, children, ...props } ) =
   }, [updateHeight])
 
   return (
-    <Box className={ classes.root }>
+    <Box className={ classes.root } {...props}>
       {resizeListener}
       <Box style={{width: constrainWidth ? divHeight * aspectRatio : '100%'}}>
         { children }

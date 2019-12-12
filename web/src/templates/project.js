@@ -11,6 +11,8 @@ import BlockContent from '../components/block-content';
 import ContainedDiv from '../components/contained-div'
 import { getImageInfo } from '../lib/get-image-info';
 
+import {ModalUpdater} from '../components/layout'
+import FigureModal from '../components/figure/figure-modal';
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -41,6 +43,24 @@ const ProjectTemplate = ({ location = null, ...props }) => {
   
   const { fluid, aspectRatio } = getImageInfo( { _ref: project.heroImage.asset._id } )
     
+  const modalUpdater = useContext( ModalUpdater );
+
+  const openHandler = () =>
+    // @ts-ignore
+    modalUpdater({
+      children: (
+        <FigureModal
+          {...{
+            fluid,
+            aspectRatio,
+            closeHandler: () => modalUpdater({ open: false, children: null }),
+          }}
+        />
+      ),
+    } );
+  
+
+
   return (
     <PageContainer
       pageTitle={project.title}
@@ -57,7 +77,7 @@ const ProjectTemplate = ({ location = null, ...props }) => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       <Box>
-        <ContainedDiv aspectRatio={aspectRatio}>
+        <ContainedDiv aspectRatio={aspectRatio} onClick={openHandler}>
           <Img fluid={ fluid } />
           </ContainedDiv>
         <BlockContent blocks={project.body} />
