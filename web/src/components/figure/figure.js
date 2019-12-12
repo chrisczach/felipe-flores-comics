@@ -159,7 +159,8 @@ export default ({ node, ...props }) => {
           }}
         />
       ),
-    });
+    } );
+  
   return (
     <>
       <Box component="figure" onClick={openHandler} className={classes.root}>

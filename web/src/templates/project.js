@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
@@ -37,10 +37,10 @@ const ProjectTemplate = ({ location = null, ...props }) => {
   const forwardedBreadcrumbs =
     location && location.state && location.state.forwardedBreadcrumb
       ? [location.state.forwardedBreadcrumb]
-      : [];
+      : [project.categories[0].title];
   
   const { fluid, aspectRatio } = getImageInfo( { _ref: project.heroImage.asset._id } )
-  
+    
   return (
     <PageContainer
       pageTitle={project.title}
@@ -49,7 +49,6 @@ const ProjectTemplate = ({ location = null, ...props }) => {
         ...forwardedBreadcrumbs,
         { slug: `'/projects/${project.slug.current}/'`, title: project.title },
       ]}
-      // heroImage={ project.heroImage }
     >
       <SEO
         title={site.title}
@@ -104,6 +103,7 @@ export const query = graphql`
       }
       categories {
         id
+        title
       }
       relatedProjects {
         title
