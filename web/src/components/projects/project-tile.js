@@ -14,6 +14,7 @@ import {
   darken,
 } from '@material-ui/core';
 import BlockContent from '../block-content';
+import { getImageInfo } from '../../lib/get-image-info';
 
 const useStyles = makeStyles(theme => {
   const gap = theme.spacing(2);
@@ -160,10 +161,7 @@ const ProjectTile = ({
     caption,
     alt,
     asset: {
-      metadata,
-      localFile: {
-        childImageSharp: { fluid },
-      },
+      _id
     },
   },
   forwardedBreadcrumb = null,
@@ -191,7 +189,7 @@ const ProjectTile = ({
       : handleNavigate();
   return (
     <Paper square className={classes.root} elevation={0} onClick={handleClick}>
-      <Img fluid={fluid} fadeIn durationFadeIn={1500} />
+      <Img fluid={getImageInfo({_ref: _id}).fluid} fadeIn durationFadeIn={1500} />
       <Box className={classes.drawerWrapper}>
         <Typography variant="h6" className={classes.overlay}>
           {title}

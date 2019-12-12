@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 
 import BackgroundImage from 'gatsby-background-image';
+import getImageInfo from '../lib/get-image-info'
 
 const useStyles = hero =>
   makeStyles(theme => {
@@ -130,8 +131,7 @@ const PageContainer = ({
   const classes = useStyles(heroImage)(props);
   const heroImageFluid =
     heroImage &&
-    heroImage.asset &&
-    heroImage.asset.localFile.childImageSharp.fluid;
+    heroImage.asset && heroImage.asset.id && getImageInfo({_ref: heroImage.asset.id }).fluid
 
   return (
     <StaticQuery

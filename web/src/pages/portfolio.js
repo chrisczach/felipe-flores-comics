@@ -66,16 +66,17 @@ export const query = graphql`
         caption
         alt
         asset {
-          localFile(width: 2400) {
-            childImageSharp {
-              fluid(
-                maxWidth: 2400
-                traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-              ) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
+          _id
+          # localFile(width: 2400) {
+          #   childImageSharp {
+          #     fluid(
+          #       maxWidth: 2400
+          #       traceSVG: { color: "#8b151b77", background: "#ffd83111" }
+          #     ) {
+          #       ...GatsbyImageSharpFluid_withWebp_tracedSVG
+          #     }
+          #   }
+          # }
         }
       }
     }
@@ -90,16 +91,17 @@ export const query = graphql`
           caption
           alt
           asset {
-            localFile(width: 2400) {
-              childImageSharp {
-                fluid(
-                  maxWidth: 2400
-                  traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-                ) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                }
-              }
-            }
+            _id
+            # localFile(width: 2400) {
+            #   childImageSharp {
+            #     fluid(
+            #       maxWidth: 2400
+            #       traceSVG: { color: "#8b151b77", background: "#ffd83111" }
+            #     ) {
+            #       ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            #     }
+            #   }
+            # }
           }
         }
       }
