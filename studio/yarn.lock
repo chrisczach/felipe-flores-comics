@@ -1208,6 +1208,10 @@
     rxjs "^6.5.3"
     shallow-equals "^1.0.0"
 
+"@sanity/production-preview@^0.147.0":
+  version "0.147.0"
+  resolved "https://registry.npmjs.org/@sanity/production-preview/-/production-preview-0.147.0.tgz#c1ab52c278b014567340c111e3a5b71b646cfc79"
+
 "@sanity/resolver@0.147.0":
   version "0.147.0"
   resolved "https://registry.npmjs.org/@sanity/resolver/-/resolver-0.147.0.tgz#7ab05bde891c6354198dce300b843c001fe27dd5"
@@ -7022,7 +7026,7 @@ react-datepicker@^1.8.0:
     react-onclickoutside "^6.7.1"
     react-popper "^1.0.2"
 
-react-dom@^16.8.6:
+react-dom@^16.12.0:
   version "16.12.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
   dependencies:
@@ -7172,7 +7176,7 @@ react-tippy@^1.2.3:
   dependencies:
     popper.js "^1.11.1"
 
-react@^16.8.6:
+react@^16.12.0:
   version "16.12.0"
   resolved "https://registry.npmjs.org/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   dependencies:
