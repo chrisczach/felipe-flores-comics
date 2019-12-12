@@ -6,6 +6,7 @@ import { makeStyles, lighten, Typography, Box, fade,darken } from '@material-ui/
 import FigureModal from './figure-modal';
 import { ModalUpdater } from '../layout';
 import { getImageInfo } from '../../lib/get-image-info';
+import ContainedDiv from '../contained-div';
 
 const useStyles = (float = false) =>
   makeStyles(theme => {
@@ -60,12 +61,12 @@ transition: 'all 500ms ease-out',
             backgroundSize: `10px 10px`,
           },
         },
-        [theme.breakpoints.up('xl')]: {
-          width: `${float ? '40%' : '65%'} !important`,
-        },
+        // [theme.breakpoints.up('xl')]: {
+        //   width: `${float ? '40%' : '65%'} !important`,
+        // },
         [theme.breakpoints.up('md')]: {
           margin: `${theme.spacing(2)}px auto`,
-          width: float ? '45%' : '50%',
+          // width: float ? '45%' : '50%',
           float: float || 'none ',
           background: 'transparent',
           position: 'relative',
@@ -162,7 +163,7 @@ export default ({ node, ...props }) => {
     } );
   
   return (
-    <>
+    <ContainedDiv aspectRatio={aspectRatio} height={.85}>
       <Box component="figure" onClick={openHandler} className={classes.root}>
         <Img fluid={fluid} alt={node.alt} />
         {node.caption && (
@@ -173,7 +174,7 @@ export default ({ node, ...props }) => {
           </Box>
         )}
       </Box>
-    </>
+    </ContainedDiv>
   );
 };
 

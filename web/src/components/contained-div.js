@@ -17,14 +17,14 @@ const useStyles = makeStyles( theme => ( {
 
 // Div that takes up whole height 
 
-const ContainedDiv = ( { aspectRatio = 1, children, ...props } ) => {
+const ContainedDiv = ( { aspectRatio = 1, height = .75, children, ...props } ) => {
   const classes = useStyles(props)
   const [ resizeListener, { width: divWidth } ] = useResizeAware()
   const [{updated, divHeight}, setDivHeight] = useState({updated: false, divHeight: 1080})
   const divAspect = divWidth / divHeight
   const constrainWidth = divAspect > aspectRatio
 
-  const updateHeight = () =>setDivHeight({updated: true, divHeight: window.innerHeight * .75})
+  const updateHeight = () =>setDivHeight({updated: true, divHeight: window.innerHeight * height})
   useEffect(() => {
     if ( !updated ) updateHeight()
     window.addEventListener('resize',updateHeight)
