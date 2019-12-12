@@ -35,13 +35,13 @@ const ProjectGrid = ({
   forwardedBreadcrumb = null,
   enablePreview = false,
   ...props
-}) => {
+} ) => {
   // @ts-ignore
-  const sm = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const lg = useMediaQuery(theme => theme.breakpoints.up('lg'));
   // @ts-ignore
-  const md = useMediaQuery(theme => theme.breakpoints.down('md'));
-
-  const columns = sm ? 1 : md ? 2 : 3;
+  const md = useMediaQuery( theme => theme.breakpoints.up( 'md' ) );
+  
+    const columns =  lg ? 3 : md ? 2 : 1;
   const classes = useStyles(props);
   const { openHandler, previewModal } = useProjectPreviewModal({
     forwardedBreadcrumb,

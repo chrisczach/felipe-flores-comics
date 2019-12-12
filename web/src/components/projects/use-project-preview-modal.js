@@ -135,7 +135,10 @@ const useStyles = portrait =>
         borderTop: `${theme.spacing(0.35)}px solid ${darkYellow}`,
         borderLeft: `${theme.spacing(0.25)}px solid ${darkYellow}`,
       },
-    },
+      },
+      open: {
+        padding: theme.spacing(0.5,3,0,6)
+      }
   
   })});
 
@@ -265,7 +268,7 @@ const useProjectPreviewModal = ({forwardedBreadcrumb = null,...props}) => {
         </Button> */}
          <Box className={classes.actionWrapper}>
           <Button disableFocusRipple disableRipple className={ classes.action } onClick={ handleNavigate }>
-            <Typography variant='h5'>
+            <Typography variant='h6' className={classes.open }>
               Open Project
               </Typography>
             </Button>
