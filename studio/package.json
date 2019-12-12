@@ -27,6 +27,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "sanity-plugin-dashboard-widget-document-list": "^0.0.8",
+    "sanity-plugin-dashboard-widget-gatsby": "^1.0.9",
     "sanity-plugin-dashboard-widget-netlify": "^1.0.1"
   },
   "devDependencies": {

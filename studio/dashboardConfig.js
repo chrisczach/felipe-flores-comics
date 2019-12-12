@@ -1,9 +1,13 @@
 export default {
   widgets: [
     {
-      name: 'sanity-tutorials',
+      name: 'gatsby',
       options: {
-        templateRepoId: 'sanity-io/sanity-template-gatsby-portfolio',
+        instances: [
+          {
+            instanceUrl: '<previewInstanceUrl>',
+          },
+        ],
       },
     },
     { name: 'structure-menu' },
