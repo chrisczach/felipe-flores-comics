@@ -10,7 +10,7 @@ const useStyles = makeStyles( theme => ( {
     margin: `${ theme.spacing( 2 ) }px auto`,
     [ theme.breakpoints.up( 'sm' ) ]: {
       // height: '75vh',
-      overflow: 'hidden'
+      // overflow: 'hidden'
     },
   }
 } ) )
