@@ -168,9 +168,11 @@ const ProjectTile = ({
   openHandler = null,
   ...props
 }) => {
-  const classes = useStyles(props);
-  const aspectRatio =
-    metadata && metadata.dimensions && metadata.dimensions.aspectRatio;
+  const classes = useStyles( props );
+  
+  // const aspectRatio =
+  //   metadata && metadata.dimensions && metadata.dimensions.aspectRatio;
+  const {fluid, aspectRatio} = getImageInfo({_ref: _id})
   const handleNavigate = () =>
     navigate(
       `/portfolio/${slug}/`,
@@ -189,7 +191,7 @@ const ProjectTile = ({
       : handleNavigate();
   return (
     <Paper square className={classes.root} elevation={0} onClick={handleClick}>
-      <Img fluid={getImageInfo({_ref: _id}).fluid} fadeIn durationFadeIn={1500} />
+      <Img fluid={fluid} fadeIn durationFadeIn={1500} />
       <Box className={classes.drawerWrapper}>
         <Typography variant="h6" className={classes.overlay}>
           {title}

@@ -129,9 +129,7 @@ const PageContainer = ({
   ...props
 }) => {
   const classes = useStyles(heroImage)(props);
-  const heroImageFluid =
-    heroImage &&
-    heroImage.asset && heroImage.asset.id && getImageInfo({_ref: heroImage.asset.id }).fluid
+  const {fluid} = heroImage && heroImage.asset && heroImage.asset._id ? getImageInfo({_ref: heroImage.asset._id }) : {}
 
   return (
     <StaticQuery
@@ -140,7 +138,7 @@ const PageContainer = ({
         <>
           {heroImage && (
             <BackgroundImage
-              fluid={heroImageFluid}
+              fluid={fluid}
               fadeIn
               durationFadeIn={1000}
               className={classes.hero}

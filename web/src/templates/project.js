@@ -9,6 +9,8 @@ import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
 import ContainedDiv from '../components/contained-div'
+import { getImageInfo } from '../lib/get-image-info';
+
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -36,7 +38,9 @@ const ProjectTemplate = ({ location = null, ...props }) => {
     location && location.state && location.state.forwardedBreadcrumb
       ? [location.state.forwardedBreadcrumb]
       : [];
-
+  
+  const { fluid, aspectRatio } = getImageInfo( { _ref: project.heroImage.asset._id } )
+  
   return (
     <PageContainer
       pageTitle={project.title}
@@ -54,8 +58,8 @@ const ProjectTemplate = ({ location = null, ...props }) => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       <Box>
-        <ContainedDiv aspectRatio={project.heroImage.asset.metadata.dimensions.aspectRatio}>
-          <Img fluid={ project.heroImage.asset.localFile.childImageSharp.fluid } />
+        <ContainedDiv aspectRatio={aspectRatio}>
+          <Img fluid={ fluid } />
           </ContainedDiv>
         <BlockContent blocks={project.body} />
       </Box>
@@ -81,11 +85,11 @@ export const query = graphql`
         alt
         asset {
           _id
-                      metadata {
-              dimensions {
-                aspectRatio
-              }
-            }
+            #           metadata {
+            #   dimensions {
+            #     aspectRatio
+            #   }
+            # }
           # localFile(width: 2400) {
           #   childImageSharp {
           #     fluid(
