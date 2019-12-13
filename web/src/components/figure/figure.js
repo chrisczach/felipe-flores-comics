@@ -141,7 +141,13 @@ const useStyles = (float = false) =>
     };
   });
 
-export default ({ node, forSlider = false, ref = null, handleClose = false, ...props }) => {
+export default ({
+  node,
+  forSlider = false,
+  ref = null,
+  handleClose = false,
+  ...props
+}) => {
   if (!node.asset) {
     return null;
   }
@@ -157,7 +163,7 @@ export default ({ node, forSlider = false, ref = null, handleClose = false, ...p
 
   const openHandler = () =>
     // @ts-ignore
-    modalUpdater( {
+    modalUpdater({
       closeHandler: handleClose && handleClose,
       children: (
         <FigureModal
@@ -165,8 +171,8 @@ export default ({ node, forSlider = false, ref = null, handleClose = false, ...p
             fluid,
             aspectRatio,
             closeHandler: () => {
-              if ( handleClose ) handleClose()
-              modalUpdater( { open: false, children: null } )
+              if (handleClose) handleClose();
+              modalUpdater({ open: false, children: null });
             },
           }}
         />

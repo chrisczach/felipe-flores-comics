@@ -7,7 +7,7 @@ import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
-
+import LinksSection from '../components/links-section'
 const useStyles = makeStyles(theme => ({
   hero: {
     backgroundAttachment: 'fixed',
@@ -51,7 +51,7 @@ const ContactPage = props => {
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-
+      <LinksSection />
       <BlockContent blocks={page.body} />
       {/* <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} /> */}
     </PageContainer>

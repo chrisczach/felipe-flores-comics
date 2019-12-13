@@ -17,6 +17,12 @@ import {
   lighten,
 } from '@material-ui/core';
 
+import {
+  SkipNextOutlined,
+  SkipPreviousOutlined,
+  PlayArrowOutlined,
+  PauseOutlined,
+} from '@material-ui/icons';
 import Figure from './figure/figure';
 
 import { getImageInfo } from '../lib/get-image-info';
@@ -32,9 +38,9 @@ const useStyles = makeStyles(theme => ({
     scrollSnapType: 'mandatory',
   },
   buttonWrapper: {
-    margin: theme.spacing( 2, 0 ),
+    margin: theme.spacing(2, 0),
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   sliderElement: {
     scrollSnapAlign: 'center',
@@ -56,37 +62,37 @@ const SlideShow = props => {
   // figure this out later
   const wrapperRef = createRef();
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [ playing, setPlaying ] = useState( true );
-  
-  const togglePlaying = (value = null) => setPlaying(state => value === null ? !state : value);
+  const [playing, setPlaying] = useState(true);
+
+  const togglePlaying = (value = null) =>
+    setPlaying(state => (value === null ? !state : value));
 
   const updateScroll = (value = 1) => {
-      setScrollPosition(current => {
-        const next =
-          current + value === images.length || current + value < 0
-            ? 0
-            : current + value;
-        wrapperRef.current.scroll({
-          left: itemsRef.current[next].offsetLeft,
-          top: 0,
-          behavior: 'smooth',
-        });
-        return next;
+    setScrollPosition(current => {
+      const next =
+        current + value === images.length || current + value < 0
+          ? 0
+          : current + value;
+      wrapperRef.current.scroll({
+        left: itemsRef.current[next].offsetLeft,
+        top: 0,
+        behavior: 'smooth',
       });
+      return next;
+    });
   };
 
   // const scrollTo = scrollPosition => {
   //   alert(scrollPosition);
   // };
 
-  useInterval( ()=> playing && updateScroll(), 3500 );
- 
-  const [prevPlaying, setPrevPlaying] = useState(true)
+  useInterval(() => playing && updateScroll(), 3500);
 
-  const handleModalClose = () =>{
-    togglePlaying(prevPlaying)
-  }
+  const [prevPlaying, setPrevPlaying] = useState(true);
 
+  const handleModalClose = () => {
+    togglePlaying(prevPlaying);
+  };
 
   const images = nodes
     .map(({ mainImage: { caption, alt, asset: { _id: _ref } } }) => ({
@@ -97,14 +103,14 @@ const SlideShow = props => {
     }))
     .map((props, i) => (
       <div
-        onClick={ () => {
-          setPrevPlaying(playing)
-          togglePlaying( false )
-        } }
+        onClick={() => {
+          setPrevPlaying(playing);
+          togglePlaying(false);
+        }}
         ref={el => (itemsRef.current[i] = el)}
         className={classes.sliderElement}
       >
-        <ToFigure handleClose={ handleModalClose} {...props} />
+        <ToFigure handleClose={handleModalClose} {...props} />
       </div>
     ));
 
@@ -115,23 +121,39 @@ const SlideShow = props => {
         {images}
       </div>
       <Box className={classes.buttonWrapper}>
-      <ButtonGroup size='large'>
-        <Button onClick={ () => {
-                    updateScroll( -1 )
-                    togglePlaying(false)
-        } }>Prev</Button>
-        <Button onClick={()=>playing ? togglePlaying(false) : togglePlaying(true)}>{playing ? 'Pause' : 'Play'}</Button>
-        <Button onClick={ () => {
-                    updateScroll( 1 )
-          togglePlaying(false)
-        } }>Next</Button>
+        <ButtonGroup size="large">
+          <Button
+            onClick={() => {
+              updateScroll(-1);
+              togglePlaying(false);
+            }}
+            startIcon={<SkipPreviousOutlined />}
+          >
+            Prev
+          </Button>
+          <Button
+            onClick={() =>
+              playing ? togglePlaying(false) : togglePlaying(true)
+            }
+          >
+            {playing ? <PauseOutlined /> : <PlayArrowOutlined />}
+          </Button>
+          <Button
+            onClick={() => {
+              updateScroll(1);
+              togglePlaying(false);
+            }}
+            endIcon={<SkipNextOutlined />}
+          >
+            Next
+          </Button>
         </ButtonGroup>
-        </Box>
+      </Box>
     </>
   );
 };
 
-const ToFigure = ({ _ref, aspectRatio, caption, alt, handleClose = false }) => (
+const ToFigure = ({ _ref, handleClose = false }) => (
   <div>
     <Figure forSlider node={{ asset: { _ref } }} handleClose={handleClose} />
   </div>
@@ -174,6 +196,5 @@ function useInterval(callback, delay) {
     }
   }, [delay]);
 }
-
 
 export default SlideShow;

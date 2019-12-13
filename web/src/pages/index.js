@@ -8,6 +8,7 @@ import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
 import SlideShow from '../components/slide-show';
+import LinksSection from '../components/links-section'
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -32,6 +33,7 @@ const IndexPage = props => {
   }
 
   return (
+    <>
     <PageContainer pageTitle={page.title} heroImage={page.heroImage}>
       <SEO
         title={site.title}
@@ -39,10 +41,12 @@ const IndexPage = props => {
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-
+      <LinksSection />
       <BlockContent blocks={page.body} />
-      <SlideShow />
-    </PageContainer>
+
+      </PageContainer>
+            <SlideShow />
+      </>
   );
 };
 

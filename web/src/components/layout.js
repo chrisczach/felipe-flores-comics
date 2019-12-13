@@ -47,10 +47,10 @@ const Layout = ({
     setModalData({ open, children, closeHandler });
   };
   const handleClose = () => {
-    setModalData( ( { closeHandler = false } ) => {
-          if(closeHandler) closeHandler()
-      return{ open: false, children: null }
-    } )
+    setModalData(({ closeHandler = false }) => {
+      if (closeHandler) closeHandler();
+      return { open: false, children: null };
+    });
   };
 
   return (
