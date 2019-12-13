@@ -14,10 +14,10 @@ import { getImageInfo } from '../lib/get-image-info';
 import { ModalUpdater } from '../components/layout';
 import FigureModal from '../components/figure/figure-modal';
 
-const useStyles = makeStyles( theme => ( {
+const useStyles = makeStyles(theme => ({
   image: {
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 }));
 
 const ProjectTemplate = ({ location = null, ...props }) => {
@@ -81,13 +81,12 @@ const ProjectTemplate = ({ location = null, ...props }) => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
 
-      <ContainedDiv aspectRatio={ aspectRatio } >
-        <Box onClick={ openHandler } className={ classes.image } >
-          <Img fluid={ fluid }  />
-          </Box>
-        </ContainedDiv>
-        <BlockContent blocks={project.body} />
-
+      <ContainedDiv aspectRatio={aspectRatio}>
+        <Box onClick={openHandler} className={classes.image}>
+          <Img fluid={fluid} />
+        </Box>
+      </ContainedDiv>
+      <BlockContent blocks={project.body} />
     </PageContainer>
   );
 };

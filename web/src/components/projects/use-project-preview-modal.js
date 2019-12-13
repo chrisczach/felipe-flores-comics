@@ -18,45 +18,45 @@ import {
 import { CloseOutlined } from '@material-ui/icons';
 
 const useStyles = portrait =>
-  makeStyles( theme => {
-        const backgroundColor = lighten(theme.palette.secondary.light, 0.5)
+  makeStyles(theme => {
+    const backgroundColor = lighten(theme.palette.secondary.light, 0.5);
     const darkYellow = theme.palette.secondary.main;
-    const red = lighten( theme.palette.primary.dark, 0.25 );
-    
-    return ( {
-    root: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backdropFilter: `blur(4px) brightness(1.25) saturate(0.75)`,
-    },
-    title: {
-      zIndex: 1000,
-      color: theme.palette.background.default,
-      borderRadius: 0,
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      padding: theme.spacing(0.5, 1, 0.5, 1),
-    },
-    viewButton: {
-      borderRadius: 0,
-      position: 'fixed',
-      bottom: 0,
-      right: 0,
-    },
-    closeButton: {
-      opacity: 0.9,
-      position: 'fixed',
-      top: theme.spacing(1),
-      right: theme.spacing(1),
-      zIndex: 1000,
-    },
-    titleRoot: {
+    const red = lighten(theme.palette.primary.dark, 0.25);
+
+    return {
+      root: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backdropFilter: `blur(4px) brightness(1.25) saturate(0.75)`,
+      },
+      title: {
+        zIndex: 1000,
+        color: theme.palette.background.default,
+        borderRadius: 0,
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        padding: theme.spacing(0.5, 1, 0.5, 1),
+      },
+      viewButton: {
+        borderRadius: 0,
+        position: 'fixed',
+        bottom: 0,
+        right: 0,
+      },
+      closeButton: {
+        opacity: 0.9,
+        position: 'fixed',
+        top: theme.spacing(1),
+        right: theme.spacing(1),
+        zIndex: 1000,
+      },
+      titleRoot: {
         zIndex: 5000,
         pointerEvents: 'none',
         position: 'fixed',
-      top: 0,
+        top: 0,
         left: 0,
         background: 'transparent',
         display: 'flex',
@@ -98,51 +98,51 @@ const useStyles = portrait =>
         marginBottom: 0,
       },
       actionWrapper: {
-      display: 'flex',
+        display: 'flex',
         justifyContent: 'flex-end',
         position: 'fixed',
         bottom: 0,
         right: 0,
-      zIndex: 5000,
-    },
-      action: {
-      color: theme.palette.background.default,
-      borderRadius: 0,
-
-          background: 'inherit',
-          '&::after': {
-            background: darken(red, 0.3),
-            borderTop: `${theme.spacing(0.35)}px solid ${darken(
-              darkYellow,
-              0.15,
-            )}`,
-            borderLeft: `${theme.spacing(0.25)}px solid ${darken(
-              darkYellow,
-              0.15,
-            )}`,
-          },
-
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        zIndex: -1,
-        top: 0,
-        right: '-50%',
-        left: theme.spacing(-2),
-        bottom: 0,
-        transform: 'skew(-45deg)',
-        background: red,
-        borderTop: `${theme.spacing(0.35)}px solid ${darkYellow}`,
-        borderLeft: `${theme.spacing(0.25)}px solid ${darkYellow}`,
+        zIndex: 5000,
       },
+      action: {
+        color: theme.palette.background.default,
+        borderRadius: 0,
+
+        background: 'inherit',
+        '&::after': {
+          background: darken(red, 0.3),
+          borderTop: `${theme.spacing(0.35)}px solid ${darken(
+            darkYellow,
+            0.15,
+          )}`,
+          borderLeft: `${theme.spacing(0.25)}px solid ${darken(
+            darkYellow,
+            0.15,
+          )}`,
+        },
+
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          zIndex: -1,
+          top: 0,
+          right: '-50%',
+          left: theme.spacing(-2),
+          bottom: 0,
+          transform: 'skew(-45deg)',
+          background: red,
+          borderTop: `${theme.spacing(0.35)}px solid ${darkYellow}`,
+          borderLeft: `${theme.spacing(0.25)}px solid ${darkYellow}`,
+        },
       },
       open: {
-        padding: theme.spacing(0.5,3,0,6)
-      }
-  
-  })});
+        padding: theme.spacing(0.5, 3, 0, 6),
+      },
+    };
+  });
 
-const useProjectPreviewModal = ({forwardedBreadcrumb = null,...props}) => {
+const useProjectPreviewModal = ({ forwardedBreadcrumb = null, ...props }) => {
   const [modalData, setModalData] = useState({});
 
   const openHandler = ({
@@ -219,7 +219,8 @@ const useProjectPreviewModal = ({forwardedBreadcrumb = null,...props}) => {
           {title}
           </Typography>
           </Box> */}
-        {title && <Paper square elevation={0} className={classes.titleRoot}>
+        {title && (
+          <Paper square elevation={0} className={classes.titleRoot}>
             <Box className={classes.titleWrap}>
               <Typography
                 variant="h5"
@@ -236,7 +237,8 @@ const useProjectPreviewModal = ({forwardedBreadcrumb = null,...props}) => {
                 {title}
               </Typography>
             </Box>
-          </Paper>}
+          </Paper>
+        )}
         <Button className={classes.closeButton} onClick={closeHandler}>
           <CloseOutlined titleAccess="Close Modal" fontSize="large" />
         </Button>
@@ -266,13 +268,18 @@ const useProjectPreviewModal = ({forwardedBreadcrumb = null,...props}) => {
         >
           Open Project
         </Button> */}
-         <Box className={classes.actionWrapper}>
-          <Button disableFocusRipple disableRipple className={ classes.action } onClick={ handleNavigate }>
-            <Typography variant='h6' className={classes.open }>
+        <Box className={classes.actionWrapper}>
+          <Button
+            disableFocusRipple
+            disableRipple
+            className={classes.action}
+            onClick={handleNavigate}
+          >
+            <Typography variant="h6" className={classes.open}>
               Open Project
-              </Typography>
-            </Button>
-          </Box>
+            </Typography>
+          </Button>
+        </Box>
       </>
     </Modal>
   );

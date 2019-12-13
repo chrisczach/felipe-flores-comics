@@ -43,10 +43,15 @@ const Layout = ({
 }) => {
   const classes = useStyles(props);
   const [modalData, setModalData] = useState({ open: false, children: null });
-  const modalUpdater = ({ open = true, children }) => {
-    setModalData({ open, children });
+  const modalUpdater = ({ open = true, closeHandler = false, children }) => {
+    setModalData({ open, children, closeHandler });
   };
-  const handleClose = () => setModalData({ open: false, children: null });
+  const handleClose = () => {
+    setModalData( ( { closeHandler = false } ) => {
+          if(closeHandler) closeHandler()
+      return{ open: false, children: null }
+    } )
+  };
 
   return (
     <>

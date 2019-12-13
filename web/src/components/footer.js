@@ -21,13 +21,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     // background: fade(theme.palette.secondary.dark, 0.35),
     background: 'transparent',
-    [ theme.breakpoints.down( 'sm' ) ]: {
-      background: fade( theme.palette.secondary.dark, .25 ),
-            borderTop: `${fade(
+    [theme.breakpoints.down('sm')]: {
+      background: fade(theme.palette.secondary.dark, 0.25),
+      borderTop: `${fade(
         theme.palette.secondary.dark,
         0.15,
       )} solid ${theme.spacing(0.25)}px`,
-       },
+    },
     overflow: 'hidden',
     borderBottom: `${fade(
       theme.palette.primary.dark,
@@ -84,12 +84,12 @@ const useStyles = makeStyles(theme => ({
 
   rightBox: {
     width: '75%',
-    [ theme.breakpoints.down( 'md' ) ]: {
-      width: '200%'
+    [theme.breakpoints.down('md')]: {
+      width: '200%',
     },
-    [ theme.breakpoints.down( 'sm' ) ]: {
-          width: '400%'
-        },
+    [theme.breakpoints.down('sm')]: {
+      width: '400%',
+    },
     position: 'relative',
     display: 'flex',
     textAlign: 'right',

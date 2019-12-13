@@ -74,7 +74,6 @@ export const query = graphql`
         alt
         asset {
           _id
-
         }
       }
     }

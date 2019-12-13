@@ -17,7 +17,7 @@ import {
   lighten,
 } from '@material-ui/core';
 
-import Figure from '../components/figure/figure';
+import Figure from './figure/figure';
 
 import { getImageInfo } from '../lib/get-image-info';
 import ContainedDiv from './contained-div';
@@ -30,6 +30,14 @@ const useStyles = makeStyles(theme => ({
     whitespace: 'nowrap',
     WebkitOverflowScrolling: 'touch',
     scrollSnapType: 'mandatory',
+  },
+  buttonWrapper: {
+    margin: theme.spacing( 2, 0 ),
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  sliderElement: {
+    scrollSnapAlign: 'center',
   },
 }));
 
@@ -45,6 +53,41 @@ const SlideShow = props => {
     itemsRef.current = itemsRef.current.slice(0, nodes.length);
   }, [nodes]);
 
+  // figure this out later
+  const wrapperRef = createRef();
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [ playing, setPlaying ] = useState( true );
+  
+  const togglePlaying = (value = null) => setPlaying(state => value === null ? !state : value);
+
+  const updateScroll = (value = 1) => {
+      setScrollPosition(current => {
+        const next =
+          current + value === images.length || current + value < 0
+            ? 0
+            : current + value;
+        wrapperRef.current.scroll({
+          left: itemsRef.current[next].offsetLeft,
+          top: 0,
+          behavior: 'smooth',
+        });
+        return next;
+      });
+  };
+
+  // const scrollTo = scrollPosition => {
+  //   alert(scrollPosition);
+  // };
+
+  useInterval( ()=> playing && updateScroll(), 3500 );
+ 
+  const [prevPlaying, setPrevPlaying] = useState(true)
+
+  const handleModalClose = () =>{
+    togglePlaying(prevPlaying)
+  }
+
+
   const images = nodes
     .map(({ mainImage: { caption, alt, asset: { _id: _ref } } }) => ({
       _ref,
@@ -53,35 +96,17 @@ const SlideShow = props => {
       ...getImageInfo({ _ref }),
     }))
     .map((props, i) => (
-      <div ref={el => (itemsRef.current[i] = el)}>
-        <ToFigure {...props} />
+      <div
+        onClick={ () => {
+          setPrevPlaying(playing)
+          togglePlaying( false )
+        } }
+        ref={el => (itemsRef.current[i] = el)}
+        className={classes.sliderElement}
+      >
+        <ToFigure handleClose={ handleModalClose} {...props} />
       </div>
     ));
-
-  // figure this out later
-  const wrapperRef = createRef();
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const togglePlaying = () => setPlaying(state => !state);
-
-  const updateScroll = () => {
-    if (playing) {
-      wrapperRef.current.scroll({
-        left: itemsRef.current[scrollPosition].offsetLeft,
-        top: 0,
-        behavior: 'smooth',
-      });
-      setScrollPosition(current =>
-        current === images.length ? 0 : current + 1,
-      );
-    }
-  };
-
-  // const scrollTo = scrollPosition => {
-  //   alert(scrollPosition);
-  // };
-
-  useInterval(updateScroll, 3500);
 
   return (
     <>
@@ -89,18 +114,26 @@ const SlideShow = props => {
       <div ref={wrapperRef} className={classes.root}>
         {images}
       </div>
-      <ButtonGroup>
-        <Button>Prev</Button>
-        <Button onClick={togglePlaying}>Play / Pause</Button>
-        <Button>Next</Button>
-      </ButtonGroup>
+      <Box className={classes.buttonWrapper}>
+      <ButtonGroup size='large'>
+        <Button onClick={ () => {
+                    updateScroll( -1 )
+                    togglePlaying(false)
+        } }>Prev</Button>
+        <Button onClick={()=>playing ? togglePlaying(false) : togglePlaying(true)}>{playing ? 'Pause' : 'Play'}</Button>
+        <Button onClick={ () => {
+                    updateScroll( 1 )
+          togglePlaying(false)
+        } }>Next</Button>
+        </ButtonGroup>
+        </Box>
     </>
   );
 };
 
-const ToFigure = ({ _ref, aspectRatio, caption, alt }) => (
+const ToFigure = ({ _ref, aspectRatio, caption, alt, handleClose = false }) => (
   <div>
-    <Figure forSlider node={{ asset: { _ref } }} />
+    <Figure forSlider node={{ asset: { _ref } }} handleClose={handleClose} />
   </div>
 );
 
@@ -136,10 +169,11 @@ function useInterval(callback, delay) {
       savedCallback.current();
     }
     if (delay !== null) {
-      let id = setInterval(tick, delay);
+      const id = setInterval(tick, delay);
       return () => clearInterval(id);
     }
   }, [delay]);
 }
+
 
 export default SlideShow;
