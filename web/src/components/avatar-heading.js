@@ -33,9 +33,19 @@ const useStyles = makeStyles(theme => {
       },
     },
     name: {
+      color: darken(theme.palette.secondary.dark,.2),
       padding: theme.spacing( 2 ),
       [ theme.breakpoints.down( 'sm' ) ]: {
          textAlign: 'center'
+       }
+    },
+    subtitle: {
+          // color: theme.palette.primary.light,
+      padding: theme.spacing( 2 ),
+      opacity: 0.9,
+      [ theme.breakpoints.down( 'sm' ) ]: {
+        textAlign: 'center',
+        padding: theme.spacing( 2,2,4,2 ),
        }
     },
     imageWrap: {
@@ -113,7 +123,7 @@ const AvatarHeading = ({ ...props }) => {
         <Typography variant={isPhone ? "h1" : isTablet ? "h2" : "h3"} className={classes.name}>
           {title}
         </Typography>
-        <Typography variant={isPhone ? "h3" : isTablet ? "h4" : "h5"} className={classes.name}>
+        <Typography variant={isPhone ? "h3" : isTablet ? "h4" : "h5"} className={classes.subtitle}>
           {subtitle}
         </Typography>
       </Box>
