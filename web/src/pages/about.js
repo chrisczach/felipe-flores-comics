@@ -8,6 +8,7 @@ import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
 
+
 const useStyles = makeStyles(theme => ({
   hero: {
     backgroundAttachment: 'fixed',
@@ -52,7 +53,8 @@ const AboutPage = props => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
  
-      <BlockContent blocks={page.body} />
+      <BlockContent blocks={ page.body } />
+   
     </PageContainer>
   );
 };
@@ -73,16 +75,6 @@ export const query = graphql`
         alt
         asset {
           _id
-          # localFile(width: 2400) {
-          #   childImageSharp {
-          #     fluid(
-          #       maxWidth: 2400
-          #       traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-          #     ) {
-          #       ...GatsbyImageSharpFluid_withWebp_tracedSVG
-          #     }
-          #   }
-          # }
         }
       }
     }

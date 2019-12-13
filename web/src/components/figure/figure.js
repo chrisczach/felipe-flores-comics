@@ -185,29 +185,4 @@ export default ({ node, ...props }) => {
   );
 };
 
-// const query = graphql`
-//   query BlockImageQuery {
-//     assets: allSanityImageAsset {
-//       edges {
-//         node {
-//           _id
-//           metadata {
-//             dimensions {
-//               aspectRatio
-//             }
-//           }
-//           localFile(width: 2400) {
-//             childImageSharp {
-//               fluid(
-//                 maxWidth: 2400
-//                 traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-//               ) {
-//                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
+

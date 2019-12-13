@@ -110,21 +110,6 @@ export const query = graphql`
         alt
         asset {
           _id
-          #           metadata {
-          #   dimensions {
-          #     aspectRatio
-          #   }
-          # }
-          # localFile(width: 2400) {
-          #   childImageSharp {
-          #     fluid(
-          #       maxWidth: 2400
-          #       traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-          #     ) {
-          #       ...GatsbyImageSharpFluid_withWebp_tracedSVG
-          #     }
-          #   }
-          # }
         }
       }
       categories {

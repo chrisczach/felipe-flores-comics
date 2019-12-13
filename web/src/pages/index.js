@@ -7,6 +7,7 @@ import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
+import SlideShow from '../components/slide-show';
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -40,7 +41,7 @@ const IndexPage = props => {
       <h1 hidden>Welcome to {site.title}</h1>
 
       <BlockContent blocks={page.body} />
-      {/* <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} /> */}
+      <SlideShow />
     </PageContainer>
   );
 };
@@ -61,16 +62,6 @@ export const query = graphql`
         alt
         asset {
           _id
-          # localFile(width: 2400) {
-          #   childImageSharp {
-          #     fluid(
-          #       maxWidth: 2400
-          #       traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-          #     ) {
-          #       ...GatsbyImageSharpFluid_withWebp_tracedSVG
-          #     }
-          #   }
-          # }
         }
       }
     }

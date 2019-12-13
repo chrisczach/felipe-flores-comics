@@ -85,25 +85,7 @@ export const query = graphql`
       }
       excerpt: _rawExcerpt
       body: _rawBody
-      # heroImage: mainImage {
-      #   caption
-      #   alt
-      #   asset {
-      #     _id
-      #     localFile(width: 2400) {
-      #       childImageSharp {
-      #         fluid(
-      #           maxWidth: 2400
-      #           traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-      #         ) {
-      #           ...GatsbyImageSharpFluid_withWebp_tracedSVG
-      #         }
-      #       }
-      #     }
-      #   }
-      # }
     }
-    #  (filter: {id: { eq: $id }}) (sort: { fields: [sort] })
     projects: allSanityProject {
       nodes {
         title
@@ -125,16 +107,6 @@ export const query = graphql`
                 aspectRatio
               }
             }
-            # localFile(width: 2400) {
-            #   childImageSharp {
-            #     fluid(
-            #       maxWidth: 2400
-            #       traceSVG: { color: "#8b151b77", background: "#ffd83111" }
-            #     ) {
-            #       ...GatsbyImageSharpFluid_withWebp_tracedSVG
-            #     }
-            #   }
-            # }
           }
         }
       }
