@@ -58,7 +58,7 @@ const SlideShow = props => {
 
   return (
     <>
-      currentyly at {images[scrollPosition].ref.current}
+      currentyly at {JSON.stringify(images[scrollPosition].ref)}
       <Box className={classes.root}>
         {images.map(({ component }) => component)}
       </Box>
@@ -67,7 +67,7 @@ const SlideShow = props => {
 };
 
 const toBoxWithRef = ({ _ref, aspectRatio, caption, alt }) => {
-  const ref = useRef();
+  const ref = useRef(null);
   return {
     ref,
     component: <Figure ref={ref} forSlider node={{ asset: { _ref } }} />,
