@@ -36,9 +36,15 @@ const useStyles = makeStyles(theme => ({
     whitespace: 'nowrap',
     WebkitOverflowScrolling: 'touch',
     scrollSnapType: 'mandatory',
+    overflow: '-moz-scrollbars-none',
+    msOverflowStyle: 'none',
+    '&::-webkit-scrollbar': {
+       width: '0 !important'
+    }
+
   },
   buttonWrapper: {
-    margin: theme.spacing(2, 0),
+    margin: theme.spacing(0,0,6, 0),
     display: 'flex',
     justifyContent: 'center',
   },
