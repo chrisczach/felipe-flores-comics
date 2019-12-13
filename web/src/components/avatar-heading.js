@@ -143,7 +143,7 @@ const query = graphql`
               aspectRatio
             }
           }
-          localFile(width: 24) {
+          localFile(width: 1200) {
             childImageSharp {
               fluid(
                 maxWidth: 24
