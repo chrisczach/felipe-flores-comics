@@ -33,10 +33,10 @@ const query = graphql`
               aspectRatio
             }
           }
-          localFile(width: 24) {
+          localFile(width: 2400) {
             childImageSharp {
               fluid(
-                maxWidth: 24
+                maxWidth: 2400
                 traceSVG: { color: "#8b151b77", background: "#ffd83111" }
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
