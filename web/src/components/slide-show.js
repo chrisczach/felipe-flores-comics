@@ -45,27 +45,24 @@ const SlideShow = props => {
     }))
     .map(toBoxWithRef);
 
-  
   // figure this out later
 
-  // const [scrollPosition, setScrollPosition] = useState(0);
-  // const updateScroll = () => () => setScrollPosition(current => current + 1);
-  // const scrollTo = scrollPosition => {
-  //   alert(scrollPosition);
-  // };
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () =>
+    setScrollPosition(current => (current === images.length ? 0 : current + 1));
+  const scrollTo = scrollPosition => {
+    alert(scrollPosition);
+  };
 
-  // useEffect(() => {
-  //   scrollTo(scrollPosition);
-  //   const interval = setInterval(updateScroll, 1000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [updateScroll]);
+  useInterval(updateScroll, 2500);
 
   return (
-    <Box className={classes.root}>
-      {images.map(({ component }) => component)}
-    </Box>
+    <>
+      currentyly at {images[scrollPosition].ref.current}
+      <Box className={classes.root}>
+        {images.map(({ component }) => component)}
+      </Box>
+    </>
   );
 };
 
@@ -93,5 +90,25 @@ const query = graphql`
     }
   }
 `;
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
 
 export default SlideShow;
