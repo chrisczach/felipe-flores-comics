@@ -141,7 +141,7 @@ const useStyles = (float = false) =>
     };
   });
 
-export default ({ node, ...props }) => {
+export default ({ node, forSlider = false, ref = null, ...props }) => {
   if (!node.asset) {
     return null;
   }
@@ -170,7 +170,12 @@ export default ({ node, ...props }) => {
     });
 
   return (
-    <ContainedDiv aspectRatio={aspectRatio} height={0.85}>
+    <ContainedDiv
+      ref={ref}
+      aspectRatio={aspectRatio}
+      height={forSlider ? 0.6 : 0.85}
+      forSlider
+    >
       <Box component="figure" onClick={openHandler} className={classes.root}>
         <Img fluid={fluid} alt={node.alt} />
         {node.caption && (
@@ -184,5 +189,3 @@ export default ({ node, ...props }) => {
     </ContainedDiv>
   );
 };
-
-

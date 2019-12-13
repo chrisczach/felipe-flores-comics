@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
@@ -22,9 +22,12 @@ import ContainedDiv from './contained-div';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    overflowX: 'scroll',
     display: 'flex',
     flexDirection: 'row',
-    overflowX: 'scroll',
+    whitespace: 'nowrap',
+    WebkitOverflowScrolling: 'touch',
+    scrollSnapType: 'mandatory',
   },
 }));
 
@@ -33,24 +36,45 @@ const SlideShow = props => {
   const {
     projects: { nodes },
   } = useStaticQuery(query);
-  const images = nodes.map(
-    ({
-      mainImage: {
-        caption,
-        alt,
-        asset: { _id: _ref },
-      },
-    }) => ({ _ref, caption, alt, ...getImageInfo({ _ref }) }),
+  const images = nodes
+    .map(({ mainImage: { caption, alt, asset: { _id: _ref } } }) => ({
+      _ref,
+      caption,
+      alt,
+      ...getImageInfo({ _ref }),
+    }))
+    .map(toBoxWithRef);
+
+  
+  // figure this out later
+
+  // const [scrollPosition, setScrollPosition] = useState(0);
+  // const updateScroll = () => () => setScrollPosition(current => current + 1);
+  // const scrollTo = scrollPosition => {
+  //   alert(scrollPosition);
+  // };
+
+  // useEffect(() => {
+  //   scrollTo(scrollPosition);
+  //   const interval = setInterval(updateScroll, 1000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [updateScroll]);
+
+  return (
+    <Box className={classes.root}>
+      {images.map(({ component }) => component)}
+    </Box>
   );
-  return <Box className={classes.root}>{images.map(toBoxes)}</Box>;
 };
 
-const toBoxes = ({ _ref, aspectRatio, caption, alt }) => {
-  return (
-    // <ContainedDiv aspectRatio={aspectRatio}>
-    <Figure node={{ asset: { _ref } }} />
-    // </ContainedDiv>
-  );
+const toBoxWithRef = ({ _ref, aspectRatio, caption, alt }) => {
+  const ref = useRef();
+  return {
+    ref,
+    component: <Figure ref={ref} forSlider node={{ asset: { _ref } }} />,
+  };
 };
 const query = graphql`
   query SlideShowQuery {

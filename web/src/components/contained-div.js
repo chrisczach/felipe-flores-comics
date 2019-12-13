@@ -2,28 +2,34 @@ import React, { useState, useEffect } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import useResizeAware from 'react-resize-aware';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'center',
-    margin: `${theme.spacing(2)}px auto`,
-    [theme.breakpoints.up('sm')]: {
-      // height: '75vh',
-      // overflow: 'hidden'
+const useStyles = forSlider =>
+  makeStyles(theme => ({
+    root: {
+      position: 'relative',
+      display: 'flex',
+      justifyContent: 'center',
+      scrollSnapAlign: 'start',
+      margin: `${theme.spacing(2)}px ${
+        forSlider ? `${theme.spacing(1)}px` : `auto`
+      }`,
+      [theme.breakpoints.up('sm')]: {
+        // height: '75vh',
+        // overflow: 'hidden'
+      },
     },
-  },
-}));
+  }));
 
 // Div that takes up whole height
 
 const ContainedDiv = ({
   aspectRatio = 1,
   height = 0.75,
+  forSlider = false,
+  ref,
   children,
   ...props
 }) => {
-  const classes = useStyles(props);
+  const classes = useStyles(forSlider)(props);
   const [resizeListener, { width: divWidth }] = useResizeAware();
   const [{ updated, divHeight }, setDivHeight] = useState({
     updated: false,
@@ -43,9 +49,13 @@ const ContainedDiv = ({
   }, [updateHeight]);
 
   return (
-    <Box className={classes.root} {...props}>
+    <Box className={classes.root} {...props} ref={ref}>
       {resizeListener}
-      <Box style={{ width: constrainWidth ? divHeight * aspectRatio : '100%' }}>
+      <Box
+        style={{
+          width: constrainWidth || forSlider ? divHeight * aspectRatio : '100%',
+        }}
+      >
         {children}
       </Box>
     </Box>
