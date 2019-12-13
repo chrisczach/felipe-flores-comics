@@ -8,6 +8,7 @@ import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
 import LinksSection from '../components/links-section';
+import AvatarHeading from '../components/avatar-heading'
 
 const useStyles = makeStyles(theme => ({
   hero: {
@@ -51,7 +52,8 @@ const AboutPage = props => {
         description={site.description}
         keywords={site.keywords}
       />
-      <h1 hidden>Welcome to {site.title}</h1>
+      <h1 hidden>Welcome to { site.title }</h1>
+      <AvatarHeading/>
       <LinksSection />
       <BlockContent blocks={page.body} />
     </PageContainer>

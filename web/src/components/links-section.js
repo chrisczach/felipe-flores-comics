@@ -10,7 +10,9 @@ import {
   ListItemIcon,
   Typography,
   ListItemText,
-  ListSubheader
+  ListSubheader,
+  useMediaQuery,
+  
 } from '@material-ui/core';
 
 import { SiteLinksContext } from './layout';
@@ -51,7 +53,7 @@ const useStyles = makeStyles( theme => {
     textAlign: 'right',
     [ theme.breakpoints.down( 'xs' ) ]: {
       textAlign: 'center',
-      margin: theme.spacing(2,0,1,0),
+      margin: theme.spacing(2,0,4,0),
     },
     margin: theme.spacing(2,0,1,0),
     }
@@ -60,10 +62,13 @@ const useStyles = makeStyles( theme => {
 const LinksSection = props => {
   const classes = useStyles(props);
   const siteLinks = useContext(SiteLinksContext);
+
+  const isPhone = useMediaQuery(theme => theme.breakpoints.down('xs'));
+
   return (
     <Paper square className={classes.root}>
       <List subheader={
-        <ListSubheader component="div"  className={classes.subheader}><Typography variant='h5'>Where to find me!</Typography></ListSubheader>
+        <ListSubheader component="div"  className={classes.subheader}><Typography variant={isPhone ? 'h3' : 'h4'}>Where to find me!</Typography></ListSubheader>
       }>{siteLinks.map(toLink)}</List>
     </Paper>
   );
