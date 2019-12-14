@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, createRef } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import { useInView } from 'react-intersection-observer';
 
 import {
   Container,
@@ -39,12 +40,11 @@ const useStyles = makeStyles(theme => ({
     overflow: '-moz-scrollbars-none',
     msOverflowStyle: 'none',
     '&::-webkit-scrollbar': {
-       width: '0 !important'
-    }
-
+      width: '0 !important',
+    },
   },
   buttonWrapper: {
-    margin: theme.spacing(0,0,6, 0),
+    margin: theme.spacing(0, 0, 6, 0),
     display: 'flex',
     justifyContent: 'center',
   },
@@ -67,6 +67,7 @@ const SlideShow = props => {
 
   // figure this out later
   const wrapperRef = createRef();
+
   const [scrollPosition, setScrollPosition] = useState(0);
   const [playing, setPlaying] = useState(true);
 
@@ -92,7 +93,9 @@ const SlideShow = props => {
   //   alert(scrollPosition);
   // };
 
-  useInterval(() => playing && updateScroll(), 3500);
+  const [ref, inView, entry] = useInView();
+
+  useInterval(() => inView && playing && updateScroll(), 3500);
 
   const [prevPlaying, setPrevPlaying] = useState(true);
 
@@ -123,8 +126,10 @@ const SlideShow = props => {
   return (
     <>
       {/* currentyly at {offset} */}
-      <div ref={wrapperRef} className={classes.root}>
-        {images}
+      <div ref={ref}>
+        <div ref={wrapperRef} className={classes.root}>
+          {images}
+        </div>
       </div>
       <Box className={classes.buttonWrapper}>
         <ButtonGroup size="large">
