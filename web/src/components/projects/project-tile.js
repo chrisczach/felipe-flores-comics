@@ -12,6 +12,7 @@ import {
   fade,
   lighten,
   darken,
+  useMediaQuery,
 } from '@material-ui/core';
 import BlockContent from '../block-content';
 import { getImageInfo } from '../../lib/get-image-info';
@@ -176,8 +177,11 @@ const ProjectTile = ({
       `/portfolio/${slug}/`,
       forwardedBreadcrumb ? { state: { forwardedBreadcrumb } } : {},
     );
+  const isPhone = useMediaQuery(theme => theme.breakpoints.down('xs'));
   const handleClick = () =>
-    openHandler
+    isPhone
+      ? handleNavigate()
+      : openHandler
       ? openHandler({
           title,
           excerpt,
@@ -187,6 +191,11 @@ const ProjectTile = ({
           handleNavigate,
         })
       : handleNavigate();
+
+  // @ts-ignore
+
+  // const isTablet = useMediaQuery(theme => theme.breakpoints.down('sm'));
+
   return (
     <Paper square className={classes.root} elevation={0} onClick={handleClick}>
       <Img fluid={fluid} fadeIn durationFadeIn={1500} />
