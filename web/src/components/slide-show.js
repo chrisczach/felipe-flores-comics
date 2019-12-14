@@ -31,11 +31,11 @@ import ContainedDiv from './contained-div';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    overflowX: 'scroll',
+    overflowX: 'hidden',
     display: 'flex',
     flexDirection: 'row',
     whitespace: 'nowrap',
-    WebkitOverflowScrolling: 'touch',
+    touchAction: 'none',
     scrollSnapType: 'mandatory',
     overflow: '-moz-scrollbars-none',
     msOverflowStyle: 'none',
@@ -44,6 +44,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonWrapper: {
+    opacity: 0.35,
+    '&:hover': {
+      opacity: 0.75,
+    },
     margin: theme.spacing(0, 0, 6, 0),
     display: 'flex',
     justifyContent: 'center',
@@ -132,7 +136,7 @@ const SlideShow = props => {
         </div>
       </div>
       <Box className={classes.buttonWrapper}>
-        <ButtonGroup size="large">
+        <ButtonGroup>
           <Button
             onClick={() => {
               updateScroll(-1);

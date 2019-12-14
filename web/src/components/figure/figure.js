@@ -183,7 +183,7 @@ export default ({
     <ContainedDiv
       ref={ref}
       aspectRatio={aspectRatio}
-      height={forSlider ? 0.6 : 0.85}
+      height={forSlider ? 0.33 : 0.85}
       forSlider
     >
       <Box component="figure" onClick={openHandler} className={classes.root}>
