@@ -31,6 +31,13 @@ import ContainedDiv from './contained-div';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    background: 'transparent',
+    '&:hover': {
+      background: `linear-gradient(180deg, transparent 20%, ${fade(
+        theme.palette.primary.dark,
+        0.25,
+      )} 40%, ${fade(theme.palette.primary.dark, 0.25)} 60%, transparent 80%)`,
+    },
     overflowX: 'hidden',
     display: 'flex',
     flexDirection: 'row',
