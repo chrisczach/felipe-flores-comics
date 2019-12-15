@@ -18,13 +18,11 @@ import { getImageInfo } from '../lib/get-image-info';
 
 const useStyles = hero =>
   makeStyles(theme => {
-    const backgroundColor = fade(
-      lighten(theme.palette.secondary.light, 0.5),
-      0.75,
-    );
+    const backgroundColor = lighten(theme.palette.secondary.light, 0.5);
+
     return {
       root: {
-        zIndex: 10,
+        zIndex: 1000,
         pointerEvents: 'none',
         position: 'sticky',
         top: 0,
@@ -39,11 +37,12 @@ const useStyles = hero =>
         zIndex: 50,
         '&::before': {
           backdropFilter: `blur(10px)`,
-          borderRight: `${fade(
+          WebkitBackdropFilter: 'blur(10px)',
+          borderRight: `${lighten(
             theme.palette.primary.dark,
             0.5,
           )} solid ${theme.spacing(2)}px`,
-          borderBottom: `${fade(
+          borderBottom: `${lighten(
             theme.palette.primary.light,
             0.5,
           )} solid ${theme.spacing(0.25)}px`,
@@ -71,15 +70,16 @@ const useStyles = hero =>
         position: 'relative',
         height: '100%',
         marginLeft: theme.spacing(8),
-        color: fade(
+        color: lighten(
           theme.palette.getContrastText(theme.palette.background.default),
-          0.75,
+          0.25,
         ),
         display: 'flex',
         alignItems: 'center',
         background: 'transparent',
         '&::before': {
           backdropFilter: `blur(10px)`,
+          WebkitBackdropFilter: 'blur(10px)',
           content: '""',
           zIndex: -1,
           position: 'absolute',
@@ -88,7 +88,7 @@ const useStyles = hero =>
           bottom: 0,
           left: theme.spacing(-6),
           transform: 'skewX(-45deg)',
-          background: fade(theme.palette.background.default, 0.5),
+          background: lighten(theme.palette.background.default, 0.5),
         },
       },
       container: {
