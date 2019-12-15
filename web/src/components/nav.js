@@ -44,16 +44,10 @@ const useStyles = makeStyles(theme => {
       borderRadius: 0,
       position: 'fixed',
       top: 0,
+      color: theme.palette.primary.dark,
       right: 0,
       zIndex: 1000,
-      backdropFilter: 'blur(4px)',
-      color: theme.palette.background.default,
-      background: `linear-gradient(45deg, transparent 15%, ${accent} 15%)`,
-      '@media( hover: hover ) ': {
-        '&:hover': {
-          background: `linear-gradient(45deg, transparent 15%, ${accent} 15%)`,
-        },
-      },
+      background: 'transparent',
     },
     menuBar: {
       position: 'absolute',
@@ -117,6 +111,16 @@ const useStyles = makeStyles(theme => {
         borderRight: `${theme.spacing(1)}px solid ${accent}`,
         borderBottom: `${theme.spacing(1)}px solid ${accent}`,
       },
+      '&:after': {
+        background: accent,
+        height: theme.spacing(1),
+        content: '""',
+        transform: 'translateX(100%)',
+        position: 'absolute',
+        top: '50%',
+        right: 0,
+        left: 0,
+      },
     },
     navTitle: {
       margin: theme.spacing(1, 2),
@@ -126,10 +130,21 @@ const useStyles = makeStyles(theme => {
     listItemClass: {
       width: 'auto',
       transform: `skewX(-15deg)`,
-      background: lighten(accent, 0.15),
+      background: `${lighten(accent, 0.15)}`,
       color: theme.palette.background.default,
       margin: theme.spacing(1, -40, 1, 0),
       paddingRight: theme.spacing(40),
+      borderTop: `${theme.spacing(0.1)}px solid ${fade(
+        theme.palette.primary.main,
+        0.75,
+      )}`,
+      borderLeft: `${theme.spacing(0.5)}px solid ${fade(
+        theme.palette.primary.main,
+        0.75,
+      )}`,
+      borderBottom: `${theme.spacing(0.15)}px solid ${
+        theme.palette.primary.main
+      }`,
       // border: `${theme.spacing(0.5)}px solid ${accent}`,
       // background: 'transparent',
       '&:after': {
@@ -142,17 +157,40 @@ const useStyles = makeStyles(theme => {
         transform: 'skewX(15deg)',
         background: fade(theme.palette.primary.main, 0.25),
       },
+      '&:hover': {
+        background: `${accent} !important`,
+      },
       '@media( hover: hover ) ': {
         '&:hover': {
-          background: accent,
           color: theme.palette.background.default,
+          '&::after': {
+            transform: `skewX(0deg)`,
+            transition: theme.transitions.create('all', {
+              duration: theme.transitions.duration.standard,
+              easing: theme.transitions.easing.easeInOut,
+            }),
+          },
           transform: `translateX(${theme.spacing(-2)}px) skewX(-15deg)`,
           transition: theme.transitions.create('all', {
             duration: theme.transitions.duration.standard,
             easing: theme.transitions.easing.easeInOut,
           }),
+          borderLeft: `${theme.spacing(0.5)}px solid ${fade(
+            theme.palette.secondary.main,
+            0.75,
+          )}`,
         },
       },
+    },
+    outline: {
+      content: '""',
+      position: 'absolute',
+      right: 0,
+      top: theme.spacing(-1),
+      bottom: theme.spacing(-1),
+      zIndex: -1,
+      left: theme.spacing(-1),
+      background: 'blue',
     },
   };
 });
