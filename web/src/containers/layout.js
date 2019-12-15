@@ -11,11 +11,12 @@ const query = graphql`
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       subtitle
-      footer: _rawFooterText
+      footer: _rawFooterText(resolveReferences: { maxDepth: 5 })
       linksList {
+        _key
         icon {
           asset {
-            fluid(maxWidth: 2400) {
+            fluid(maxWidth: 1200) {
               ...GatsbySanityImageFluid
             }
           }
@@ -33,10 +34,10 @@ const query = graphql`
               aspectRatio
             }
           }
-          localFile(width: 2400) {
+          localFile(width: 1200) {
             childImageSharp {
               fluid(
-                maxWidth: 2400
+                maxWidth: 1200
                 traceSVG: { color: "#8b151b77", background: "#ffd83111" }
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
@@ -76,10 +77,11 @@ function LayoutContainer(props) {
           ({
             linkTitle,
             linkUrl,
+            _key: key,
             icon: {
               asset: { fluid },
             },
-          }) => ({ linkTitle, linkUrl, fluid }),
+          }) => ({ linkTitle, linkUrl, fluid, key }),
         );
         return (
           <>
