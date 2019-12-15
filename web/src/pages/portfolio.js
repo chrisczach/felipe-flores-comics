@@ -72,6 +72,7 @@ export const query = graphql`
     }
     projects: allSanityCategory(sort: { fields: [sort] }) {
       nodes {
+        id
         title
         slug {
           current

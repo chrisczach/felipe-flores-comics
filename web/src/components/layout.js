@@ -57,15 +57,17 @@ const Layout = ({
     <>
       <ModalUpdater.Provider value={modalUpdater}>
         <SiteLinksContext.Provider value={siteLinks}>
-          <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={modalData.open}
-            onClose={handleClose}
-            className={classes.root}
-          >
-            {modalData.children}
-          </Modal>
+          {modalData.children && (
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={modalData.open}
+              onClose={handleClose}
+              className={classes.root}
+            >
+              {modalData.children}
+            </Modal>
+          )}
           <Nav {...{ siteTitle, siteSubtitle }} />
           <PageTransition location={location}>
             {children}

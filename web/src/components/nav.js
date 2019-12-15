@@ -217,16 +217,21 @@ const toNav = (handleClose, listItemClass) => ({ name, icon, slug }, index) => {
   };
   return (
     // <Link to={slug}>
-    <Slide in direction="left" timeout={index * 250 + 500}>
-      <Box>
+    <Slide
+      in
+      key={name + 'transition'}
+      direction="left"
+      timeout={index * 250 + 500}
+    >
+      <Box key={name}>
         <ListItem
+          key={name + 'item'}
           button
-          key={name}
           onClick={handleClick}
           className={listItemClass}
         >
-          <ListItemIcon>{icon}</ListItemIcon>
-          <ListItemText primary={name} />
+          <ListItemIcon key={name + 'icon'}>{icon}</ListItemIcon>
+          <ListItemText key={name + 'text'} primary={name} />
         </ListItem>
       </Box>
     </Slide>
@@ -269,11 +274,15 @@ const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
         onClose={handleClose}
         anchor="right"
       >
-        <Button onClick={handleToggle} className={classes.menuButtonClosed}>
+        <Button
+          onClick={handleToggle}
+          className={classes.menuButtonClosed}
+          key="menuButton"
+        >
           <CloseOutlined titleAccess="Close Nav Menu" fontSize="large" />
         </Button>
         <Slide in direction="down" timeout={500}>
-          <List disablePadding className={classes.menuBar}>
+          <List disablePadding className={classes.menuBar} key={'menuBar'}>
             <ListItem key={siteTitle} className={classes.menuHeading}>
               <ListItemText
                 primary={siteTitle}

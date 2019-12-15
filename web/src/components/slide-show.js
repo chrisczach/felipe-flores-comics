@@ -176,7 +176,7 @@ const SlideShow = props => {
 };
 
 const ToFigure = ({ _ref, handleClose = false }) => (
-  <div>
+  <div key={_ref}>
     <Figure forSlider node={{ asset: { _ref } }} handleClose={handleClose} />
   </div>
 );

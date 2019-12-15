@@ -157,6 +157,7 @@ const useStyles = makeStyles(theme => {
 const ProjectTile = ({
   title,
   excerpt,
+  id,
   slug: { current: slug },
   mainImage: {
     caption,
@@ -197,7 +198,13 @@ const ProjectTile = ({
   // const isTablet = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   return (
-    <Paper square className={classes.root} elevation={0} onClick={handleClick}>
+    <Paper
+      square
+      className={classes.root}
+      elevation={0}
+      onClick={handleClick}
+      key={id}
+    >
       <Img fluid={fluid} fadeIn durationFadeIn={1500} />
       <Box className={classes.drawerWrapper}>
         <Typography variant="h6" className={classes.overlay}>

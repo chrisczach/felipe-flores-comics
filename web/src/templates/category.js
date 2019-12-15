@@ -71,49 +71,48 @@ const Category = props => {
 };
 
 export const query = graphql`
-         query CategoryTemplateQuery($id: String!) {
-           site: sanitySiteSettings(
-             _id: { regex: "/(drafts.|)siteSettings/" }
-           ) {
-             title
-             description
-             keywords
-           }
-           page: sanityCategory(id: { eq: $id }) {
-             id
-             title
-             slug {
-               current
-             }
-             excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
-             body: _rawBody(resolveReferences: { maxDepth: 5 })
-           }
-           projects: allSanityProject {
-             nodes {
-               title
-               slug {
-                 current
-               }
-               excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
-               categories {
-                 id
-                 title
-               }
-               mainImage {
-                 caption
-                 alt
-                 asset {
-                   _id
-                   metadata {
-                     dimensions {
-                       aspectRatio
-                     }
-                   }
-                 }
-               }
-             }
-           }
-         }
-       `;
+  query CategoryTemplateQuery($id: String!) {
+    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
+      title
+      description
+      keywords
+    }
+    page: sanityCategory(id: { eq: $id }) {
+      id
+      title
+      slug {
+        current
+      }
+      excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
+      body: _rawBody(resolveReferences: { maxDepth: 5 })
+    }
+    projects: allSanityProject {
+      nodes {
+        id
+        title
+        slug {
+          current
+        }
+        excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
+        categories {
+          id
+          title
+        }
+        mainImage {
+          caption
+          alt
+          asset {
+            _id
+            metadata {
+              dimensions {
+                aspectRatio
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default Category;
