@@ -7,7 +7,10 @@ import {
   List,
   ListItemIcon,
   ListItemText,
+  Slide,
   ListItem,
+  Box,
+  lighten,
 } from '@material-ui/core';
 import {
   HomeOutlined,
@@ -21,6 +24,7 @@ import {
 const useStyles = makeStyles(theme => {
   const backgroundColor = fade(theme.palette.secondary.light, 0.25);
   const buttonColor = fade(theme.palette.background.default, 0.75);
+  const accent = lighten(theme.palette.primary.main, 0.25);
   return {
     menuButton: {
       borderRadius: 0,
@@ -28,54 +32,97 @@ const useStyles = makeStyles(theme => {
       top: 0,
       right: 0,
       zIndex: 1000,
-      // backdropFilter: 'blur(4px)',
+      backdropFilter: 'blur(4px)',
       background: `linear-gradient(45deg, transparent 15%, ${buttonColor} 15%)`,
       '&:hover': {
         background: `linear-gradient(45deg, transparent 15%, ${theme.palette.background.default} 15%)`,
       },
     },
-    menuHeading: {
-      background: backgroundColor,
-      '&:before': {
-        content: `""`,
-        position: 'absolute',
-        background: backgroundColor,
-        zIndex: 2,
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        // transform: 'skewY(2deg)',
-        // borderBottom: `${theme.spacing(1)}px solid ${
-        //   theme.palette.primary.main
-        // }`,
+    menuButtonClosed: {
+      borderRadius: 0,
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      zIndex: 1000,
+      backdropFilter: 'blur(4px)',
+      color: theme.palette.background.default,
+      background: `linear-gradient(45deg, transparent 15%, ${theme.palette.primary.dark} 15%)`,
+      '&:hover': {
+        background: `linear-gradient(45deg, transparent 15%, ${theme.palette.primary.main} 15%)`,
       },
     },
-    menuPaper: {
-      background: 'transparent',
-    },
     menuBar: {
-      background: theme.palette.background.default,
-      height: 'auto',
-      display: 'inline-flex',
-      flexDirection: 'column',
-      top: theme.spacing(8),
-      paddingBottom: theme.spacing(1),
       position: 'absolute',
-      right: theme.spacing(4),
-      borderTop: `${theme.spacing(0.5)}px solid ${theme.palette.primary.dark}`,
-      borderLeft: `${theme.spacing(0.25)}px solid ${
-        theme.palette.primary.dark
-      }`,
-    },
-    listItemClass: {
+      right: 0,
+      top: 0,
+      padding: theme.spacing(8, 8, 2, 4),
       background: 'transparent',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      // WIP MAYBE
+      transform: `skewX(15deg) !important`,
+      alignItems: 'stretch',
+      '&::before': {
+        // transform: `skewX(15deg) translateX(${theme.spacing(4)}px)`,
+        // transform: `translateX(${theme.spacing(4)}px) `,
+        transformOrigin: '0 0',
+        content: '""',
+        top: 0,
+        right: theme.spacing(-8),
+        bottom: 0,
+        left: theme.spacing(4),
+        position: 'absolute',
+        backgroundImage: `radial-gradient(${lighten(
+          theme.palette.primary.light,
+          0.7,
+        )} 10%, transparent 10%), radial-gradient(${lighten(
+          theme.palette.primary.light,
+          0.8,
+        )} 10%, transparent 10%)`,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+        backgroundPosition: `0 0, 5px 5px`,
+        backgroundSize: `10px 10px`,
+      },
     },
-    list: {
-      width: 250,
+    menuHeading: {
+      margin: theme.spacing(0, 0, 2, 0),
+      position: 'relative',
+      transform: `translateX(${theme.spacing(-0.5)}px) skewX(-15deg)`,
+      border: `${theme.spacing(0.5)}px solid ${accent}`,
+      backgroundImage: `radial-gradient(${lighten(
+        theme.palette.primary.light,
+        0.45,
+      )} 10%, transparent 10%), radial-gradient(${lighten(
+        theme.palette.primary.light,
+        0.55,
+      )} 10%, transparent 10%)`,
+      backgroundColor: theme.palette.secondary.light,
+      backgroundPosition: `0 0, 5px 5px`,
+      backgroundSize: `10px 10px`,
+      '&::before': {
+        content: '""',
+        top: theme.spacing(0.5),
+        right: theme.spacing(-1.25),
+        bottom: theme.spacing(-1.25),
+        left: theme.spacing(0.5),
+        position: 'absolute',
+        background: 'transparent',
+        borderRight: `${theme.spacing(1)}px solid ${accent}`,
+        borderBottom: `${theme.spacing(1)}px solid ${accent}`,
+      },
     },
-    fullList: {
+    navTitle: {
+      margin: theme.spacing(1, 2),
+    },
+    menuPaper: {},
+
+    listItemClass: {
       width: 'auto',
+      transform: `skewX(-15deg)`,
+      background: theme.palette.primary.light,
+      margin: theme.spacing(1, 0),
+      // background: 'transparent',
     },
   };
 });
@@ -87,17 +134,26 @@ const actions = [
   { icon: <ContactMailOutlined />, name: 'Contact', slug: 'contact/' },
 ];
 
-const toNav = (handleClose, listItemClass) => ({ name, icon, slug }) => {
+const toNav = (handleClose, listItemClass) => ({ name, icon, slug }, index) => {
   const handleClick = () => {
     handleClose();
     navigate(slug);
   };
   return (
     // <Link to={slug}>
-    <ListItem button key={name} onClick={handleClick} className={listItemClass}>
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={name} />
-    </ListItem>
+    <Slide in direction="left" timeout={index * 250 + 500}>
+      <Box>
+        <ListItem
+          button
+          key={name}
+          onClick={handleClick}
+          className={listItemClass}
+        >
+          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemText primary={name} />
+        </ListItem>
+      </Box>
+    </Slide>
     // </Link>
   );
 };
@@ -117,6 +173,7 @@ const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
         </Button>
       )}
       <Drawer
+        SlideProps={{ timeout: 500 }}
         ModalProps={{
           BackdropProps: {
             style: {
@@ -136,33 +193,36 @@ const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
         onClose={handleClose}
         anchor="right"
       >
-        <Button onClick={handleToggle} className={classes.menuButton}>
+        <Button onClick={handleToggle} className={classes.menuButtonClosed}>
           <CloseOutlined titleAccess="Close Nav Menu" fontSize="large" />
         </Button>
-        <List disablePadding className={classes.menuBar}>
-          <ListItem key={siteTitle} className={classes.menuHeading}>
-            <ListItemText
-              primary={siteTitle}
-              primaryTypographyProps={{
-                style: {
-                  fontWeight: 'bold',
-                  fontVariant: 'small-caps',
-                },
-                color: 'primary',
-                variant: 'h5',
-              }}
-              secondary={siteSubtitle}
-              secondaryTypographyProps={{
-                color: 'textPrimary',
-                style: {
-                  marginBottom: 0,
-                },
-              }}
-              style={{ opacity: 0.75 }}
-            />
-          </ListItem>
-          {actions.map(toNav(handleClose, classes.listItemClass))}
-        </List>
+        <Slide in direction="down" timeout={500}>
+          <List disablePadding className={classes.menuBar}>
+            <ListItem key={siteTitle} className={classes.menuHeading}>
+              <ListItemText
+                primary={siteTitle}
+                primaryTypographyProps={{
+                  style: {
+                    fontWeight: 'bold',
+                    fontVariant: 'small-caps',
+                  },
+                  color: 'primary',
+                  variant: 'h5',
+                }}
+                secondary={siteSubtitle}
+                secondaryTypographyProps={{
+                  color: 'textPrimary',
+                  style: {
+                    marginBottom: 0,
+                  },
+                }}
+                className={classes.navTitle}
+                style={{ opacity: 0.75 }}
+              />
+            </ListItem>
+            {actions.map(toNav(handleClose, classes.listItemClass))}
+          </List>
+        </Slide>
       </Drawer>
     </>
   );

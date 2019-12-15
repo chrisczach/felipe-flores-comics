@@ -12,17 +12,15 @@ import { Link } from 'gatsby';
 const useStyles = makeStyles(theme => ({
   list: {
     display: 'flex',
-    alignItems: 'center',
+    width: '100%',
+    alignItems: 'stretch',
+    flexDirection: 'column',
     justifyContent: 'stretch',
     marginTop: theme.spacing(4),
     // overflow: 'hidden',
   },
   link: {
-    transform: 'skewX(-45deg)',
-    '& *': {
-      transform: 'skewX(45deg)',
-    },
-    height: '10vh',
+    padding: theme.spacing(4),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,6 +36,7 @@ const HomeLinks = props => {
     <Box className={classes.list}>
       <Link to="/about/" className={classes.link}>
         <Typography variant="h5">About</Typography>
+        
       </Link>
 
       <Link to="/portfolio/" className={classes.link}>

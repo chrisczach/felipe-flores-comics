@@ -129,7 +129,7 @@ const PageContainer = ({
   ...props
 }) => {
   const classes = useStyles(heroImage)(props);
-  const { fluid } =
+  const { fluid = null } =
     heroImage && heroImage.asset && heroImage.asset._id
       ? getImageInfo({ _ref: heroImage.asset._id })
       : {};
@@ -203,6 +203,7 @@ const PageContainer = ({
                       }
                     : { to: slug, component: GatsbyLink };
                   return (
+                    // @ts-ignore
                     <ComponentToUse {...propsToUse}>{title}</ComponentToUse>
                   );
                 })}
