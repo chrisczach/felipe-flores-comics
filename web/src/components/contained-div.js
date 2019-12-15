@@ -25,7 +25,7 @@ const ContainedDiv = ({
   aspectRatio = 1,
   height = 0.75,
   forSlider = false,
-  ref,
+  ref = null,
   children,
   ...props
 }) => {

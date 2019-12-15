@@ -48,8 +48,8 @@ const IndexPage = props => {
         <h1 hidden>Welcome to {site.title}</h1>
         <AvatarHeading />
         <LinksSection />
-        <BlockContent blocks={ page.body } />
-        <HomeLinks/>
+        <BlockContent blocks={page.body} />
+        <HomeLinks />
       </PageContainer>
       <Hidden smDown>
         <SlideShow />
@@ -67,8 +67,8 @@ export const query = graphql`
     }
     page: sanityPage(title: { eq: "Home" }) {
       title
-      excerpt: _rawExcerpt
-      body: _rawBody
+      excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
+      body: _rawBody(resolveReferences: { maxDepth: 5 })
       heroImage: mainImage {
         caption
         alt

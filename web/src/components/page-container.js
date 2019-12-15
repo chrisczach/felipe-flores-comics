@@ -227,7 +227,7 @@ const query = graphql`
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       subtitle
-      footer: _rawFooterText
+      footer: _rawFooterText(resolveReferences: { maxDepth: 5 })
     }
   }
 `;

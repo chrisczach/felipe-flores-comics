@@ -60,8 +60,8 @@ export const query = graphql`
     }
     page: sanityPage(title: { eq: "Portfolio" }) {
       title
-      excerpt: _rawExcerpt
-      body: _rawBody
+      excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
+      body: _rawBody(resolveReferences: { maxDepth: 5 })
       heroImage: mainImage {
         caption
         alt
@@ -76,7 +76,7 @@ export const query = graphql`
         slug {
           current
         }
-        excerpt: _rawExcerpt
+        excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
         mainImage {
           caption
           alt

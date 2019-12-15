@@ -63,25 +63,27 @@ const ContactPage = props => {
 };
 
 export const query = graphql`
-  query ContactPageQuery {
-    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
-      title
-      description
-      keywords
-    }
-    page: sanityPage(title: { eq: "Contact" }) {
-      title
-      excerpt: _rawExcerpt
-      body: _rawBody
-      heroImage: mainImage {
-        caption
-        alt
-        asset {
-          _id
-        }
-      }
-    }
-  }
-`;
+         query ContactPageQuery {
+           site: sanitySiteSettings(
+             _id: { regex: "/(drafts.|)siteSettings/" }
+           ) {
+             title
+             description
+             keywords
+           }
+           page: sanityPage(title: { eq: "Contact" }) {
+             title
+             excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
+             body: _rawBody(resolveReferences: { maxDepth: 5 })
+             heroImage: mainImage {
+               caption
+               alt
+               asset {
+                 _id
+               }
+             }
+           }
+         }
+       `;
 
 export default ContactPage;

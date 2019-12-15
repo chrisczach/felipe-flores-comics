@@ -103,7 +103,7 @@ export const query = graphql`
       slug {
         current
       }
-      body: _rawBody
+      body: _rawBody(resolveReferences: { maxDepth: 5 })
       heroImage: mainImage {
         caption
         alt
