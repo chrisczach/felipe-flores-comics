@@ -12,6 +12,7 @@ export default {
       name: 'linkUrl',
       title: 'Link Url',
       type: 'url',
+      validation: Rule => Rule.uri({ scheme: ['https', 'http', 'mailto'] }),
     },
     {
       name: 'icon',

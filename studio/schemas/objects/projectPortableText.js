@@ -38,6 +38,8 @@ export default {
                 title: 'URL',
                 name: 'href',
                 type: 'url',
+                validation: Rule =>
+                  Rule.uri({ scheme: ['https', 'http', 'mailto'] }),
               },
             ],
           },
