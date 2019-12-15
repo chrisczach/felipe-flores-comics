@@ -34,8 +34,10 @@ const useStyles = makeStyles(theme => {
       zIndex: 1000,
       backdropFilter: 'blur(4px)',
       background: `linear-gradient(45deg, transparent 15%, ${buttonColor} 15%)`,
-      '&:hover': {
-        background: `linear-gradient(45deg, transparent 15%, ${theme.palette.background.default} 15%)`,
+      '@media( hover: hover ) ': {
+        '&:hover': {
+          background: `linear-gradient(45deg, transparent 15%, ${theme.palette.background.default} 15%)`,
+        },
       },
     },
     menuButtonClosed: {
@@ -46,32 +48,36 @@ const useStyles = makeStyles(theme => {
       zIndex: 1000,
       backdropFilter: 'blur(4px)',
       color: theme.palette.background.default,
-      background: `linear-gradient(45deg, transparent 15%, ${theme.palette.primary.dark} 15%)`,
-      '&:hover': {
-        background: `linear-gradient(45deg, transparent 15%, ${theme.palette.primary.main} 15%)`,
+      background: `linear-gradient(45deg, transparent 15%, ${accent} 15%)`,
+      '@media( hover: hover ) ': {
+        '&:hover': {
+          background: `linear-gradient(45deg, transparent 15%, ${accent} 15%)`,
+        },
       },
     },
     menuBar: {
       position: 'absolute',
       right: 0,
       top: 0,
-      padding: theme.spacing(8, 8, 2, 4),
+      padding: theme.spacing(8, 2, 8, 4),
       background: 'transparent',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-start',
       // WIP MAYBE
       transform: `skewX(15deg) !important`,
-      alignItems: 'stretch',
+      alignItems: 'flex-start',
       '&::before': {
         // transform: `skewX(15deg) translateX(${theme.spacing(4)}px)`,
         // transform: `translateX(${theme.spacing(4)}px) `,
         transformOrigin: '0 0',
+        borderLeft: `${theme.spacing(1)}px solid ${accent}`,
+        borderBottom: `${theme.spacing(1.5)}px solid ${accent}`,
         content: '""',
         top: 0,
         right: theme.spacing(-8),
         bottom: 0,
-        left: theme.spacing(4),
+        left: theme.spacing(10),
         position: 'absolute',
         backgroundImage: `radial-gradient(${lighten(
           theme.palette.primary.light,
@@ -120,18 +126,50 @@ const useStyles = makeStyles(theme => {
     listItemClass: {
       width: 'auto',
       transform: `skewX(-15deg)`,
-      background: theme.palette.primary.light,
-      margin: theme.spacing(1, 0),
+      background: lighten(accent, 0.15),
+      color: theme.palette.background.default,
+      margin: theme.spacing(1, -40, 1, 0),
+      paddingRight: theme.spacing(40),
+      // border: `${theme.spacing(0.5)}px solid ${accent}`,
       // background: 'transparent',
+      '&:after': {
+        content: '""',
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        bottom: 0,
+        left: theme.spacing(20),
+        transform: 'skewX(15deg)',
+        background: fade(theme.palette.primary.main, 0.25),
+      },
+      '@media( hover: hover ) ': {
+        '&:hover': {
+          background: accent,
+          color: theme.palette.background.default,
+          transform: `translateX(${theme.spacing(-2)}px) skewX(-15deg)`,
+          transition: theme.transitions.create('all', {
+            duration: theme.transitions.duration.standard,
+            easing: theme.transitions.easing.easeInOut,
+          }),
+        },
+      },
     },
   };
 });
 
 const actions = [
-  { icon: <HomeOutlined />, name: 'Home', slug: '/' },
-  { icon: <InfoOutlined />, name: 'About', slug: 'about/' },
-  { icon: <PhotoAlbumOutlined />, name: 'Portfolio', slug: 'portfolio/' },
-  { icon: <ContactMailOutlined />, name: 'Contact', slug: 'contact/' },
+  { icon: <HomeOutlined color="secondary" />, name: 'Home', slug: '/' },
+  { icon: <InfoOutlined color="secondary" />, name: 'About', slug: 'about/' },
+  {
+    icon: <PhotoAlbumOutlined color="secondary" />,
+    name: 'Portfolio',
+    slug: 'portfolio/',
+  },
+  {
+    icon: <ContactMailOutlined color="secondary" />,
+    name: 'Contact',
+    slug: 'contact/',
+  },
 ];
 
 const toNav = (handleClose, listItemClass) => ({ name, icon, slug }, index) => {
