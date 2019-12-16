@@ -110,6 +110,7 @@ const ContactLink = props => {
 
   const { fluid } = getImageInfo({ _ref });
 
+  
   return (
     <Container maxWidth="sm" className={classes.wrapper}>
       <div ref={ref}>
