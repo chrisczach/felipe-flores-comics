@@ -39,12 +39,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(1),
     padding: theme.spacing(3, 6),
     position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexBasis: 1,
-    flexGrow: 1,
+    display: 'block',
     border: `${theme.spacing(0.5)}px solid ${theme.palette.primary.main}`,
     // backgroundImage: `radial-gradient(${lighten(
     //   theme.palette.primary.main,
