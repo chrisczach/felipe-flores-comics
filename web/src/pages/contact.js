@@ -7,8 +7,7 @@ import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
-import LinksSection from '../components/links-section';
-import AvatarHeading from '../components/avatar-heading';
+import ContactPageLinks from '../components/contact-page-links';
 
 const useStyles = makeStyles(theme => ({
   hero: {
@@ -44,7 +43,7 @@ const ContactPage = props => {
   return (
     <PageContainer
       pageTitle={page.title}
-      heroImage={page.heroImage}
+      // heroImage={page.heroImage}
       breadcrumbs={[{ slug: '/contact/', title: 'Contact' }]}
     >
       <SEO
@@ -54,8 +53,9 @@ const ContactPage = props => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       {/* <AvatarHeading/> */}
-      <LinksSection />
+      {/* <LinksSection /> */}
       <BlockContent blocks={page.body} />
+      <ContactPageLinks _ref={page.heroImage.asset._id} />
       {/* <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} /> */}
     </PageContainer>
   );

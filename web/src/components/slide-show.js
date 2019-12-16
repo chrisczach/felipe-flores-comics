@@ -140,11 +140,11 @@ const SlideShow = props => {
     <>
       {/* currentyly at {offset} */}
       <div ref={ref}>
-        <Fade direction="up" in={inView} timeout={1000}>
-          <div ref={wrapperRef} className={classes.root}>
-            {images}
-          </div>
-        </Fade>
+        {/* <Fade direction="up" in={inView} timeout={1000}> */}
+        <div ref={wrapperRef} className={classes.root}>
+          {images}
+        </div>
+        {/* </Fade> */}
       </div>
       <Box className={classes.buttonWrapper}>
         <ButtonGroup>

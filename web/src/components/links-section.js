@@ -15,8 +15,8 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 
-import { SiteLinksContext } from './layout';
 import Img from 'gatsby-image';
+import { SiteLinksContext } from './layout';
 
 const useStyles = makeStyles(theme => {
   const backgroundColor = lighten(theme.palette.secondary.main, 0.8);

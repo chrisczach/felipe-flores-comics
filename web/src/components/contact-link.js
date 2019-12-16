@@ -113,8 +113,8 @@ const ContactLink = props => {
   return (
     <Container maxWidth="sm" className={classes.wrapper}>
       <div ref={ref}>
-        <Slide direction="up" in={inView} timeout={1000}>
-          <Fade in={inView} timeout={2000}>
+        <Slide direction="left" in={inView} timeout={750}>
+          <Fade in={inView} timeout={1250}>
             <Box className={classes.innerWrapper}>
               <Link
                 component={GatsbyLink}
@@ -127,12 +127,14 @@ const ContactLink = props => {
             </Box>
           </Fade>
         </Slide>
-        <Fade in={inView} timeout={2000}>
-          <Box className={classes.imageWrapper}>
-            {/* {JSON.stringify(_ref)} */}
-            <Img fluid={fluid} className={classes.image} />
-          </Box>
-        </Fade>
+        <Slide direction="left" in={inView} timeout={500}>
+          <Fade in={inView} timeout={1000}>
+            <Box className={classes.imageWrapper}>
+              {/* {JSON.stringify(_ref)} */}
+              <Img fluid={fluid} className={classes.image} />
+            </Box>
+          </Fade>
+        </Slide>
       </div>
     </Container>
   );

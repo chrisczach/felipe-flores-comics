@@ -220,7 +220,9 @@ const PageContainer = ({
             )}
             {pageTitle && !hideTitleOnPortrait && (
               <Hidden smUp implementation="css">
-                <Typography variant="h1">{pageTitle}</Typography>
+                <Typography variant="h1" style={{ marginBottom: '0.5em' }}>
+                  {pageTitle}
+                </Typography>
               </Hidden>
             )}
             {children}

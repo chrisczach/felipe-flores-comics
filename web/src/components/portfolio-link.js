@@ -110,18 +110,18 @@ const PortfolioLink = props => {
     <div ref={ref}>
       <Grow in={inView} timeout={1200}>
         <Box className={classes.list}>
-          <Link to="/about/" className={classes.link + ' ' + classes.firstLink}>
+          <Link to="/about/" className={`${classes.link} ${classes.firstLink}`}>
             <Typography variant="h5" className={classes.linkText}>
-              More About Me
+              See Full Bio
             </Typography>
           </Link>
 
           <Link
             to="/portfolio/"
-            className={classes.link + ' ' + classes.secondLink}
+            className={`${classes.link} ${classes.secondLink}`}
           >
             <Typography variant="h5" className={classes.linkText}>
-              See My Portfolio
+              Browse My Portfolio
             </Typography>
           </Link>
         </Box>
