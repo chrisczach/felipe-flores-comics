@@ -29,6 +29,7 @@ const useStyles = portrait =>
         justifyContent: 'center',
         alignItems: 'center',
         backdropFilter: `blur(4px) brightness(1.25) saturate(0.75)`,
+        WebkitBackdropFilter: `blur(4px) brightness(1.25) saturate(0.75)`,
       },
       title: {
         zIndex: 1000,
@@ -69,6 +70,7 @@ const useStyles = portrait =>
         zIndex: 50,
         '&::before': {
           backdropFilter: `blur(10px)`,
+          WebkitBackdropFilter: `blur(10px)`,
           borderRight: `${lighten(
             theme.palette.primary.dark,
             0.25,

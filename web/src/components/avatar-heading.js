@@ -1,6 +1,6 @@
-import React,{useContext} from 'react';
+import React, { useContext } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image'
+import Img from 'gatsby-image';
 import {
   makeStyles,
   Box,
@@ -14,7 +14,9 @@ import {
   ListItemText,
   ListSubheader,
   useMediaQuery,
+  Grow,
 } from '@material-ui/core';
+import { useInView } from 'react-intersection-observer';
 
 // import { ModalUpdater } from './layout';
 // import FigureModal from './figure/figure'
@@ -22,8 +24,8 @@ import {
 const useStyles = makeStyles(theme => {
   return {
     root: {
-      display: 'inline-flex',
-      justifyContent: 'flex-start',
+      display: 'flex',
+      justifyContent: 'center',
       flexDirection: 'row',
       alignItems: 'center',
       [theme.breakpoints.down('sm')]: {
@@ -33,41 +35,41 @@ const useStyles = makeStyles(theme => {
       },
     },
     name: {
-      color: darken(theme.palette.secondary.dark,.2),
-      padding: theme.spacing( 2 ),
-      [ theme.breakpoints.down( 'sm' ) ]: {
-         textAlign: 'center'
-       }
+      color: darken(theme.palette.secondary.dark, 0.2),
+      padding: theme.spacing(2),
+      [theme.breakpoints.down('sm')]: {
+        textAlign: 'center',
+      },
     },
     subtitle: {
-          // color: theme.palette.primary.light,
-      padding: theme.spacing( 2 ),
+      // color: theme.palette.primary.light,
+      padding: theme.spacing(2),
       opacity: 0.9,
-      [ theme.breakpoints.down( 'sm' ) ]: {
+      [theme.breakpoints.down('sm')]: {
         textAlign: 'center',
-        padding: theme.spacing( 2,2,4,2 ),
-       }
+        padding: theme.spacing(2, 2, 4, 2),
+      },
     },
     imageWrap: {
-      boxShadow: theme.shadows[2],
-      [ theme.breakpoints.down( 'md' ) ]: {
-      width: '20vh',
-      height: '20vh',
+      boxShadow: theme.shadows[5],
+      borderRadius: `${theme.spacing(8)}px ${theme.spacing(1)}px`,
+      [theme.breakpoints.down('md')]: {
+        width: '20vh',
+        height: '20vh',
       },
-            [ theme.breakpoints.down( 'sm' ) ]: {
-      width: '30vh',
-      height: '30vh',
+      [theme.breakpoints.down('sm')]: {
+        width: '30vh',
+        height: '30vh',
       },
-            [ theme.breakpoints.down( 'xs' ) ]: {
-      width: '60vw',
-      height: '60vw',
+      [theme.breakpoints.down('xs')]: {
+        width: '60vw',
+        height: '60vw',
       },
       width: '25vh',
       height: '25vh',
-      borderRadius: 10000,
       overflow: 'hidden',
       margin: theme.spacing(4),
-    }
+    },
   };
 });
 
@@ -79,55 +81,48 @@ const AvatarHeading = ({ ...props }) => {
       profileImage: {
         asset: {
           metadata: {
-            dimensions: {
-              aspectRatio
-            }
+            dimensions: { aspectRatio },
           },
           localFile: {
-            childImageSharp: {
-              fluid
-            }
-          }
-        }
-      }
+            childImageSharp: { fluid },
+          },
+        },
+      },
     },
   } = useStaticQuery(query);
-  const classes = useStyles( props );
-  //   const modalUpdater = useContext(ModalUpdater);
+  const classes = useStyles(props);
 
-  // const openHandler = () => {
-  //   modalUpdater( {
-  //     closeHandler: handleClose && handleClose,
-  //     children: (
-  //       <FigureModal
-  //         {...{
-  //           fluid,
-  //           aspectRatio
-  //         }}
-  //       />
-  //     ),
-  //   })};
-  
-  
   const isPhone = useMediaQuery(theme => theme.breakpoints.down('xs'));
-  const isTablet = useMediaQuery( theme => theme.breakpoints.down( 'sm' ) );
-  
+  const isTablet = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const [ref, inView, entry] = useInView({ threshold: 0.1 });
+
   return (
-    <Box className={classes.root}>
-      <Box className={ classes.imageWrap }
-        // onClick={ openHandler }
-      >
-         <Img fluid={ fluid } />
-      </Box>
-      <Box>
-        <Typography variant={isPhone ? "h1" : isTablet ? "h2" : "h3"} className={classes.name}>
-          {title}
-        </Typography>
-        <Typography variant={isPhone ? "h3" : isTablet ? "h4" : "h5"} className={classes.subtitle}>
-          {subtitle}
-        </Typography>
-      </Box>
-    </Box>
+    <div ref={ref}>
+      <Grow in={inView} timeout={1000}>
+        <Box className={classes.root}>
+          <Box
+            className={classes.imageWrap}
+            // onClick={ openHandler }
+          >
+            <Img fluid={fluid} />
+          </Box>
+          <Box>
+            <Typography
+              variant={isPhone ? 'h1' : isTablet ? 'h2' : 'h3'}
+              className={classes.name}
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant={isPhone ? 'h3' : isTablet ? 'h4' : 'h5'}
+              className={classes.subtitle}
+            >
+              {subtitle}
+            </Typography>
+          </Box>
+        </Box>
+      </Grow>
+    </div>
   );
 };
 
@@ -136,9 +131,9 @@ const query = graphql`
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       subtitle
-            profileImage {
+      profileImage {
         asset {
-                    metadata {
+          metadata {
             dimensions {
               aspectRatio
             }
@@ -146,10 +141,10 @@ const query = graphql`
           localFile(width: 1200) {
             childImageSharp {
               fluid(
-                maxWidth: 24
+                maxWidth: 1200
                 traceSVG: { color: "#8b151b77", background: "#ffd83111" }
               ) {
-                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
             }
           }

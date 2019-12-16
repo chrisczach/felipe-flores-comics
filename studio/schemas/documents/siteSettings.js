@@ -44,6 +44,12 @@ export default {
       type: 'figure',
     },
     {
+      name: 'mainImage',
+      title: 'Main image',
+      validation: Rule => Rule.required(),
+      type: 'figure',
+    },
+    {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',

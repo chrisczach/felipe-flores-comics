@@ -11,8 +11,9 @@ const query = graphql`
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       subtitle
-      footer: _rawFooterText
+      footer: _rawFooterText(resolveReferences: { maxDepth: 5 })
       linksList {
+        _key
         icon {
           asset {
             fluid(maxWidth: 2400) {
@@ -36,6 +37,7 @@ const query = graphql`
           localFile(width: 2400) {
             childImageSharp {
               fluid(
+                background: "rgba(250,250,250,1)"
                 maxWidth: 2400
                 traceSVG: { color: "#8b151b77", background: "#ffd83111" }
               ) {
@@ -76,10 +78,11 @@ function LayoutContainer(props) {
           ({
             linkTitle,
             linkUrl,
+            _key: key,
             icon: {
               asset: { fluid },
             },
-          }) => ({ linkTitle, linkUrl, fluid }),
+          }) => ({ linkTitle, linkUrl, fluid, key }),
         );
         return (
           <>

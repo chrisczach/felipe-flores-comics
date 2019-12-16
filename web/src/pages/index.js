@@ -1,15 +1,17 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Hidden } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
 import SlideShow from '../components/slide-show';
-import LinksSection from '../components/links-section'
-import AvatarHeading from '../components/avatar-heading'
+import LinksSection from '../components/links-section';
+import AvatarHeading from '../components/avatar-heading';
+import PortfolioLink from '../components/portfolio-link';
+import ContactLink from '../components/contact-link';
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -35,20 +37,26 @@ const IndexPage = props => {
 
   return (
     <>
-    <PageContainer pageTitle={page.title} heroImage={page.heroImage}>
-      <SEO
-        title={site.title}
-        description={site.description}
-        keywords={site.keywords}
-      />
-        <h1 hidden>Welcome to { site.title }</h1>
-         <AvatarHeading/>
-      <LinksSection />
-      <BlockContent blocks={page.body} />
-
+      <PageContainer
+        // pageTitle={ page.title }
+        heroImage={page.heroImage}
+      >
+        <SEO
+          title={site.title}
+          description={site.description}
+          keywords={site.keywords}
+        />
+        <h1 hidden>Welcome to {site.title}</h1>
+        <AvatarHeading />
+        {/* <LinksSection /> */}
+        <BlockContent blocks={page.body} />
+        <PortfolioLink />
       </PageContainer>
-            <SlideShow />
-      </>
+      <Hidden smDown>
+        <SlideShow />
+      </Hidden>
+      <ContactLink />
+    </>
   );
 };
 
@@ -61,8 +69,8 @@ export const query = graphql`
     }
     page: sanityPage(title: { eq: "Home" }) {
       title
-      excerpt: _rawExcerpt
-      body: _rawBody
+      excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
+      body: _rawBody(resolveReferences: { maxDepth: 5 })
       heroImage: mainImage {
         caption
         alt

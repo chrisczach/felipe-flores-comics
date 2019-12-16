@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, createRef } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import { useInView } from 'react-intersection-observer';
 
 import {
   Container,
@@ -8,8 +9,10 @@ import {
   Typography,
   Paper,
   ButtonGroup,
+  Fade,
   Button,
   makeStyles,
+  Slide,
   Breadcrumbs,
   Box,
   Hidden,
@@ -30,21 +33,31 @@ import ContainedDiv from './contained-div';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    overflowX: 'scroll',
+    background: 'transparent',
+    '&:hover': {
+      background: `linear-gradient(180deg, transparent 20%, ${fade(
+        theme.palette.primary.dark,
+        0.25,
+      )} 40%, ${fade(theme.palette.primary.dark, 0.25)} 60%, transparent 80%)`,
+    },
+    overflowX: 'hidden',
     display: 'flex',
     flexDirection: 'row',
     whitespace: 'nowrap',
-    WebkitOverflowScrolling: 'touch',
+    touchAction: 'none',
     scrollSnapType: 'mandatory',
     overflow: '-moz-scrollbars-none',
     msOverflowStyle: 'none',
     '&::-webkit-scrollbar': {
-       width: '0 !important'
-    }
-
+      width: '0 !important',
+    },
   },
   buttonWrapper: {
-    margin: theme.spacing(0,0,6, 0),
+    opacity: 0.35,
+    '&:hover': {
+      opacity: 0.75,
+    },
+    margin: theme.spacing(0, 0, 0, 0),
     display: 'flex',
     justifyContent: 'center',
   },
@@ -67,6 +80,7 @@ const SlideShow = props => {
 
   // figure this out later
   const wrapperRef = createRef();
+
   const [scrollPosition, setScrollPosition] = useState(0);
   const [playing, setPlaying] = useState(true);
 
@@ -92,7 +106,9 @@ const SlideShow = props => {
   //   alert(scrollPosition);
   // };
 
-  useInterval(() => playing && updateScroll(), 3500);
+  const [ref, inView, entry] = useInView({ threshold: 0.1 });
+
+  useInterval(() => inView && playing && updateScroll(), 3500);
 
   const [prevPlaying, setPrevPlaying] = useState(true);
 
@@ -123,11 +139,15 @@ const SlideShow = props => {
   return (
     <>
       {/* currentyly at {offset} */}
-      <div ref={wrapperRef} className={classes.root}>
-        {images}
+      <div ref={ref}>
+        <Fade direction="up" in={inView} timeout={1000}>
+          <div ref={wrapperRef} className={classes.root}>
+            {images}
+          </div>
+        </Fade>
       </div>
       <Box className={classes.buttonWrapper}>
-        <ButtonGroup size="large">
+        <ButtonGroup>
           <Button
             onClick={() => {
               updateScroll(-1);
@@ -160,7 +180,7 @@ const SlideShow = props => {
 };
 
 const ToFigure = ({ _ref, handleClose = false }) => (
-  <div>
+  <div key={_ref}>
     <Figure forSlider node={{ asset: { _ref } }} handleClose={handleClose} />
   </div>
 );

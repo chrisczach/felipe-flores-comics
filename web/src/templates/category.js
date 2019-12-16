@@ -83,16 +83,17 @@ export const query = graphql`
       slug {
         current
       }
-      excerpt: _rawExcerpt
-      body: _rawBody
+      excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
+      body: _rawBody(resolveReferences: { maxDepth: 5 })
     }
     projects: allSanityProject {
       nodes {
+        id
         title
         slug {
           current
         }
-        excerpt: _rawExcerpt
+        excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
         categories {
           id
           title

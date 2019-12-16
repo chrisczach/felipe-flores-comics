@@ -17,7 +17,9 @@ import figure from './objects/figure';
 import projectMember from './objects/projectMember';
 import projectPortableText from './objects/projectPortableText';
 import simplePortableText from './objects/simplePortableText';
-import siteLink from './objects/siteLink'
+import siteLink from './objects/siteLink';
+import internalLink from './objects/internalLink';
+
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -30,6 +32,7 @@ export default createSchema({
     bioPortableText,
     figure,
     projectMember,
+    internalLink,
     projectPortableText,
     simplePortableText,
     siteLink,
