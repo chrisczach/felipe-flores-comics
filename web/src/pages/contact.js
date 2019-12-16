@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Box } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
@@ -18,6 +18,16 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    [ theme.breakpoints.up( 'md' ) ]: {
+      flexDirection: 'row'
+    }
+  },
+  contact: {
+    width: '100%'
+  }
 }));
 
 const ContactPage = props => {
@@ -53,10 +63,13 @@ const ContactPage = props => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       {/* <AvatarHeading/> */}
-      {/* <LinksSection /> */}
-      <BlockContent blocks={page.body} />
-      <ContactPageLinks _ref={page.heroImage.asset._id} />
-      {/* <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} /> */}
+      {/* <LinksSection /> */ }
+      <Box className={ classes.wrapper }>
+        <Box className={classes.contact}>
+          <BlockContent blocks={ page.body } />
+          </Box>
+        <ContactPageLinks _ref={ page.heroImage.asset._id } />
+        </Box>
     </PageContainer>
   );
 };

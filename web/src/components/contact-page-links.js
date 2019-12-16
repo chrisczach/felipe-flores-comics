@@ -21,19 +21,14 @@ import { getImageInfo } from '../lib/get-image-info';
 
 const useStyles = makeStyles(theme => {
   const buttonColor = fade(theme.palette.background.default, 0.75);
-  const accent = lighten(theme.palette.primary.main, 0.25);
+  const accent = lighten(theme.palette.primary.main, 0.1);
   return {
     backgroundWrapper: {
+      width: '100%',
       boxShadow: theme.shadows[6],
       margin: theme.spacing(0, 16),
-      [theme.breakpoints.up('xl')]: {
-        margin: theme.spacing(0, 52),
-      },
-      [theme.breakpoints.up('lg')]: {
-        margin: theme.spacing(0, 36),
-      },
-      [theme.breakpoints.down('md')]: {
-        margin: theme.spacing(0, 4),
+      [theme.breakpoints.up('md')]: {
+        margin: theme.spacing(0,0,0,2),
       },
       [theme.breakpoints.down('sm')]: {
         margin: theme.spacing(0, 2),
@@ -47,7 +42,7 @@ const useStyles = makeStyles(theme => {
       justifyContent: 'center',
       alignItems: 'center',
       paddingBottom: theme.spacing(4),
-      minHeight: '75vh',
+      minHeight: '65vh',
       [theme.breakpoints.down('sm')]: {
         minHeight: '55vh',
       },
@@ -135,13 +130,13 @@ const useStyles = makeStyles(theme => {
     },
   };
 });
-const months = ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const months = ['Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 const ContactPageLinks = ({ _ref, ...props }) => {
   const classes = useStyles(props);
   const siteLinks = useContext(SiteLinksContext);
 
-  const isPhone = useMediaQuery(theme => theme.breakpoints.down('xs'));
+
   const d = new Date()
   return (
     <BackgroundImage
@@ -164,14 +159,15 @@ const ContactPageLinks = ({ _ref, ...props }) => {
         {siteLinks.map(toLink)}
       </List>
       <Typography variant="body1" className={classes.footer}>
-        {`Special Social Media Issue - ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`}
+        {`Social Media Issue - ${months[d.getMonth()]} ${d.getFullYear()}`}
       </Typography>
     </BackgroundImage>
   );
 };
 
 const toLink = ({ linkTitle, linkUrl, fluid, ...props }) => {
-  const classes = useStyles(props);
+  const classes = useStyles( props );
+    const isPhoneOrTablet = useMediaQuery(theme => theme.breakpoints.down('sm'));
   return (
     <ListItem
       component="a"
@@ -183,7 +179,7 @@ const toLink = ({ linkTitle, linkUrl, fluid, ...props }) => {
       <Box> {/* <Img fluid={fluid} /> */}</Box>
       <ListItemText
         className={classes.linkText}
-        primaryTypographyProps={{ variant: 'h5', style: { fontWeight: 700 } }}
+        primaryTypographyProps={{ variant: isPhoneOrTablet ? 'h5' : 'h6', style: { fontWeight: 700 } }}
       >
         {linkTitle}
       </ListItemText>
