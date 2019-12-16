@@ -11,6 +11,7 @@ import SlideShow from '../components/slide-show';
 import LinksSection from '../components/links-section';
 import AvatarHeading from '../components/avatar-heading';
 import HomeLinks from '../components/home-links';
+import ContactLink from '../components/contact-link';
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -47,13 +48,14 @@ const IndexPage = props => {
         />
         <h1 hidden>Welcome to {site.title}</h1>
         <AvatarHeading />
-        <LinksSection />
+        {/* <LinksSection /> */}
         <BlockContent blocks={page.body} />
         <HomeLinks />
       </PageContainer>
       <Hidden smDown>
         <SlideShow />
       </Hidden>
+      <ContactLink />
     </>
   );
 };

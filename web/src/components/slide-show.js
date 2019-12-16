@@ -9,8 +9,10 @@ import {
   Typography,
   Paper,
   ButtonGroup,
+  Fade,
   Button,
   makeStyles,
+  Slide,
   Breadcrumbs,
   Box,
   Hidden,
@@ -104,7 +106,7 @@ const SlideShow = props => {
   //   alert(scrollPosition);
   // };
 
-  const [ref, inView, entry] = useInView();
+  const [ref, inView, entry] = useInView({ threshold: 0.1 });
 
   useInterval(() => inView && playing && updateScroll(), 3500);
 
@@ -138,9 +140,11 @@ const SlideShow = props => {
     <>
       {/* currentyly at {offset} */}
       <div ref={ref}>
-        <div ref={wrapperRef} className={classes.root}>
-          {images}
-        </div>
+        <Fade direction="up" in={inView} timeout={1000}>
+          <div ref={wrapperRef} className={classes.root}>
+            {images}
+          </div>
+        </Fade>
       </div>
       <Box className={classes.buttonWrapper}>
         <ButtonGroup>

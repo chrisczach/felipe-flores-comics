@@ -36,15 +36,10 @@ const HomeLinks = props => {
     <Box className={classes.list}>
       <Link to="/about/" className={classes.link}>
         <Typography variant="h5">About</Typography>
-        
       </Link>
 
       <Link to="/portfolio/" className={classes.link}>
         <Typography variant="h5">Portfolio</Typography>
-      </Link>
-
-      <Link to="/contact/" className={classes.link}>
-        <Typography variant="h5">Contact</Typography>
       </Link>
     </Box>
   );
