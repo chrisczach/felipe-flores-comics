@@ -9,6 +9,7 @@ import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
 import LinksSection from '../components/links-section';
 import AvatarHeading from '../components/avatar-heading';
+import ContactLink from '../components/contact-link';
 
 const useStyles = makeStyles(theme => ({
   hero: {
@@ -56,6 +57,7 @@ const AboutPage = props => {
       <AvatarHeading />
       <LinksSection />
       <BlockContent blocks={page.body} />
+      <ContactLink />
     </PageContainer>
   );
 };

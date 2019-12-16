@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       opacity: 0.75,
     },
-    margin: theme.spacing(0, 0, 6, 0),
+    margin: theme.spacing(0, 0, 0, 0),
     display: 'flex',
     justifyContent: 'center',
   },

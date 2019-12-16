@@ -30,13 +30,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HomeLinks = props => {
+const PortfolioLink = props => {
   const classes = useStyles(props);
   return (
     <Box className={classes.list}>
-      <Link to="/about/" className={classes.link}>
+      {/* <Link to="/about/" className={classes.link}>
         <Typography variant="h5">About</Typography>
-      </Link>
+      </Link> */}
 
       <Link to="/portfolio/" className={classes.link}>
         <Typography variant="h5">Portfolio</Typography>
@@ -45,4 +45,4 @@ const HomeLinks = props => {
   );
 };
 
-export default HomeLinks;
+export default PortfolioLink;

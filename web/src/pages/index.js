@@ -10,7 +10,7 @@ import BlockContent from '../components/block-content';
 import SlideShow from '../components/slide-show';
 import LinksSection from '../components/links-section';
 import AvatarHeading from '../components/avatar-heading';
-import HomeLinks from '../components/home-links';
+import PortfolioLink from '../components/portfolio-link';
 import ContactLink from '../components/contact-link';
 
 const useStyles = makeStyles(theme => ({}));
@@ -50,7 +50,7 @@ const IndexPage = props => {
         <AvatarHeading />
         {/* <LinksSection /> */}
         <BlockContent blocks={page.body} />
-        <HomeLinks />
+        <PortfolioLink />
       </PageContainer>
       <Hidden smDown>
         <SlideShow />

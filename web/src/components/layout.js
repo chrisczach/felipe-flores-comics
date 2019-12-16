@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     backdropFilter: `blur(4px) brightness(1.25) saturate(0.75)`,
+    WebkitBackdropFilter: `blur(4px) brightness(1.25) saturate(0.75)`,
   },
 }));
 
