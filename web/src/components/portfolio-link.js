@@ -95,6 +95,8 @@ const useStyles = makeStyles(theme => {
       // },
     },
     linkText: {
+      fontWeight: 700,
+      fontVariant: 'small-caps',
       transform: `skewX(15deg)`,
       color: accent,
     },
@@ -110,7 +112,7 @@ const PortfolioLink = props => {
         <Box className={classes.list}>
           <Link to="/about/" className={classes.link + ' ' + classes.firstLink}>
             <Typography variant="h5" className={classes.linkText}>
-              About
+              More About Me
             </Typography>
           </Link>
 
@@ -119,7 +121,7 @@ const PortfolioLink = props => {
             className={classes.link + ' ' + classes.secondLink}
           >
             <Typography variant="h5" className={classes.linkText}>
-              Portfolio
+              See My Portfolio
             </Typography>
           </Link>
         </Box>
