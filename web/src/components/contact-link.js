@@ -18,6 +18,7 @@ import Img from 'gatsby-image';
 import { useInView } from 'react-intersection-observer';
 
 import { getImageInfo } from '../lib/get-image-info';
+import BlockContent from './block-content';
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -36,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     borderRadius: theme.spacing(1),
-    padding: theme.spacing(8, 6),
+    padding: theme.spacing(3, 6),
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -109,6 +110,7 @@ const ContactLink = props => {
         asset: { _id: _ref },
       },
     },
+    page: { excerpt },
   } = useStaticQuery(query);
 
   const { fluid } = getImageInfo({ _ref });
@@ -124,9 +126,7 @@ const ContactLink = props => {
                 to="/contact/"
                 className={classes.link}
               >
-                <Typography variant="h3" color="primary">
-                  Want to say hello?
-                </Typography>
+                <BlockContent blocks={excerpt} />
               </Link>
               <Box className={classes.triangle} />
             </Box>
@@ -151,6 +151,10 @@ const query = graphql`
           _id
         }
       }
+    }
+    page: sanityPage(title: { eq: "Contact" }) {
+      title
+      excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
     }
   }
 `;

@@ -54,13 +54,22 @@ const useStyles = hero =>
           bottom: 0,
           left: theme.spacing(-6),
           transform: 'skewX(-45deg)',
-          background: backgroundColor,
+          backgroundImage: `radial-gradient(${lighten(
+            theme.palette.secondary.main,
+            0.15,
+          )} 10%, transparent 10%), radial-gradient(${lighten(
+            theme.palette.secondary.main,
+            0.05,
+          )} 10%, transparent 10%)`,
+          backgroundColor: lighten(theme.palette.secondary.light, 0.45),
+          backgroundPosition: `0 0, 5px 5px`,
+          backgroundSize: `10px 10px`,
         },
       },
       heading: {
         fontVariant: 'small-caps',
         fontWeight: 'bold',
-        opacity: 0.65,
+        opacity: 0.85,
       },
       subHeading: {
         opacity: 0.75,
@@ -93,7 +102,7 @@ const useStyles = hero =>
       },
       container: {
         marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(6),
+        marginBottom: theme.spacing(4),
         // remove min height later
         minHeight: '50vh',
       },

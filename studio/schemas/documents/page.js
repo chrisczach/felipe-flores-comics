@@ -27,7 +27,7 @@ export default {
       name: 'excerpt',
       title: 'Excerpt',
       validation: Rule => Rule.required(),
-      type: 'simplePortableText',
+      type: 'projectPortableText',
     },
     {
       name: 'mainImage',

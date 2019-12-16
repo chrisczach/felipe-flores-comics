@@ -7,9 +7,8 @@ import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
-import LinksSection from '../components/links-section'
-import AvatarHeading from '../components/avatar-heading'
-
+import LinksSection from '../components/links-section';
+import AvatarHeading from '../components/avatar-heading';
 
 const useStyles = makeStyles(theme => ({
   hero: {
@@ -53,8 +52,8 @@ const ContactPage = props => {
         description={site.description}
         keywords={site.keywords}
       />
-      <h1 hidden>Welcome to { site.title }</h1>
-       <AvatarHeading/>
+      <h1 hidden>Welcome to {site.title}</h1>
+      {/* <AvatarHeading/> */}
       <LinksSection />
       <BlockContent blocks={page.body} />
       {/* <Img fluid={heroImageFluid} fadeIn durationFadeIn={1000} /> */}
@@ -63,27 +62,25 @@ const ContactPage = props => {
 };
 
 export const query = graphql`
-         query ContactPageQuery {
-           site: sanitySiteSettings(
-             _id: { regex: "/(drafts.|)siteSettings/" }
-           ) {
-             title
-             description
-             keywords
-           }
-           page: sanityPage(title: { eq: "Contact" }) {
-             title
-             excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
-             body: _rawBody(resolveReferences: { maxDepth: 5 })
-             heroImage: mainImage {
-               caption
-               alt
-               asset {
-                 _id
-               }
-             }
-           }
-         }
-       `;
+  query ContactPageQuery {
+    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
+      title
+      description
+      keywords
+    }
+    page: sanityPage(title: { eq: "Contact" }) {
+      title
+      excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
+      body: _rawBody(resolveReferences: { maxDepth: 5 })
+      heroImage: mainImage {
+        caption
+        alt
+        asset {
+          _id
+        }
+      }
+    }
+  }
+`;
 
 export default ContactPage;

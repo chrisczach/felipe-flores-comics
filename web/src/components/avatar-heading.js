@@ -14,7 +14,9 @@ import {
   ListItemText,
   ListSubheader,
   useMediaQuery,
+  Grow,
 } from '@material-ui/core';
+import { useInView } from 'react-intersection-observer';
 
 // import { ModalUpdater } from './layout';
 // import FigureModal from './figure/figure'
@@ -22,8 +24,8 @@ import {
 const useStyles = makeStyles(theme => {
   return {
     root: {
-      display: 'inline-flex',
-      justifyContent: 'flex-start',
+      display: 'flex',
+      justifyContent: 'center',
       flexDirection: 'row',
       alignItems: 'center',
       [theme.breakpoints.down('sm')]: {
@@ -89,47 +91,38 @@ const AvatarHeading = ({ ...props }) => {
     },
   } = useStaticQuery(query);
   const classes = useStyles(props);
-  //   const modalUpdater = useContext(ModalUpdater);
-
-  // const openHandler = () => {
-  //   modalUpdater( {
-  //     closeHandler: handleClose && handleClose,
-  //     children: (
-  //       <FigureModal
-  //         {...{
-  //           fluid,
-  //           aspectRatio
-  //         }}
-  //       />
-  //     ),
-  //   })};
 
   const isPhone = useMediaQuery(theme => theme.breakpoints.down('xs'));
   const isTablet = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const [ref, inView, entry] = useInView({ threshold: 0.1 });
 
   return (
-    <Box className={classes.root}>
-      <Box
-        className={classes.imageWrap}
-        // onClick={ openHandler }
-      >
-        <Img fluid={fluid} />
-      </Box>
-      <Box>
-        <Typography
-          variant={isPhone ? 'h1' : isTablet ? 'h2' : 'h3'}
-          className={classes.name}
-        >
-          {title}
-        </Typography>
-        <Typography
-          variant={isPhone ? 'h3' : isTablet ? 'h4' : 'h5'}
-          className={classes.subtitle}
-        >
-          {subtitle}
-        </Typography>
-      </Box>
-    </Box>
+    <div ref={ref}>
+      <Grow in={inView} timeout={1000}>
+        <Box className={classes.root}>
+          <Box
+            className={classes.imageWrap}
+            // onClick={ openHandler }
+          >
+            <Img fluid={fluid} />
+          </Box>
+          <Box>
+            <Typography
+              variant={isPhone ? 'h1' : isTablet ? 'h2' : 'h3'}
+              className={classes.name}
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant={isPhone ? 'h3' : isTablet ? 'h4' : 'h5'}
+              className={classes.subtitle}
+            >
+              {subtitle}
+            </Typography>
+          </Box>
+        </Box>
+      </Grow>
+    </div>
   );
 };
 
