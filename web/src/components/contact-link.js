@@ -110,8 +110,9 @@ const ContactLink = props => {
 
   const { fluid } = getImageInfo({ _ref });
 
-  
+
   return (
+    <div style={{overflow: 'hidden'}}>
     <Container maxWidth="sm" className={classes.wrapper}>
       <div ref={ref}>
         <Slide direction="left" in={inView} timeout={750}>
@@ -137,7 +138,8 @@ const ContactLink = props => {
           </Fade>
         </Slide>
       </div>
-    </Container>
+      </Container>
+      </div>
   );
 };
 
