@@ -16,7 +16,7 @@ import {
 import BackgroundImage from 'gatsby-background-image';
 import { getImageInfo } from '../lib/get-image-info';
 
-const useStyles = (subHeader = false) =>
+const useStyles = (subHeader = null) =>
   makeStyles(theme => {
     const backgroundColor = lighten(theme.palette.secondary.light, 0.5);
 
@@ -110,6 +110,7 @@ const useStyles = (subHeader = false) =>
         marginBottom: theme.spacing(4),
       },
       hero: {
+        position: 'relative',
         backgroundAttachment: 'fixed',
         height: subHeader ? '50vh' : '75vh',
         [theme.breakpoints.down('sm')]: {
@@ -136,11 +137,12 @@ const PageContainer = ({
   pageTitle = '',
   hideTitleOnPortrait = false,
   heroImage = {},
+  heroOverlay = null,
   subHeader = null,
   breadcrumbs = null,
   ...props
 }) => {
-  const classes = useStyles(heroImage)(props);
+  const classes = useStyles(subHeader)(props);
   const { fluid = null } =
     heroImage && heroImage.asset && heroImage.asset._id
       ? getImageInfo({ _ref: heroImage.asset._id })
@@ -158,13 +160,7 @@ const PageContainer = ({
               durationFadeIn={1000}
               className={classes.hero}
             >
-              <Typography
-                variant="h1"
-                color="primary"
-                className={classes.captionText}
-              >
-                {heroImage.caption}
-              </Typography>
+              {heroOverlay && heroOverlay}
             </BackgroundImage>
           )}
           <Paper square elevation={0} className={classes.root}>

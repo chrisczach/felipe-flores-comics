@@ -26,7 +26,10 @@ const useStyles = (small = false) =>
     return {
       backgroundWrapper: {
         width: small ? '75%' : '100%',
-        boxShadow: theme.shadows[6],
+        boxShadow: theme.shadows[4],
+        '&:hover': {
+          boxShadow: theme.shadows[8],
+        },
         margin: theme.spacing(0, 16),
         [theme.breakpoints.up('md')]: {
           margin: theme.spacing(0, 0, 0, 2),

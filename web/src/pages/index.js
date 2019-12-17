@@ -1,7 +1,16 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link as GatsbyLink } from 'gatsby';
 
-import { makeStyles, Hidden, Container } from '@material-ui/core';
+import {
+  makeStyles,
+  Hidden,
+  Container,
+  Typography,
+  lighten,
+  Link,
+} from '@material-ui/core';
+
+import { DoubleArrowOutlined } from '@material-ui/icons';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
@@ -14,7 +23,35 @@ import PortfolioLink from '../components/portfolio-link';
 import ContactLink from '../components/contact-link';
 import HomeSubBanner from '../components/home-sub-banner';
 
-const useStyles = makeStyles(theme => ({}));
+const useStyles = makeStyles(theme => {
+  const red = lighten(theme.palette.primary.dark, 0.35);
+  const darkRed = lighten(theme.palette.primary.dark, 0.2);
+  return {
+    overlay: {
+      transform: `skewX(-45deg) translateX(${theme.spacing(20)}px)`,
+      transformOrigin: '0 0',
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      backgroundImage: `radial-gradient(${lighten(
+        theme.palette.primary.dark,
+        0.15,
+      )} 10%, transparent 10%), radial-gradient(${red} 10%, transparent 10%)`,
+      background: darkRed,
+      backgroundPosition: `0 0, 5px 5px`,
+      backgroundSize: `10px 10px`,
+      borderLeft: `${theme.spacing(0.5)}px solid ${red}`,
+      borderTop: `${theme.spacing(0.5)}px solid ${red}`,
+      padding: theme.spacing(1, 24, 1, 4),
+    },
+    overlayText: {
+      fontVariant: 'small-caps',
+      transform: `skewX(45deg)`,
+      transformOrigin: '0 0',
+      color: theme.palette.getContrastText(darkRed),
+    },
+  };
+});
 
 const IndexPage = props => {
   const { data, errors } = props;
@@ -41,6 +78,17 @@ const IndexPage = props => {
       <PageContainer
         // pageTitle={ page.title }
         heroImage={page.heroImage}
+        heroOverlay={
+          <Link
+            component={GatsbyLink}
+            to="portfolio"
+            className={classes.overlay}
+          >
+            <Typography variant="h5" className={classes.overlayText}>
+              Portfolio »
+            </Typography>
+          </Link>
+        }
         subHeader={<HomeSubBanner />}
       >
         <SEO
