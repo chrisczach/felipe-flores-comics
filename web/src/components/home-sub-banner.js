@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles, Box } from '@material-ui/core';
+import { makeStyles, Box, fade, lighten } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import { getImageInfo } from '../lib/get-image-info';
@@ -10,7 +10,7 @@ const useStyle = makeStyles(theme => {
   return {
     wrapper: {
       overflow: 'hidden',
-      background: theme.palette.secondary.main,
+      background: theme.palette.secondary.light,
       position: 'absolute',
       top: '50vh',
       height: `calc(40vh + ${theme.spacing(1)}px)`,
@@ -28,14 +28,14 @@ const useStyle = makeStyles(theme => {
       height: `calc(40vh + ${theme.spacing(1)}px)`,
       clipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
       WebkitClipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
-      '&::before': {
+      '&::after': {
         position: 'absolute',
         top: 0,
         right: 0,
         bottom: 0,
         left: 0,
         content: '""',
-        background: theme.palette.background.default,
+        background: lighten(theme.palette.primary.light, 0.5),
       },
     },
   };

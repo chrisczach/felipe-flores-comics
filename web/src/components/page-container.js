@@ -110,6 +110,15 @@ const useStyles = (subHeader = null) =>
         marginBottom: theme.spacing(4),
       },
       hero: {
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          background: lighten(theme.palette.primary.light, 0.5),
+        },
         position: 'relative',
         backgroundAttachment: 'fixed',
         height: subHeader ? '50vh' : '75vh',
