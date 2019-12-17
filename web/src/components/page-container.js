@@ -111,7 +111,7 @@ const useStyles = (subHeader = false) =>
       },
       hero: {
         backgroundAttachment: 'fixed',
-        height: '75vh',
+        height: subHeader ? '50vh' : '75vh',
         [theme.breakpoints.down('sm')]: {
           height: '50vh',
         },
