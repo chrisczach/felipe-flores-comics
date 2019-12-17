@@ -4,6 +4,7 @@ import { makeStyles, Box } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import { getImageInfo } from '../lib/get-image-info';
+import BackgroundImage from 'gatsby-background-image';
 
 const useStyle = makeStyles(theme => {
   return {
@@ -18,15 +19,24 @@ const useStyle = makeStyles(theme => {
       WebkitClipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
     },
     imageWrap: {
+      backgroundAttachment: 'fixed',
+      backgroundPosition: '10% 10%',
       position: 'relative',
-      left: theme.spacing(-2),
-      transform: `translateY(${theme.spacing(-1)}px) translateX(${theme.spacing(
-        2,
-      )}px)`,
+      // left: theme.spacing(-2),
+      transform: `translateY(${theme.spacing(-1)}px)`,
       overflow: 'hidden',
       height: `calc(40vh + ${theme.spacing(1)}px)`,
       clipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
       WebkitClipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
+      '&::before': {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        content: '""',
+        background: theme.palette.background.default,
+      },
     },
   };
 });
@@ -46,9 +56,13 @@ const HomeSubBanner = ({ ...props }) => {
 
   return (
     <Box className={classes.wrapper}>
-      <Box className={classes.imageWrap}>
-        <Img fluid={getImageInfo({ _ref }).fluid} />
-      </Box>
+      {/* <Box className={classes.imageWrap}> */}
+      {/* <Img fluid={getImageInfo({ _ref }).fluid} /> */}
+      <BackgroundImage
+        fluid={getImageInfo({ _ref }).fluid}
+        className={classes.imageWrap}
+      />
+      {/* </Box> */}
     </Box>
   );
 };

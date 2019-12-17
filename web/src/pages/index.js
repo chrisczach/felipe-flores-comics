@@ -40,8 +40,8 @@ const useStyles = makeStyles(theme => {
       background: darkRed,
       backgroundPosition: `0 0, 5px 5px`,
       backgroundSize: `10px 10px`,
-      borderLeft: `${theme.spacing(0.5)}px solid ${red}`,
-      borderTop: `${theme.spacing(0.5)}px solid ${red}`,
+      borderLeft: `${theme.spacing(2)}px solid ${red}`,
+      borderTop: `${theme.spacing(0.5)}px solid ${lighten(red, 0.15)}`,
       padding: theme.spacing(1, 24, 1, 4),
     },
     overlayText: {
