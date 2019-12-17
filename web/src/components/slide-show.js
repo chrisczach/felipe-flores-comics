@@ -31,7 +31,7 @@ import Figure from './figure/figure';
 import { getImageInfo } from '../lib/get-image-info';
 import ContainedDiv from './contained-div';
 
-const useStyles = makeStyles( theme => {
+const useStyles = makeStyles(theme => {
   const path =
     'polygon(38% 20%, 36% 9%, 27% 18%, 24% 8%, 14% 14%, 13% 4%, 5% 10%, 0% 0%, 0% 100%, 8% 86%, 16% 92%, 21% 79%, 27% 86%, 33% 78%, 40% 86%, 46% 79%, 55% 86%, 65% 76%, 70% 87%, 79% 78%, 84% 90%, 93% 84%, 100% 100%, 100% 0%, 96% 14%, 87% 7%, 82% 16%, 73% 10%, 69% 20%, 58% 11%, 52% 21%, 46% 12%)';
   return {
@@ -169,7 +169,7 @@ const SlideShow = props => {
         </div>
         {/* </Fade> */}
         <Box className={classes.buttonWrapper}>
-          <ButtonGroup color="secondary">
+          <ButtonGroup color="secondary" size="large">
             <Button
               onClick={() => {
                 updateScroll(-1);

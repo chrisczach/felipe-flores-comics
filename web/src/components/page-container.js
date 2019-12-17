@@ -101,14 +101,14 @@ const useStyles = (subHeader = null) =>
         },
       },
       container: {
-        overflow: 'hidden',
+        overflowX: 'hidden',
         marginTop: subHeader
           ? `calc(35vh - ${theme.spacing(2)}px)`
           : theme.spacing(2),
         // [theme.breakpoints.down('sm')]: {
         //   marginTop: subHeader ? '50vh' : theme.spacing(2),
         // },
-        marginBottom: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
       },
       hero: {
         overflow: 'hidden',
