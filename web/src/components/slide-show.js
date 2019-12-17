@@ -31,41 +31,63 @@ import Figure from './figure/figure';
 import { getImageInfo } from '../lib/get-image-info';
 import ContainedDiv from './contained-div';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    marginTop: theme.spacing(8),
-    background: 'transparent',
-    '&:hover': {
-      background: `linear-gradient(180deg, transparent 20%, ${fade(
-        theme.palette.primary.dark,
-        0.25,
-      )} 40%, ${fade(theme.palette.primary.dark, 0.25)} 60%, transparent 80%)`,
+const useStyles = makeStyles( theme => {
+  const path =
+    'polygon(38% 20%, 36% 9%, 27% 18%, 24% 8%, 14% 14%, 13% 4%, 5% 10%, 0% 0%, 0% 100%, 8% 86%, 16% 92%, 21% 79%, 27% 86%, 33% 78%, 40% 86%, 46% 79%, 55% 86%, 65% 76%, 70% 87%, 79% 78%, 84% 90%, 93% 84%, 100% 100%, 100% 0%, 96% 14%, 87% 7%, 82% 16%, 73% 10%, 69% 20%, 58% 11%, 52% 21%, 46% 12%)';
+  return {
+    cutout: {
+      position: 'relative',
+      margin: theme.spacing(-4, 0),
+      padding: theme.spacing(24, 0, 20, 0),
+      background: theme.palette.secondary.light,
+      clipPath: path,
+      WebkitClipPath: path,
+      // '&:hover': {
+      //   background: `linear-gradient(180deg, transparent 20%, ${fade(
+      //     theme.palette.primary.dark,
+      //     0.25,
+      //   )} 40%, ${fade(theme.palette.primary.dark, 0.25)} 60%, transparent 80%)`,
+      // },
+
+      '&::before': {
+        clipPath: path,
+        WebkitClipPath: path,
+        position: 'absolute',
+        top: theme.spacing(2),
+        right: 0,
+        bottom: theme.spacing(2),
+        left: 0,
+        content: '""',
+        backgroundColor: lighten(theme.palette.primary.main, 0.25),
+      },
     },
-    overflowX: 'hidden',
-    display: 'flex',
-    flexDirection: 'row',
-    whitespace: 'nowrap',
-    touchAction: 'none',
-    scrollSnapType: 'mandatory',
-    overflow: '-moz-scrollbars-none',
-    msOverflowStyle: 'none',
-    '&::-webkit-scrollbar': {
-      width: '0 !important',
+    root: {
+      overflowX: 'hidden',
+      display: 'flex',
+      flexDirection: 'row',
+      whitespace: 'nowrap',
+      touchAction: 'none',
+      scrollSnapType: 'mandatory',
+      overflow: '-moz-scrollbars-none',
+      msOverflowStyle: 'none',
+      '&::-webkit-scrollbar': {
+        width: '0 !important',
+      },
     },
-  },
-  buttonWrapper: {
-    opacity: 0.35,
-    '&:hover': {
-      opacity: 0.75,
+    buttonWrapper: {
+      opacity: 0.9,
+      '&:hover': {
+        opacity: 1,
+      },
+      margin: theme.spacing(0, 0, 6, 0),
+      display: 'flex',
+      justifyContent: 'center',
     },
-    margin: theme.spacing(0, 0, 0, 0),
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  sliderElement: {
-    scrollSnapAlign: 'center',
-  },
-}));
+    sliderElement: {
+      scrollSnapAlign: 'center',
+    },
+  };
+});
 
 const SlideShow = props => {
   const classes = useStyles(props);
@@ -140,42 +162,42 @@ const SlideShow = props => {
   return (
     <>
       {/* currentyly at {offset} */}
-      <div ref={ref}>
+      <div ref={ref} className={classes.cutout}>
         {/* <Fade direction="up" in={inView} timeout={1000}> */}
         <div ref={wrapperRef} className={classes.root}>
           {images}
         </div>
         {/* </Fade> */}
+        <Box className={classes.buttonWrapper}>
+          <ButtonGroup color="secondary">
+            <Button
+              onClick={() => {
+                updateScroll(-1);
+                togglePlaying(false);
+              }}
+              startIcon={<SkipPreviousOutlined />}
+            >
+              Prev
+            </Button>
+            <Button
+              onClick={() =>
+                playing ? togglePlaying(false) : togglePlaying(true)
+              }
+            >
+              {playing ? <PauseOutlined /> : <PlayArrowOutlined />}
+            </Button>
+            <Button
+              onClick={() => {
+                updateScroll(1);
+                togglePlaying(false);
+              }}
+              endIcon={<SkipNextOutlined />}
+            >
+              Next
+            </Button>
+          </ButtonGroup>
+        </Box>
       </div>
-      <Box className={classes.buttonWrapper}>
-        <ButtonGroup>
-          <Button
-            onClick={() => {
-              updateScroll(-1);
-              togglePlaying(false);
-            }}
-            startIcon={<SkipPreviousOutlined />}
-          >
-            Prev
-          </Button>
-          <Button
-            onClick={() =>
-              playing ? togglePlaying(false) : togglePlaying(true)
-            }
-          >
-            {playing ? <PauseOutlined /> : <PlayArrowOutlined />}
-          </Button>
-          <Button
-            onClick={() => {
-              updateScroll(1);
-              togglePlaying(false);
-            }}
-            endIcon={<SkipNextOutlined />}
-          >
-            Next
-          </Button>
-        </ButtonGroup>
-      </Box>
     </>
   );
 };

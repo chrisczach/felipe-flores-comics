@@ -101,6 +101,7 @@ const useStyles = (subHeader = null) =>
         },
       },
       container: {
+        overflow: 'hidden',
         marginTop: subHeader
           ? `calc(35vh - ${theme.spacing(2)}px)`
           : theme.spacing(2),
@@ -110,6 +111,7 @@ const useStyles = (subHeader = null) =>
         marginBottom: theme.spacing(4),
       },
       hero: {
+        overflow: 'hidden',
         '&::after': {
           content: '""',
           position: 'absolute',
