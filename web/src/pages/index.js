@@ -67,7 +67,7 @@ export const query = graphql`
       description
       keywords
     }
-    page: sanityPage(title: { eq: "Home" }) {
+    page: sanityPage(slug: { current: { eq: "/" } }) {
       title
       excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
       body: _rawBody(resolveReferences: { maxDepth: 5 })

@@ -21,13 +21,13 @@ const useStyles = makeStyles(theme => ({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
-    [ theme.breakpoints.up( 'md' ) ]: {
-      flexDirection: 'row'
-    }
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+    },
   },
   contact: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 }));
 
 const ContactPage = props => {
@@ -63,13 +63,13 @@ const ContactPage = props => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       {/* <AvatarHeading/> */}
-      {/* <LinksSection /> */ }
-      <Box className={ classes.wrapper }>
+      {/* <LinksSection /> */}
+      <Box className={classes.wrapper}>
         <Box className={classes.contact}>
-          <BlockContent blocks={ page.body } />
-          </Box>
-        <ContactPageLinks _ref={ page.heroImage.asset._id } />
+          <BlockContent blocks={page.body} />
         </Box>
+        <ContactPageLinks _ref={page.heroImage.asset._id} />
+      </Box>
     </PageContainer>
   );
 };
@@ -81,7 +81,7 @@ export const query = graphql`
       description
       keywords
     }
-    page: sanityPage(title: { eq: "Contact" }) {
+    page: sanityPage(slug: { current: { eq: "contact" } }) {
       title
       excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
       body: _rawBody(resolveReferences: { maxDepth: 5 })

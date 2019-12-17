@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Box } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
@@ -10,6 +10,7 @@ import BlockContent from '../components/block-content';
 import LinksSection from '../components/links-section';
 import AvatarHeading from '../components/avatar-heading';
 import ContactLink from '../components/contact-link';
+import ContactPageLinks from '../components/contact-page-links';
 
 const useStyles = makeStyles(theme => ({
   hero: {
@@ -19,6 +20,16 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+    },
+  },
+  about: {
+    width: '100%',
   },
 }));
 
@@ -45,7 +56,7 @@ const AboutPage = props => {
   return (
     <PageContainer
       pageTitle={page.title}
-      heroImage={page.heroImage}
+      // heroImage={page.heroImage}
       breadcrumbs={[{ slug: '/about/', title: 'About' }]}
     >
       <SEO
@@ -55,8 +66,13 @@ const AboutPage = props => {
       />
       <h1 hidden>Welcome to {site.title}</h1>
       <AvatarHeading />
-      <LinksSection />
-      <BlockContent blocks={page.body} />
+      {/* <LinksSection /> */}
+      <Box className={classes.wrapper}>
+        <Box className={classes.about}>
+          <BlockContent blocks={page.body} />
+        </Box>
+        <ContactPageLinks small _ref={page.heroImage.asset._id} />
+      </Box>
       <ContactLink />
     </PageContainer>
   );
@@ -69,7 +85,7 @@ export const query = graphql`
       description
       keywords
     }
-    page: sanityPage(title: { eq: "About" }) {
+    page: sanityPage(slug: { current: { eq: "about" } }) {
       title
       excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
       body: _rawBody(resolveReferences: { maxDepth: 5 })

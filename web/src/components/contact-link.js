@@ -152,7 +152,7 @@ const query = graphql`
         }
       }
     }
-    page: sanityPage(title: { eq: "Contact" }) {
+    page: sanityPage(slug: { current: { eq: "contact" } }) {
       title
       excerpt: _rawExcerpt(resolveReferences: { maxDepth: 5 })
     }
