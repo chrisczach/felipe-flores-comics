@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { makeStyles, Hidden } from '@material-ui/core';
+import { makeStyles, Hidden, Container } from '@material-ui/core';
 
 import GraphQLErrorList from '../components/graphql-error-list';
 import SEO from '../components/seo';
@@ -12,6 +12,7 @@ import LinksSection from '../components/links-section';
 import AvatarHeading from '../components/avatar-heading';
 import PortfolioLink from '../components/portfolio-link';
 import ContactLink from '../components/contact-link';
+import HomeSubBanner from '../components/home-sub-banner';
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -40,6 +41,7 @@ const IndexPage = props => {
       <PageContainer
         // pageTitle={ page.title }
         heroImage={page.heroImage}
+        subHeader={<HomeSubBanner />}
       >
         <SEO
           title={site.title}
@@ -47,9 +49,11 @@ const IndexPage = props => {
           keywords={site.keywords}
         />
         <h1 hidden>Welcome to {site.title}</h1>
-        <AvatarHeading />
+        {/* <AvatarHeading /> */}
         {/* <LinksSection /> */}
-        <BlockContent blocks={page.body} />
+        <Container maxWidth="md">
+          <BlockContent blocks={page.body} />
+        </Container>
         <PortfolioLink />
       </PageContainer>
       <Hidden smDown>

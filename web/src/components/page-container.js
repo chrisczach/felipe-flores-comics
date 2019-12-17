@@ -16,7 +16,7 @@ import {
 import BackgroundImage from 'gatsby-background-image';
 import { getImageInfo } from '../lib/get-image-info';
 
-const useStyles = hero =>
+const useStyles = (subHeader = false) =>
   makeStyles(theme => {
     const backgroundColor = lighten(theme.palette.secondary.light, 0.5);
 
@@ -101,10 +101,13 @@ const useStyles = hero =>
         },
       },
       container: {
-        marginTop: theme.spacing(2),
+        marginTop: subHeader
+          ? `calc(35vh - ${theme.spacing(2)}px)`
+          : theme.spacing(2),
+        // [theme.breakpoints.down('sm')]: {
+        //   marginTop: subHeader ? '50vh' : theme.spacing(2),
+        // },
         marginBottom: theme.spacing(4),
-        // remove min height later
-        minHeight: '50vh',
       },
       hero: {
         backgroundAttachment: 'fixed',
@@ -133,7 +136,7 @@ const PageContainer = ({
   pageTitle = '',
   hideTitleOnPortrait = false,
   heroImage = {},
-  //  need to setup
+  subHeader = null,
   breadcrumbs = null,
   ...props
 }) => {
@@ -189,6 +192,7 @@ const PageContainer = ({
               </Hidden>
             )}
           </Paper>
+          {subHeader && subHeader}
           <Container maxWidth="lg" className={classes.container}>
             {breadcrumbs && (
               <Breadcrumbs aria-label="breadcrumb">
