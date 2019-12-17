@@ -40,6 +40,15 @@ const useStyles = makeStyles(theme => {
       margin: theme.spacing(-4, 0),
       padding: theme.spacing(24, 0, 20, 0),
       background: theme.palette.secondary.light,
+      backgroundImage: `radial-gradient(${lighten(
+        theme.palette.secondary.dark,
+        0.15,
+      )} 10%, transparent 10%), radial-gradient(${lighten(
+        theme.palette.secondary.dark,
+        0.35,
+      )} 10%, transparent 10%)`,
+      backgroundPosition: `0 0, 5px 5px`,
+      backgroundSize: `10px 10px`,
       clipPath: path,
       WebkitClipPath: path,
       // '&:hover': {
@@ -58,7 +67,16 @@ const useStyles = makeStyles(theme => {
         bottom: theme.spacing(2),
         left: 0,
         content: '""',
-        backgroundColor: lighten(theme.palette.primary.main, 0.25),
+        background: lighten(theme.palette.primary.main, 0.25),
+        backgroundImage: `radial-gradient(${lighten(
+          theme.palette.primary.dark,
+          0.15,
+        )} 10%, transparent 10%), radial-gradient(${lighten(
+          theme.palette.primary.dark,
+          0.35,
+        )} 10%, transparent 10%)`,
+        backgroundPosition: `0 0, 5px 5px`,
+        backgroundSize: `10px 10px`,
       },
     },
     root: {

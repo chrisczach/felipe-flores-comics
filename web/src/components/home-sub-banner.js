@@ -11,6 +11,15 @@ const useStyle = makeStyles(theme => {
     wrapper: {
       overflow: 'hidden',
       background: theme.palette.secondary.light,
+      backgroundImage: `radial-gradient(${lighten(
+        theme.palette.secondary.dark,
+        0.15,
+      )} 10%, transparent 10%), radial-gradient(${lighten(
+        theme.palette.secondary.dark,
+        0.35,
+      )} 10%, transparent 10%)`,
+      backgroundPosition: `0 0, 5px 5px`,
+      backgroundSize: `10px 10px`,
       position: 'absolute',
       top: '50vh',
       height: `calc(40vh + ${theme.spacing(1)}px)`,
