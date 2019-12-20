@@ -32,8 +32,6 @@ const useStyles = makeStyles(theme => {
       top: 0,
       right: 0,
       zIndex: 1000,
-      backdropFilter: 'blur(4px)',
-      WebkitBackdropFilter: 'blur(4px)',
       background: `linear-gradient(45deg, transparent 15%, ${buttonColor} 15%)`,
       '@media( hover: hover ) ': {
         '&:hover': {
@@ -259,8 +257,6 @@ const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
         ModalProps={{
           BackdropProps: {
             style: {
-              backdropFilter: 'blur(4px)',
-              WebkitBackdropFilter: 'blur(4px)',
               background: 'rgba(50,50,50,.25)',
             },
           },

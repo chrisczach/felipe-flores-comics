@@ -53,15 +53,15 @@ const useStyles = makeStyles(theme => {
     imageWrap: {
       boxShadow: theme.shadows[5],
       borderRadius: `${theme.spacing(8)}px ${theme.spacing(1)}px`,
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('lg')]: {
         width: '20vh',
         height: '20vh',
       },
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         width: '30vh',
         height: '30vh',
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         width: '60vw',
         height: '60vw',
       },

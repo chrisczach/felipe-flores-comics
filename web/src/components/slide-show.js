@@ -81,6 +81,7 @@ const useStyles = makeStyles(theme => {
     },
     root: {
       overflowX: 'hidden',
+      overflowY: 'hidden',
       display: 'flex',
       flexDirection: 'row',
       whitespace: 'nowrap',

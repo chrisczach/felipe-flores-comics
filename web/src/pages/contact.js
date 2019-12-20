@@ -29,6 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
   contact: {
     width: '100%',
+    paddingBottom: theme.spacing(4)
   },
 }));
 

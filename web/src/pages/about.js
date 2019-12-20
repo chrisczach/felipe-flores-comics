@@ -31,6 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
   about: {
     width: '100%',
+     paddingBottom: theme.spacing(4)
   },
 }));
 
