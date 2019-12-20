@@ -70,10 +70,10 @@ const useStyles = makeStyles(theme => {
         background: lighten(theme.palette.primary.main, 0.25),
         backgroundImage: `radial-gradient(${lighten(
           theme.palette.primary.dark,
-          0.15,
+          0.225,
         )} 10%, transparent 10%), radial-gradient(${lighten(
           theme.palette.primary.dark,
-          0.35,
+          0.275,
         )} 10%, transparent 10%)`,
         backgroundPosition: `0 0, 5px 5px`,
         backgroundSize: `10px 10px`,
@@ -102,6 +102,19 @@ const useStyles = makeStyles(theme => {
       justifyContent: 'center',
     },
     sliderElement: {
+      '@media (hover:hover)': {
+        transition: theme.transitions.create('all', {
+          duration: theme.transitions.duration.standard,
+          easing: theme.transitions.easing.easeInOut,
+        }),
+        '&:hover': {
+          transform: 'scale(1.05)',
+          transition: theme.transitions.create('all', {
+            duration: theme.transitions.duration.standard,
+            easing: theme.transitions.easing.easeInOut,
+          }),
+        },
+      },
       scrollSnapAlign: 'center',
     },
   };

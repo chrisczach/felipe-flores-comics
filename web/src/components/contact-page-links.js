@@ -31,10 +31,11 @@ const useStyles = (small = false) =>
           boxShadow: theme.shadows[8],
         },
         margin: theme.spacing(0, 16),
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('lg')]: {
           margin: theme.spacing(0, 0, 0, 2),
         },
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
+          width: '100%',
           margin: theme.spacing(0),
         },
       },

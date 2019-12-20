@@ -8,10 +8,12 @@ import SEO from '../components/seo';
 import PageContainer from '../components/page-container';
 import BlockContent from '../components/block-content';
 import ContactPageLinks from '../components/contact-page-links';
+import AvatarHeading from '../components/avatar-heading';
 
 const useStyles = makeStyles(theme => ({
   hero: {
     backgroundAttachment: 'fixed',
+    backgroundPosition: 'center center',
     height: '75vh',
     display: 'flex',
     flexDirection: 'column',
@@ -21,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       flexDirection: 'row',
     },
   },
@@ -62,13 +64,14 @@ const ContactPage = props => {
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-      {/* <AvatarHeading/> */}
+
       {/* <LinksSection /> */}
       <Box className={classes.wrapper}>
         <Box className={classes.contact}>
+          <AvatarHeading />
           <BlockContent blocks={page.body} />
         </Box>
-        <ContactPageLinks _ref={page.heroImage.asset._id} />
+        <ContactPageLinks small _ref={page.heroImage.asset._id} />
       </Box>
     </PageContainer>
   );

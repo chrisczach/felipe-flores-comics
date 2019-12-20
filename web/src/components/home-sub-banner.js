@@ -3,8 +3,8 @@ import React from 'react';
 import { makeStyles, Box, fade, lighten } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
-import { getImageInfo } from '../lib/get-image-info';
 import BackgroundImage from 'gatsby-background-image';
+import { getImageInfo } from '../lib/get-image-info';
 
 const useStyle = makeStyles(theme => {
   return {
@@ -29,7 +29,7 @@ const useStyle = makeStyles(theme => {
     },
     imageWrap: {
       backgroundAttachment: 'fixed',
-      backgroundPosition: '10% 10%',
+      backgroundPosition: 'center center',
       position: 'relative',
       // left: theme.spacing(-2),
       transform: `translateY(${theme.spacing(-1)}px)`,

@@ -123,6 +123,7 @@ const useStyles = (subHeader = null) =>
         },
         position: 'relative',
         backgroundAttachment: 'fixed',
+        backgroundPosition: 'center center',
         height: subHeader ? '50vh' : '75vh',
         [theme.breakpoints.down('sm')]: {
           height: '50vh',

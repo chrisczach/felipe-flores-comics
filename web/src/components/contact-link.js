@@ -110,36 +110,35 @@ const ContactLink = props => {
 
   const { fluid } = getImageInfo({ _ref });
 
-
   return (
-    <div style={{overflow: 'hidden'}}>
-    <Container maxWidth="sm" className={classes.wrapper}>
-      <div ref={ref}>
-        <Slide direction="left" in={inView} timeout={750}>
-          <Fade in={inView} timeout={1250}>
-            <Box className={classes.innerWrapper}>
-              <Link
-                component={GatsbyLink}
-                to="/contact/"
-                className={classes.link}
-              >
-                <BlockContent blocks={excerpt} />
-              </Link>
-              <Box className={classes.triangle} />
-            </Box>
-          </Fade>
-        </Slide>
-        <Slide direction="left" in={inView} timeout={500}>
-          <Fade in={inView} timeout={1000}>
-            <Box className={classes.imageWrapper}>
-              {/* {JSON.stringify(_ref)} */}
-              <Img fluid={fluid} className={classes.image} />
-            </Box>
-          </Fade>
-        </Slide>
-      </div>
+    <div style={{ overflow: 'hidden' }}>
+      <Container maxWidth="sm" className={classes.wrapper}>
+        <div ref={ref}>
+          <Slide direction="left" in={inView} timeout={750}>
+            <Fade in={inView} timeout={1250}>
+              <Box className={classes.innerWrapper}>
+                <Link
+                  component={GatsbyLink}
+                  to="/contact/"
+                  className={classes.link}
+                >
+                  <BlockContent blocks={excerpt} />
+                </Link>
+                <Box className={classes.triangle} />
+              </Box>
+            </Fade>
+          </Slide>
+          <Slide direction="left" in={inView} timeout={500}>
+            <Fade in={inView} timeout={1000}>
+              <Box className={classes.imageWrapper}>
+                {/* {JSON.stringify(_ref)} */}
+                <Img fluid={fluid} className={classes.image} />
+              </Box>
+            </Fade>
+          </Slide>
+        </div>
       </Container>
-      </div>
+    </div>
   );
 };
 
