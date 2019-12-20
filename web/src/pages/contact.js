@@ -12,7 +12,15 @@ import AvatarHeading from '../components/avatar-heading';
 
 const useStyles = makeStyles(theme => ({
   hero: {
-    backgroundAttachment: 'fixed',
+    [theme.breakpoints.up('sm')]: {
+      backgroundAttachment: 'fixed',
+      '&::before': {
+        backgroundAttachment: 'fixed',
+      },
+      '&::after': {
+        backgroundAttachment: 'fixed',
+      },
+    },
     backgroundPosition: 'center center',
     height: '75vh',
     display: 'flex',
@@ -29,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
   contact: {
     width: '100%',
-    paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
   },
 }));
 

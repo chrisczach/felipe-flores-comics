@@ -14,7 +14,15 @@ import ContactPageLinks from '../components/contact-page-links';
 
 const useStyles = makeStyles(theme => ({
   hero: {
-    backgroundAttachment: 'fixed',
+    [theme.breakpoints.up('sm')]: {
+      backgroundAttachment: 'fixed',
+      '&::before': {
+        backgroundAttachment: 'fixed',
+      },
+      '&::after': {
+        backgroundAttachment: 'fixed',
+      },
+    },
     backgroundPosition: 'center center',
     height: '75vh',
     display: 'flex',
@@ -31,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
   about: {
     width: '100%',
-     paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
   },
 }));
 

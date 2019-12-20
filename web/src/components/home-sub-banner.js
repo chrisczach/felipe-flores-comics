@@ -28,8 +28,16 @@ const useStyle = makeStyles(theme => {
       WebkitClipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
     },
     imageWrap: {
-      backgroundAttachment: 'fixed',
-      backgroundPosition: 'center center',
+      [theme.breakpoints.up('sm')]: {
+        backgroundAttachment: 'fixed',
+        '&::before': {
+          backgroundAttachment: 'fixed',
+        },
+        '&::after': {
+          backgroundAttachment: 'fixed',
+        },
+      },
+      backgroundPosition: '50% 75%',
       position: 'relative',
       // left: theme.spacing(-2),
       transform: `translateY(${theme.spacing(-1)}px)`,

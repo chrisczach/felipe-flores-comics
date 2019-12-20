@@ -122,8 +122,16 @@ const useStyles = (subHeader = null) =>
           background: lighten(theme.palette.primary.light, 0.5),
         },
         position: 'relative',
-        backgroundAttachment: 'fixed',
-        backgroundPosition: 'center center',
+        [theme.breakpoints.up('sm')]: {
+          backgroundAttachment: 'fixed',
+          '&::before': {
+            backgroundAttachment: 'fixed',
+          },
+          '&::after': {
+            backgroundAttachment: 'fixed',
+          },
+        },
+        backgroundPosition: '50% 45%',
         height: subHeader ? '50vh' : '75vh',
         [theme.breakpoints.down('sm')]: {
           height: '50vh',
