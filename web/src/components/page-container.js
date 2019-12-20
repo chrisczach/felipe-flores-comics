@@ -132,6 +132,12 @@ const useStyles = (subHeader = null) =>
           },
         },
         backgroundPosition: '50% 45%',
+                  '&::before': {
+           backgroundPosition: '50% 45%',
+    },
+    // '&::after': {
+    //      backgroundPosition: '50% 45%',
+    // },
         height: subHeader ? '50vh' : '75vh',
         [theme.breakpoints.down('sm')]: {
           height: '50vh',

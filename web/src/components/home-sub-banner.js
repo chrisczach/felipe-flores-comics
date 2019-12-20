@@ -38,6 +38,12 @@ const useStyle = makeStyles(theme => {
         },
       },
       backgroundPosition: '50% 75%',
+          '&::before': {
+       backgroundPosition: '50% 75%',
+    },
+    '&::after': {
+    backgroundPosition: '50% 75%',
+    },
       position: 'relative',
       // left: theme.spacing(-2),
       transform: `translateY(${theme.spacing(-1)}px)`,

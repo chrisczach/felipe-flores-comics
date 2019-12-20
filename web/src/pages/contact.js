@@ -22,6 +22,12 @@ const useStyles = makeStyles(theme => ({
       },
     },
     backgroundPosition: 'center center',
+    '&::before': {
+      backgroundPosition: 'center center',
+    },
+    '&::after': {
+      backgroundPosition: 'center center',
+    },
     height: '75vh',
     display: 'flex',
     flexDirection: 'column',
