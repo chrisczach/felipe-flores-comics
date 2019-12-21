@@ -257,6 +257,8 @@ const Nav = ({ siteTitle, siteSubtitle, ...props }) => {
         ModalProps={{
           BackdropProps: {
             style: {
+              backdropFilter: 'blur(4px)',
+              WebkitBackdropFilter: 'blur(4px)',
               background: 'rgba(50,50,50,.25)',
             },
           },
