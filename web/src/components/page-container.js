@@ -112,8 +112,32 @@ const useStyles = (subHeader = null) =>
       },
       hero: {
         overflow: 'hidden',
+        position: 'relative',
+        [theme.breakpoints.up('sm')]: {
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: '50% 40%',
+          '&::before': {
+            backgroundSize: 'cover',
+            backgroundPosition: '50% 40%',
+            backgroundAttachment: 'fixed',
+          },
+          '&::after': {
+            backgroundSize: 'cover',
+            backgroundPosition: '50% 40%',
+            backgroundAttachment: 'fixed',
+          },
+        },
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 45%',
+        '&::before': {
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 45%',
+        },
         '&::after': {
           content: '""',
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 45%',
           position: 'absolute',
           top: 0,
           right: 0,
@@ -121,23 +145,7 @@ const useStyles = (subHeader = null) =>
           left: 0,
           background: lighten(theme.palette.primary.light, 0.5),
         },
-        position: 'relative',
-        [theme.breakpoints.up('sm')]: {
-          backgroundAttachment: 'fixed',
-          '&::before': {
-            backgroundAttachment: 'fixed',
-          },
-          '&::after': {
-            backgroundAttachment: 'fixed',
-          },
-        },
-        backgroundPosition: '50% 45%',
-                  '&::before': {
-           backgroundPosition: '50% 45%',
-    },
-    // '&::after': {
-    //      backgroundPosition: '50% 45%',
-    // },
+
         height: subHeader ? '50vh' : '75vh',
         [theme.breakpoints.down('sm')]: {
           height: '50vh',

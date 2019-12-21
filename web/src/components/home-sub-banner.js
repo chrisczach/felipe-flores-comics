@@ -30,28 +30,28 @@ const useStyle = makeStyles(theme => {
     imageWrap: {
       [theme.breakpoints.up('sm')]: {
         backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 85% !important',
         '&::before': {
           backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 85% !important',
         },
         '&::after': {
           backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 85% !important',
         },
       },
-      backgroundPosition: '50% 75%',
-          '&::before': {
-       backgroundPosition: '50% 75%',
-    },
-    '&::after': {
-    backgroundPosition: '50% 75%',
-    },
-      position: 'relative',
-      // left: theme.spacing(-2),
-      transform: `translateY(${theme.spacing(-1)}px)`,
-      overflow: 'hidden',
-      height: `calc(40vh + ${theme.spacing(1)}px)`,
-      clipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
-      WebkitClipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
+      backgroundPosition: '50% 100%',
+      backgroundSize: 'cover',
+      '&::before': {
+        backgroundPosition: '50% 100%',
+        backgroundSize: 'cover',
+      },
       '&::after': {
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 100%',
         position: 'absolute',
         top: 0,
         right: 0,
@@ -60,6 +60,22 @@ const useStyle = makeStyles(theme => {
         content: '""',
         background: lighten(theme.palette.primary.light, 0.5),
       },
+      [theme.breakpoints.up('xl')]: {
+        backgroundPosition: '50% 90% !important',
+        '&::before': {
+          backgroundPosition: '50% 90% !important',
+        },
+        '&::after': {
+          backgroundPosition: '50% 90% !important',
+        },
+      },
+      position: 'relative',
+      // left: theme.spacing(-2),
+      transform: `translateY(${theme.spacing(-1)}px)`,
+      overflow: 'hidden',
+      height: `calc(40vh + ${theme.spacing(1)}px)`,
+      clipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
+      WebkitClipPath: `polygon(94% 85%, 100% 100%, 100% 0%, 0% 0%, 0% 100%, 4% 86%, 12% 92%, 14% 81%, 20% 90%, 21% 77%, 28% 87%, 31% 74%, 40% 85%, 44% 70%, 48% 83%, 54% 69%, 56% 78%, 62% 72%, 63% 84%, 70% 76%, 73% 89%, 79% 76%, 84% 94%)`,
     },
   };
 });
