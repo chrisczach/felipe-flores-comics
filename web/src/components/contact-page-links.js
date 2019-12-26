@@ -7,6 +7,7 @@ import {
   darken,
   List,
   fade,
+  Grow,
   ListItem,
   ListItemIcon,
   Typography,
@@ -156,6 +157,7 @@ const ContactPageLinks = ({ _ref, small = false, ...props }) => {
 
   const d = new Date();
   return (
+    <Grow in timeout={1250}>
     <BackgroundImage
       {...getImageInfo({ _ref })}
       className={classes.backgroundWrapper}
@@ -178,7 +180,8 @@ const ContactPageLinks = ({ _ref, small = false, ...props }) => {
       <Typography variant="body1" className={classes.footer}>
         {`Social Media Issue - ${months[d.getMonth()]} ${d.getFullYear()}`}
       </Typography>
-    </BackgroundImage>
+      </BackgroundImage>
+      </Grow>
   );
 };
 
