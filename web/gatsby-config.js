@@ -67,7 +67,7 @@ module.exports = {
         display: `standalone`,
       },
     },
-    `gatsby-plugin-remove-serviceworker`, // remove for development
-    // `gatsby-plugin-offline`, add back in when deployed
+    // `gatsby-plugin-remove-serviceworker`, // remove for development
+    `gatsby-plugin-offline`, // add back in when deployed
   ],
 };
