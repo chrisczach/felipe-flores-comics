@@ -16,7 +16,7 @@ const query = graphql`
         _key
         icon {
           asset {
-            fluid(maxWidth: 480) {
+            fluid(maxWidth: 1200) {
               ...GatsbySanityImageFluid
             }
           }
@@ -34,11 +34,11 @@ const query = graphql`
               aspectRatio
             }
           }
-          localFile(width: 480) {
+          localFile(width: 2400) {
             childImageSharp {
               fluid(
                 background: "rgba(250,250,250,1)"
-                maxWidth: 480
+                maxWidth: 2400
                 traceSVG: { color: "#8b151b77", background: "#ffd83111" }
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
